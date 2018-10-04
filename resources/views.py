@@ -13,3 +13,9 @@ def create_workplanactivity(request):
     else:
         form = WorkplanActivityCreateForm()
     return render(request, 'resources/edit_workplanactiviy.html', {'form': form})
+
+def index(request):
+	return render(request, "index.html")
+
+def workflow_users(request):
+	return render(request, "workflow/workflow_users.html")
