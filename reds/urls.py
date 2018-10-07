@@ -20,5 +20,5 @@ from resources import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
-    path('workflow/users', views.workflow_users, name="workflow_users" )
+    path('workflow/<int:workplan_activity_id>/users', views.workflow_users, name="workflow_users" )
 ]

@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+{% block extra_style %}
+
+	<style type="text/css">
+		.highlighted {
+			background-color:#d4d5d6;
+	</style>
+
+{% endblock extra_style %}
+
 {% block content %}
 
   	<div class="container">
@@ -9,29 +18,144 @@
 			</div>
 			<div class="row row border" style="padding: 4%;">
 				<ul class="list-group">
-				  <li class="list-group-item" style="border: none">Cras justo odio</li>
-				  <li class="list-group-item" style="border: none">Dapibus ac facilisis in</li>
-				  <li class="list-group-item" style="border: none">Morbi leo risus</li>
-				  <li class="list-group-item" style="border: none">Porta ac consectetur ac</li>
-				  <li class="list-group-item" style="border: none">Vestibulum at eros</li>
+					{% for us in users %}	
+						<li class="list-group-item" style="border: none">{{us}}</li>
+					{% endfor %}
 				</ul>
 			</div>
-			<div class="row border" style="padding: 5%">
+			<div class="row" style="padding: 5%;">
 				<div class="col">
-					<form>
+					{% if error_message is not None %}
+						<div class="alert alert-danger">
+			                <strong>{{ error_message }}</strong>
+			            </div>
+			        {% endif %}    
+					<form action="{% url 'workflow_users' workplan_activity.pk %}" autocomplete="off" method="POST">
+						{% csrf_token %}
 						<div class="row">
 					    	<div class="col-8">
-					      		<input type="text" class="form-control">
+					      		<input id="new_member" name="new_member" type="text" class="form-control" maxlength="20">
+					      		<ul id="autocomplete_results" class="list-group" style="height: 60%;overflow: auto;"></ul>	
 					    	</div>
 					    	<div class="col-4">
-					      		<button class="btn btn-ligth" type="button">Agregar</button>
+					      		<button class="btn btn-ligth" type="submit">Agregar</button>
 					    	</div>
 					  	</div>
 					</form>
 				</div>	
 				
 			</div>	
-		<a href="/workflow/users">Volver</a>
 	</div>
 
 {% endblock content %}
+
+{% block extra_js %}
+
+	<!-- AUTO-COMPLETE -->
+	<script type="text/javascript">
+		var input_new_member = document.getElementById("new_member"),
+			results = document.getElementById("autocomplete_results"),
+			matches = [],
+			i = 0,
+			resultsCursor = 0,
+			members_list = []; 	
+			{% for us in all_users %}	
+				members_list[i] = '{{us}}';
+				i++;
+			{% endfor %}
+			//console.log(members_list);
+
+		input_new_member.focus();
+
+		input_new_member.addEventListener("keydown", function(event){
+			if(event.keyCode == "13"){
+				event.preventDefault();
+			}
+		});
+
+		input_new_member.addEventListener("keyup", function(event){
+			// Erase previous results
+			results.innerHTML = "";
+
+			if(this.value.length > 0){
+				matches = getMatches(this.value);
+
+				if(matches.length > 0){
+					displayMatches(matches);
+					suggested_items_conf();
+				}
+			}
+
+			if(results.innerHTML != ""){
+				switch(event.keyCode){
+					// Enter
+					case 13:
+						var suggested_items = document.querySelectorAll("#suggested_item");
+						input_new_member.value = suggested_items[resultsCursor].innerHTML;
+						results.innerHTML = "";
+						//toggleResults("hide");
+						resultsCursor = 0;
+						break;
+					// Up	
+					case 38:
+						if(resultsCursor > 0){
+							resultsCursor --;
+							moveCursor(resultsCursor);
+						}
+						break;
+					// Down	
+					case 40:
+						if(resultsCursor < matches.length-1){
+							resultsCursor++;
+							moveCursor(resultsCursor);
+						}
+						break;	
+				}
+			}
+		});
+
+		function getMatches(inputText){
+			var matchList = [];
+
+			for(var i = 0; i < members_list.length; i++){
+				if(members_list[i].toLowerCase().indexOf( inputText.toLowerCase() )  != -1 ){
+					matchList.push(members_list[i]);
+				}
+			}
+
+			return matchList;
+		}
+
+		function displayMatches(matchList){
+			for(var i = 0; i < matchList.length ; i++){
+				results.innerHTML += '<div><li id="suggested_item" class="list-group-item" style="border: none">' + matchList[i] +  '</li></div>';
+			}
+			
+			moveCursor(resultsCursor);
+		}
+
+		function moveCursor(position){
+			for(var i = 0; i < results.children.length; i++){
+				results.children[i].children[0].classList.remove("highlighted");
+			}
+
+			results.children[position].children[0].classList.add("highlighted");
+		}
+
+		
+		function suggested_items_conf(){
+			var suggested_items = document.querySelectorAll("#suggested_item");
+			for(var i = 0 ; i < suggested_items.length; i++){
+				suggested_items[i].addEventListener("click", function() {
+					input_new_member.value = this.innerHTML;
+					results.innerHTML = "";
+					resultsCursor = 0;
+					console.log(this.innerHTML + "clicked");
+				});
+			}
+		}
+		
+
+	</script>
+
+{% endblock extra_js %}

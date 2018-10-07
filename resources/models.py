@@ -71,6 +71,8 @@ class WorkplanActivity(models.Model):
 
     resource = models.ForeignKey('Resource', related_name='workplan_activities', on_delete=models.CASCADE)
 
+    users = models.ManyToManyField(User, related_name='users_workplan_activities')
+
     class Meta:
         verbose_name = "Actividad del plan de trabajo"
         verbose_name_plural = "Actividades del plan de trabajo"
@@ -88,7 +90,7 @@ class Resource(models.Model):
     PRIORITY_CHOICES = (
         (LOW, 'Baja'),
         (MEDIUM, 'Media'),
-        (HIGH, 'Baja')
+        (HIGH, 'Alta')
     )
 
     WEBPAGE = 'Web page'
