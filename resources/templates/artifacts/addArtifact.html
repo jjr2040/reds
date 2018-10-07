@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <head>
+    <meta charset="utf-8">
+    <title>s3direct</title>
+    {{ form.media }}
+</head>
+<body>
+    <form action="/addArtifact/" method="POST" style="margin:80px;">{% csrf_token %}
+        <div class="form-group">
+            <label for="id_name">Nombre</label>
+            {% if form.errors %}
+                 <div class="alert alert-danger">
+                    <strong>{{ form.name.error|escape }}: {{ form.name.name }} </strong>
+                 </div>
+            {% endif %}
+            <input class="form-control" type="text" name="name" maxlength="100" required="" id="id_name">
+        </div>
+        <div class="form-group">
+            <label for="id_description">Descripción</label>
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ form.description.error|escape }}: {{ forms.description.name }} </strong>
+                </div>
+            {% endif %}
+            <textarea class="form-control" name="description" cols="40" rows="10" required="" id="id_description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="id_tags">Tags</label>
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ form.tags.error|escape }}: {{ forms.tags.name }} </strong>
+                </div>
+            {% endif %}
+            {{ form.tags }}
+        </div>
+        <div class="form-group">
+            <label for="id_created_by">Creado por</label>
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ form.created_by.error|escape }}: {{ forms.created_by.name }} </strong>
+                </div>
+            {% endif %}
+            {{ form.created_by }}
+        </div>
+        <div class="form-group">
+            <label for="id_file">File</label>
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ form.file.error|escape }}: {{ forms.file.name }} </strong>
+                </div>
+            {% endif %}
+            <br>
+            {{ form.file.errors }}
+            {{ form.file }}
+        </div>
+        <br>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</body>
+{% endblock content %}

@@ -10,6 +10,9 @@ django-heroku = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
 django-filter = "*"
+boto3="*"
+django-storages = "*"
+django-s3direct = "*"
 
 [dev-packages]
 

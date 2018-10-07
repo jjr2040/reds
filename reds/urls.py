@@ -14,11 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import *
 from resources import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
-    path('workflow/users', views.workflow_users, name="workflow_users" )
+    path('workflow/users', views.workflow_users, name="workflow_users"),
+    path('addArtifact/', views.artifact_view, name="artifacts"),
+    path('s3direct/', include('s3direct.urls')),
 ]
