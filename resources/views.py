@@ -1,20 +1,14 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
 from resources.models import Resource
+from resources.forms import ResourceForm
 
 
 class ResourceCreateView(CreateView):
     model = Resource
+    form_class = ResourceForm
     template_name = 'resources/resource_create.html'
-    fields = [
-        'name',
-        'description',
-        'type',
-        'priority',
-        'estimated_duration',
-        'project',
-        'tags'
-    ]
+    success_url = 'resources/'
 
 
 def index(request):
