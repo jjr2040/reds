@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from users.models import User
+from taggit.managers import TaggableManager
 from s3direct.fields import S3DirectField
 
 class Tag(models.Model):
@@ -37,7 +38,7 @@ class Artifact(models.Model):
     file = S3DirectField(dest='custom_filename', blank=True)
 
     created_by = models.ForeignKey(User, related_name='user_artifacts', on_delete=models.PROTECT)
-    tags = models.ManyToManyField(Tag, related_name='tag_artifacts')
+    tags = TaggableManager()
 
     class Meta:
         verbose_name = "Artefacto"
@@ -114,7 +115,7 @@ class Resource(models.Model):
     name = models.CharField('Nombre', max_length=100, help_text='Nombre del recurso')
     type = models.CharField('Tipo', max_length=50, help_text='Tipo del recurso ()', choices=TYPE_CHOICES)
     priority = models.IntegerField(verbose_name='Prioridad', choices=PRIORITY_CHOICES)
-    estimated_duration = models.FloatField(verbose_name=u'Duración estimada')
+    estimated_duration = models.FloatField(verbose_name=u'Duración estimada en días')
     description = models.TextField(verbose_name=u'Descripción', default='')
     created_at = models.DateTimeField(verbose_name=u'Fecha creación', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name=u'Fecha de modificación', auto_now=True)
@@ -122,7 +123,7 @@ class Resource(models.Model):
 
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_resources')
     users = models.ManyToManyField(User, related_name='user_resources')
-    tags = models.ManyToManyField(Tag, related_name='tag_resources')
+    tags = TaggableManager()
     artifacts = models.ManyToManyField(Artifact, related_name='artifact_resources')
 
     class Meta:

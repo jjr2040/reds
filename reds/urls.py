@@ -19,6 +19,7 @@ from resources import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('resource/create', views.ResourceCreateView.as_view(), name='create_resource'),
     path('', views.index, name="index"),
     path('workflow/users', views.workflow_users, name="workflow_users"),
     path('addArtifact/', views.artifact_view, name="artifacts"),

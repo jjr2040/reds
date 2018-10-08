@@ -1,13 +1,19 @@
 from django.shortcuts import render
-
-# Create your views here.
+from django.views.generic.edit import CreateView
+from resources.models import Resource
+from resources.forms import ResourceForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.views.generic import FormView
 from .forms import S3DirectUploadForm
 from .models import Artifact
 from resources.forms import ArtifactForm
+
+class ResourceCreateView(CreateView):
+    model = Resource
+    form_class = ResourceForm
+    template_name = 'resources/resource_create.html'
+    success_url = 'resources/'
 
 
 def index(request):
