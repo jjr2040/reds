@@ -38,6 +38,7 @@ class Artifact(models.Model):
 
     created_by = models.ForeignKey(User, related_name='user_artifacts', on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, related_name='tag_artifacts')
+    preview = models.BooleanField('Vista Previa', default=False)
 
     class Meta:
         verbose_name = "Artefacto"

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from resources.forms import WorkplanActivityCreateForm
 from django.shortcuts import redirect
+from resources.models import Artifact
 
 
 # Create your views here.
@@ -19,3 +20,8 @@ def index(request):
 
 def workflow_users(request):
 	return render(request, "workflow/workflow_users.html")
+
+def artifact(request):
+    artifacts_list = Artifact.objects.all()
+    context = {'artifacts_list': artifacts_list}
+    return render(request, "artifact/artifacts.html", context)
