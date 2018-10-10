@@ -1,0 +1,44 @@
+ {% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <h3>Actividades de plan trabajo de recurso</h3>
+<div class="row">
+        <div class="col-lg-10">
+                <a href='{% url 'workplanactivity_new' %}' class="btn btn-primary">
+                        Crear Actividad
+                </a>
+        </div>
+</div>
+<hr/>
+<div class="row">
+        <div class="col-lg-12">
+                <table id="tabla" class="display" cellspacing="0" width="100%">
+                        <thead>
+                                <tr>
+                                     <th class="text-center">Nombre</th>
+                                     <th class="text-center">Estado</th>
+                                     <th class="text-center">Avance</th>
+                                     <th class="text-center">Fecha inicio</th>
+                                     <th class="text-center">Fecha fin</th>
+                                     <th class="text-center">Operaciones</th>
+                               </tr>
+                        </thead>
+                <tbody>
+                     {% for activity in list_workplanactivity %}
+                        <tr>
+                            <td>{{ activity.name }}</td>
+                            <td>{{ activity.get_status_display }}</td>
+                            <td>{{ activity.progress }} %</td>
+                            <td>{{ activity.start_date }}</td>
+                            <td>{{ activity.end_date }}</td>
+                            <td class="text-center">
+                                    <img src="{% static "resources/images/edit.png" %}" alt="Editar">
+                                    <img src="{% static "resources/images/delete.png" %}" alt="Eliminar">
+                            </td>
+                        </tr>
+                     {% endfor %}
+                </tbody>
+     </table>
+ </div>
+</div>
+{% endblock content %}

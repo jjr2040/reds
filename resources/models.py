@@ -54,13 +54,25 @@ class WorkplanActivity(models.Model):
     WEEKLY = 3
     BIWEEKLY = 4
     MONTHLY = 5
+    NA = 6
+
+    STARTED = 1
+    NOT_STARTED = 2
+    FINISHED = 3
 
     PERIODICITY_CHOICES = (
         (HOURLY, 'Cada hora'),
         (DAILY, 'Diario'),
         (WEEKLY, 'Semanal'),
         (BIWEEKLY, 'Quincenal'),
-        (MONTHLY, 'Mensual')
+        (MONTHLY, 'Mensual'),
+        (NA, 'N/A')
+    )
+
+    STATUS_CHOICES = (
+        (STARTED, 'Iniciado'),
+        (NOT_STARTED, 'No iniciado'),
+        (FINISHED, 'Finalizado')
     )
 
     name = models.CharField('Nombre', max_length=100)
@@ -68,6 +80,8 @@ class WorkplanActivity(models.Model):
     end_date = models.DateTimeField(verbose_name='Fecha de fin')
     duration = models.IntegerField(verbose_name=u'Duración')
     periodicity = models.IntegerField(verbose_name='Periodicidad', choices=PERIODICITY_CHOICES)
+    status = models.IntegerField(verbose_name='Estado', choices=STATUS_CHOICES, default=NOT_STARTED)
+    progress = models.IntegerField(verbose_name='Avance', default=0)
 
     resource = models.ForeignKey('Resource', related_name='workplan_activities', on_delete=models.CASCADE)
 

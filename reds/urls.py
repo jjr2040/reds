@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
 from resources import views
-from resources import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^workplanactiviy/new/$', views.create_workplanactivity, name='workplanactiviy_new'),
+    url(r'^workplanactivity/new/$', views.create_workplanactivity, name='workplanactivity_new'),
+    url(r'^workplanactivity/edit/(?P<pk>[0-9]+)/$', views.create_workplanactivity, name='workplanactivity_edit'),
     path('', views.index, name="index"),
-    path('workflow/users', views.workflow_users, name="workflow_users" )
+    path('workflow/users', views.workflow_users, name="workflow_users" ),
+    url(r'^workplanactivity/list/$',views.list_workplanactivity, name='list_workplanactivity'),
 ]
