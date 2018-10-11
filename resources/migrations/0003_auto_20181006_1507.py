@@ -12,11 +12,11 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        #migrations.AddField(
-        #    model_name='workplanactivity',
-        #    name='users',
-        #    field=models.ManyToManyField(related_name='users_workplan_activities', to=settings.AUTH_USER_MODEL),
-        #),
+        migrations.AddField(
+            model_name='workplanactivity',
+            name='users',
+            field=models.ManyToManyField(related_name='users_workplan_activities', to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AlterField(
             model_name='artifact',
             name='file',

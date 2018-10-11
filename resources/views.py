@@ -25,7 +25,8 @@ def workflow_users(request, workplan_activity_id):
 		if new_member is not "":
 			try:
 				search_user = User.objects.get(username=new_member)
-				workplan_activity.users.add(search_user)
+				#workplan_activity.users.add(search_user)
+				WorkplanActivity.assign_new_member(search_user, workplan_activity_id)
 				return redirect(reverse('workflow_users', args=(workplan_activity_id,)))
 			except ObjectDoesNotExist:
 				error_message = "El usuario no existe"
