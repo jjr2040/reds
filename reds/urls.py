@@ -22,6 +22,6 @@ urlpatterns = [
     path('resource/create', views.ResourceCreateView.as_view(), name='create_resource'),
     path('', views.index, name="index"),
     path('workflow/users', views.workflow_users, name="workflow_users"),
-    path('addArtifact/', views.artifact_view, name="artifacts"),
+    path('artifacts/create', views.ArtifactCreateView.as_view(), name="create_artifacts"),
     path('s3direct/', include('s3direct.urls')),
 ]
