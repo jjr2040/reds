@@ -4,29 +4,32 @@
 
     <div class="container">
         <div class="row">
-            <h4>Crea un nuevo recurso</h4>
-            <form method="post" class="col">
-                {% csrf_token %}
 
-                {% for hidden_field in form.hidden_fields %}
-                    {{ hidden_field }}
-                {% endfor %}
+            <div class="col">
+                <h4>Crea un nuevo recurso</h4>
+                <form method="post" class="col">
+                    {% csrf_token %}
 
-                {% for field in form.visible_fields %}
-                    <div class="form-group">
-                        {{ field.label_tag }}
+                    {% for hidden_field in form.hidden_fields %}
+                        {{ hidden_field }}
+                    {% endfor %}
 
-                        {{ field }}
+                    {% for field in form.visible_fields %}
+                        <div class="form-group">
+                            {{ field.label_tag }}
 
-                        {% if field.help_text %}
-                            <small class="form-text text-muted">{{ field.help_text }}</small>
-                        {% endif %}
+                            {{ field }}
 
-                    </div>
-                {% endfor %}
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
 
-                <input type="submit" class="btn btn-primary" value="Crear">
-            </form>
+                        </div>
+                    {% endfor %}
+
+                    <input type="submit" class="btn btn-primary" value="Crear">
+                </form>
+            </div>
         </div>
     </div>
 

@@ -3,13 +3,16 @@ from django.views.generic.edit import CreateView
 from django.views.generic import DetailView
 from resources.models import Resource
 from resources.forms import ResourceForm
+from django.urls import reverse_lazy
 
 
 class ResourceCreateView(CreateView):
     model = Resource
     form_class = ResourceForm
     template_name = 'resources/resource_create.html'
-    success_url = 'resources/'
+
+    def get_success_url(self):
+        return reverse_lazy('resource_detail', kwargs={'pk': self.object.pk})
 
 
 class ResourceDetailView(DetailView):
