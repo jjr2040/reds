@@ -20,10 +20,12 @@ from resources import views
 
 
 urlpatterns = [
+               path('', views.index, name="index"),
     path('admin/', admin.site.urls),
+    path('resource/<int:pk>', views.ResourceDetailView.as_view(), name='resource_detail'),
+    path('resource/create', views.ResourceCreateView.as_view(), name='create_resource'),
     url(r'^workplanactivity/new/$', views.create_workplanactivity, name='workplanactivity_new'),
     url(r'^workplanactivity/edit/(?P<pk>[0-9]+)/$', views.create_workplanactivity, name='workplanactivity_edit'),
-    path('', views.index, name="index"),
-    path('workflow/users', views.workflow_users, name="workflow_users" ),
+    path('workflow/users', views.workflow_users, name="workflow_users"),
     url(r'^workplanactivity/list/$',views.list_workplanactivity, name='list_workplanactivity'),
 ]
