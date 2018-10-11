@@ -24,5 +24,5 @@ urlpatterns = [
     url(r'^workplanactiviy/new/$', views.create_workplanactivity, name='workplanactiviy_new'),
     path('', views.index, name="index"),
     path('workflow/users', views.workflow_users, name="workflow_users" ),
-    path('resourcesList', views.resourcesList , name="resourcesList" )
+    path('artifactList', views.artifactList, name="artifactList" )
 ]
