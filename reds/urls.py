@@ -14,8 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
 from django.conf.urls import url
+from django.urls import *
 from resources import views
 
 
@@ -28,5 +28,7 @@ urlpatterns = [
     url(r'^workplanactivity/edit/(?P<pk>[0-9]+)/$', views.create_workplanactivity, name='workplanactivity_edit'),
     path('workflow/users', views.workflow_users, name="workflow_users"),
     url(r'^workplanactivity/list/$',views.list_workplanactivity, name='list_workplanactivity'),
-    path('workflow/<int:workplan_activity_id>/users', views.workflow_users, name="workflow_users")
+    path('workflow/<int:workplan_activity_id>/users', views.workflow_users, name="workflow_users"),
+    path('artifacts/create', views.ArtifactCreateView.as_view(), name="create_artifacts"),
+    path('s3direct/', include('s3direct.urls'))
 ]

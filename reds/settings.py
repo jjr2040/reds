@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'datetimewidget',
     'users',
-    'resources'
+    'resources',
+    'storages',
+    's3direct',
 ]
 
 MIDDLEWARE = [
@@ -160,3 +162,52 @@ REST_FRAMEWORK = {
 
 # CORS
 CORS_ORIGIN_ALLOW_ALL = True
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
+
+def create_filename(filename):
+    import uuid
+    ext = filename.split('.')[-1]
+    filename = '%s.%s' % (uuid.uuid4().hex, ext)
+    return os.path.join('', filename)
+
+
+S3DIRECT_DESTINATIONS = {
+    # Allow anybody to upload any MIME type
+    'misc': {
+        'key': '/'
+    },
+
+    # Allow staff users to upload any MIME type
+    'pdfs': {
+        'key': 'uploads/pdfs',
+        'auth': lambda u: u.is_staff
+    },
+
+    # Allow anybody to upload jpeg's and png's. Limit sizes to 5kb - 20mb
+    'images': {
+        'key': 'uploads/images',
+        'auth': lambda u: True,
+        'allowed': [
+            'image/jpeg',
+            'image/png'
+        ],
+        'content_length_range': (5000, 20000000),
+    },
+
+    # Allow authenticated users to upload mp4's
+    'videos': {
+        'key': 'uploads/videos',
+        'auth': lambda u: u.is_authenticated,
+        'allowed': ['video/mp4']
+    },
+
+    # Allow anybody to upload any MIME type with a custom name function
+    'custom_filename': {
+        'key': create_filename
+    },
+}

@@ -2,6 +2,7 @@
 from django.db import models
 from users.models import User
 from taggit.managers import TaggableManager
+from s3direct.fields import S3DirectField
 
 class Tag(models.Model):
 
@@ -34,7 +35,7 @@ class Artifact(models.Model):
     description = models.TextField(verbose_name=u'Descripción', default='')
     created_at = models.DateTimeField(verbose_name=u'Fecha creación', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name=u'Fecha de modificación', auto_now=True)
-    file = models.URLField(verbose_name='Archivo')
+    file = S3DirectField(dest='custom_filename', blank=True)
 
     created_by = models.ForeignKey(User, related_name='user_artifacts', on_delete=models.PROTECT)
     tags = TaggableManager()
@@ -151,5 +152,3 @@ class Resource(models.Model):
 
     def __str__(self):
         return self.name
-
-

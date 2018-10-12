@@ -1,11 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.edit import CreateView
 from django.views.generic import DetailView, ListView
-from resources.models import Resource, WorkplanActivity
-from resources.forms import ResourceForm, WorkplanActivityCreateForm
+from resources.models import Resource, WorkplanActivity, Artifact
+from resources.forms import ResourceForm, WorkplanActivityCreateForm, ArtifactForm
 from django.urls import reverse_lazy, reverse
 from django.core.exceptions import ObjectDoesNotExist
 from users.models import User
+from django.http import HttpResponseRedirect
+from django.views.generic import FormView
+from .forms import S3DirectUploadForm
 
 
 class ResourceCreateView(CreateView):
@@ -113,3 +116,12 @@ def workflow_users(request, workplan_activity_id):
         # return render(request, "workflow/workflow_users.html", context)
 
     return render(request, "workflow/workflow_users.html", context)
+
+
+class ArtifactCreateView(CreateView):
+    model = Artifact
+    form_class = ArtifactForm
+    template_name = 'artifacts/addArtifact.html'
+    error_message = 'ass'
+    success_url = 'artifacts/'
+

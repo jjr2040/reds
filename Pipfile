@@ -13,6 +13,9 @@ django-filter = "*"
 django-taggit = "*"
 django-datetime-widget = "*"
 selenium = "*"
+boto3="*"
+django-storages = "*"
+django-s3direct = "*"
 
 [dev-packages]
 
