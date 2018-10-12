@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <h5 class="card-header">Información del recurso</h5>
+                    <ul class="list-group list-group-flush">
+                        <li id="id_name" class="list-group-item"><strong>Nombre:</strong> {{ resource.name }}</li>
+                        <li class="list-group-item"><strong>Descripción:</strong> {{ resource.description }}</li>
+                        <li class="list-group-item"><strong>Tipo:</strong> {{ resource.type }}</li>
+                        <li class="list-group-item"><strong>Prioridad:</strong> {{ resource.priority }}</li>
+                        <li class="list-group-item"><strong>Tiempo estimado en días:</strong> {{ resource.estimated_duration }}</li>
+                        <li class="list-group-item"><strong>Fecha de creación:</strong> {{ resource.created_at }}</li>
+                        <li class="list-group-item"><strong>Fecha de actualización:</strong> {{ resource.updated_at }}</li>
+                        <li class="list-group-item"><strong>Fase actual:</strong> {{ resource.get_current_phase_display }}</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary">Ver artefactos</a>
+                        <a href="#" class="btn btn-primary">Ver plan de trabajo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
