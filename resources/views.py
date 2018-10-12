@@ -41,8 +41,10 @@ def create_workplanactivity(request):
     return render(request, 'resources/edit_workplanactiviy.html', {'form': form})
 
 
-def list_workplanactivity(request):
-    list = WorkplanActivity.objects.all()
+def list_workplanactivity(request, resource_id):
+    resource = Resource.objects.get(id = resource_id)
+    list = WorkplanActivity.objects.filter(resource = resource)
+    #list = WorkplanActivity.objects.all()
     print("Cantidad" + str(list.__sizeof__()))
     return render(request, 'resources/workplanactivity_list.html', {'list_workplanactivity': list})
 
@@ -61,12 +63,6 @@ def create_workplanactivity(request):
     else:
         form = WorkplanActivityCreateForm()
     return render(request, 'resources/edit_workplanactiviy.html', {'form': form})
-
-
-def list_workplanactivity(request):
-    list = WorkplanActivity.objects.all()
-    print("Cantidad" + str(list.__sizeof__()))
-    return render(request, 'resources/workplanactivity_list.html', {'list_workplanactivity': list})
 
 
 def edit_workplanactivity(request, pk):
