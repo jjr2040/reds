@@ -79,12 +79,11 @@ class WorkplanActivityCase(TestCase):
         tag2 = Tag.objects.create(name="Intro")
         arti = Artifact.objects.create(name="Intro", description="In progress...", file="banner.png", created_by=ana)
         arti2 = Artifact.objects.create(name="Intro2", description="In progress...", file="banner2.png", created_by=ana)
-        arti.tags.set([tag, tag2])
-        arti2.tags.set([tag, tag2])
+        
         resource = Resource.objects.create(name="Resource1", type="Banner", priority=3, estimated_duration="1",
                                            description="", created_at="", updated_at="", current_phase=1,
                                            project=project)
-        resource.tags.set([tag, tag2])
+        
         resource.artifacts.set([arti, arti2])
         resource.users.set([ana, pablo])
         WorkplanActivity.objects.create(name="ActivityH", start_date="2018-09-04 06:00:00.000000",
