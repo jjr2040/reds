@@ -85,6 +85,8 @@ class WorkplanActivity(models.Model):
 
     resource = models.ForeignKey('Resource', related_name='workplan_activities', on_delete=models.CASCADE)
 
+    users = models.ManyToManyField(User, related_name='users_workplan_activities')
+
     class Meta:
         verbose_name = "Actividad del plan de trabajo"
         verbose_name_plural = "Actividades del plan de trabajo"
@@ -92,6 +94,10 @@ class WorkplanActivity(models.Model):
     def __str__(self):
         return self.name
 
+    @classmethod
+    def assign_new_member(cs, new_user,workplan_activity_id):
+        w = cs.objects.get(id=workplan_activity_id)
+        w.users.add(new_user)
 
 class Resource(models.Model):
 
@@ -102,7 +108,7 @@ class Resource(models.Model):
     PRIORITY_CHOICES = (
         (LOW, 'Baja'),
         (MEDIUM, 'Media'),
-        (HIGH, 'Baja')
+        (HIGH, 'Alta')
     )
 
     WEBPAGE = 'Web page'
