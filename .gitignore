@@ -227,6 +227,9 @@ ENV/
 # mkdocs documentation
 /site
 
+# Origin
+*.orig
+
 # End of https://www.gitignore.io/api/macos,linux,django,python,pycharm
  @jjr2040
    

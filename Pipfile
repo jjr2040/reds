@@ -12,6 +12,7 @@ django-cors-headers = "*"
 django-filter = "*"
 django-taggit = "*"
 django-datetime-widget = "*"
+selenium = "*"
 
 [dev-packages]
 
