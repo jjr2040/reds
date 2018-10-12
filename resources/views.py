@@ -74,5 +74,49 @@ def index(request):
     return render(request, "index.html")
 
 
-def workflow_users(request):
-    return render(request, "workflow/workflow_users.html")
+def artifactList(request, resource_id):
+    resource = Resource.objects.get(id = resource_id)
+    artifact_list = resource.artifacts.all()
+    #artifact_list = Artifact.objects.all()
+    context = {'artifact_list': artifact_list}
+    return render(request, "artifact/artifactList.html", context)
+
+
+def workflow_users(request, workplan_activity_id):
+    workplan_activity = WorkplanActivity.objects.get(id=workplan_activity_id)
+    users = workplan_activity.users.all()
+    all_users = User.objects.all()
+    error_message = ""
+    context = {
+        'workplan_activity': workplan_activity,
+        'users': users,
+        'all_users': all_users
+    }
+    if request.method == 'POST':
+        new_member = (request.POST.get('new_member')).rstrip()
+        if new_member is not "":
+            try:
+                search_user = User.objects.get(username=new_member)
+                # workplan_activity.users.add(search_user)
+                WorkplanActivity.assign_new_member(search_user, workplan_activity_id)
+                return redirect(reverse('workflow_users', args=(workplan_activity_id,)))
+            except ObjectDoesNotExist:
+                error_message = "El usuario no existe"
+                context.update({'error_message': error_message})
+            # return render(request, "workflow/workflow_users.html", context)
+        else:
+            error_message = "El usuario no existe"
+            context.update({'error_message': error_message})
+        # return render(request, "workflow/workflow_users.html", context)
+    return render(request, "workflow/workflow_users.html", context)
+
+class WorkplanActivityList(ListView):
+    model = WorkplanActivity
+
+class ArtifactCreateView(CreateView):
+    model = Artifact
+    form_class = ArtifactForm
+    template_name = 'artifacts/addArtifact.html'
+    error_message = 'ass'
+    success_url = 'artifacts/'
+
