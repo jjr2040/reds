@@ -84,15 +84,14 @@ class WorkplanActivityCreateForm(forms.ModelForm):
 
 
     start_date = forms.DateTimeField(
-        label=u'Fecha de inicio (yyyy-mm-dd hh-mm-ss)',
-        widget=forms.TextInput(attrs={'class': 'form-control'})
+        label=u'Fecha de inicio (yyyy-mm-dd hh:mm:ss)'
     )
     end_date = forms.DateTimeField(
-        label=u'Fecha de fin (yyyy-mm-dd hh-mm-ss)',
-        widget=forms.TextInput(attrs={'class': 'form-control'})
+        label=u'Fecha de fin (yyyy-mm-dd hh:mm:ss)'
     )
+
     class Meta:
         model = WorkplanActivity
-        fields = ('name', 'start_date', 'end_date', 'duration', 'periodicity', 'resource')
+        fields = ('name', 'start_date', 'end_date', 'duration', 'periodicity')
 
 

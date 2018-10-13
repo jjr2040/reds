@@ -30,23 +30,12 @@ class ResourceDetailView(DetailView):
         return context
 
 
-def create_workplanactivity(request):
-    if request.method == "POST":
-        form = WorkplanActivityCreateForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return list_workplanactivity(request)
-    else:
-        form = WorkplanActivityCreateForm()
-    return render(request, 'resources/edit_workplanactiviy.html', {'form': form})
-
-
 def list_workplanactivity(request, resource_id):
     resource = Resource.objects.get(id = resource_id)
     list = WorkplanActivity.objects.filter(resource = resource)
     #list = WorkplanActivity.objects.all()
     print("Cantidad" + str(list.__sizeof__()))
-    return render(request, 'resources/workplanactivity_list.html', {'list_workplanactivity': list})
+    return render(request, 'resources/workplanactivity_list.html', {'list_workplanactivity': list, 'resource_id': resource_id})
 
 
 def edit_workplanactivity(request, pk):
@@ -54,12 +43,15 @@ def edit_workplanactivity(request, pk):
     return render(request, 'resources/edit_workplanactiviy.html', {'form': post})
 
 
-def create_workplanactivity(request):
+def create_workplanactivity(request, resource_id):
     if request.method == "POST":
         form = WorkplanActivityCreateForm(request.POST)
         if form.is_valid():
-            form.save()
-            return list_workplanactivity(request, resource_id=form.resource.id)
+            #form.resource = Resource.objects.get(id=resource_id)
+            activity = form.save(commit=False)
+            activity.resource = Resource.objects.get(id=resource_id)
+            activity.save()
+            return HttpResponseRedirect(reverse('list_workplanactivity', kwargs={'resource_id': resource_id}))
     else:
         form = WorkplanActivityCreateForm()
     return render(request, 'resources/edit_workplanactiviy.html', {'form': form})

@@ -28,7 +28,8 @@ urlpatterns = [
     path('resource/<int:resource_id>/artifacts', views.artifactList, name="artifact_list"),
     path('resource/<int:resource_id>/artifacts/create', views.artifact_create_view, name="create_artifacts"),
     path('workflow/<int:workplan_activity_id>/users', views.workflow_users, name="workflow_users"),
-    url(r'^workplanactivity/new/$', views.create_workplanactivity, name='workplanactivity_new'),
+    path('resource/<int:resource_id>/activity/new', views.create_workplanactivity, name='workplanactivity_new'),
+    #url(r'^workplanactivity/new/$', views.create_workplanactivity, name='workplanactivity_new'),
     url(r'^workplanactivity/edit/(?P<pk>[0-9]+)/$', views.create_workplanactivity, name='workplanactivity_edit'),
     path('s3direct/', include('s3direct.urls'))
 ]
