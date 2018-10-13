@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+		<div style="width: 50%; margin: 25px auto;">
+			<div class="row border" style="padding: 2%; background-color: #f6f8fa">
+				<div class="col-8">
+					<span class="align-middle"><strong>Artefactos del recurso</strong> </span>			
+				</div>
+				<div class="col-4">
+					<a href="/artifacts/create" class="float-right btn btn-primary">Crear artefacto</a>
+				</div>
+			</div>
+
+            <div class="row row border" style="padding: 4%;">
+				<ul class="list-group" style="width: 100%">
+                {% for Artifact in artifact_list %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center" style="border: none">{{ Artifact.name }}</li>
+                    </span>	
+                {% endfor %}
+				</ul>
+			</div>
+        </div>
+    </div>
+{% endblock %}
