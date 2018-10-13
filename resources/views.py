@@ -59,7 +59,7 @@ def create_workplanactivity(request):
         form = WorkplanActivityCreateForm(request.POST)
         if form.is_valid():
             form.save()
-            return list_workplanactivity(request)
+            return list_workplanactivity(request, resource_id=form.resource.id)
     else:
         form = WorkplanActivityCreateForm()
     return render(request, 'resources/edit_workplanactiviy.html', {'form': form})
@@ -112,6 +112,7 @@ def workflow_users(request, workplan_activity_id):
 
 class WorkplanActivityList(ListView):
     model = WorkplanActivity
+
 
 class ArtifactCreateView(CreateView):
     model = Artifact
