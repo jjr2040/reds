@@ -30,5 +30,5 @@ urlpatterns = [
     path('workflow/<int:workplan_activity_id>/users', views.workflow_users, name="workflow_users"),
     path('artifacts/create', views.ArtifactCreateView.as_view(), name="create_artifacts"),
     path('s3direct/', include('s3direct.urls')),
-    path('resource/<int:resource_id>/artifact/list', views.artifactList, name="artifactList" )
+    path('resource/<int:resource_id>/artifacts', views.artifactList, name="artifactList" )
 ]
