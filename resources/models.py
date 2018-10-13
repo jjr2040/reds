@@ -153,3 +153,8 @@ class Resource(models.Model):
 
     def __str__(self):
         return self.name
+
+    @classmethod
+    def assign_new_artifact(cs, new_artifact, resource_id):
+        r = cs.objects.get(id=resource_id)
+        r.artifacts.add(new_artifact)

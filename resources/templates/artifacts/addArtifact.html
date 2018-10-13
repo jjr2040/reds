@@ -5,7 +5,7 @@
     {{ form.media }}
 </head>
 <body>
-    <form method="post" class="col" style="margin:80px;">
+    <form method="post" class="col" style="margin:80px; max-width: 1000px">
         {% csrf_token %}
 
         {% for hidden_field in form.hidden_fields %}

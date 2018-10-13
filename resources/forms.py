@@ -11,7 +11,7 @@ class S3DirectUploadForm(forms.Form):
     file = forms.URLField(widget=S3DirectWidget(dest='misc'))
 
 
-class ArtifactForm(ModelForm):
+class ArtifactCreateForm(ModelForm):
     name = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
@@ -19,7 +19,7 @@ class ArtifactForm(ModelForm):
         widget=forms.Textarea(attrs={'class': 'form-control'})
     )
     file = forms.URLField(
-        widget=S3DirectWidget(dest='misc', attrs={'class': 'form-control'})
+        widget=S3DirectWidget(dest='misc', attrs={'class': 'form-control-file'})
     )
     created_by = forms.ModelChoiceField(
         User.objects.all(),

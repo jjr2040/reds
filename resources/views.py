@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.edit import CreateView
 from django.views.generic import DetailView, ListView
 from resources.models import Resource, WorkplanActivity, Artifact
-from resources.forms import ResourceForm, WorkplanActivityCreateForm, ArtifactForm
+from resources.forms import ResourceForm, WorkplanActivityCreateForm, ArtifactCreateForm
 from django.urls import reverse_lazy, reverse
 from django.core.exceptions import ObjectDoesNotExist
 from users.models import User
@@ -78,8 +78,8 @@ def artifactList(request, resource_id):
     resource = Resource.objects.get(id = resource_id)
     artifact_list = resource.artifacts.all()
     #artifact_list = Artifact.objects.all()
-    context = {'artifact_list': artifact_list}
-    return render(request, "artifact/artifactList.html", context)
+    context = {'artifact_list': artifact_list, 'resource_id': resource_id}
+    return render(request, "artifacts/artifactList.html", context)
 
 
 def workflow_users(request, workplan_activity_id):
@@ -110,14 +110,23 @@ def workflow_users(request, workplan_activity_id):
         # return render(request, "workflow/workflow_users.html", context)
     return render(request, "workflow/workflow_users.html", context)
 
+
 class WorkplanActivityList(ListView):
     model = WorkplanActivity
 
 
-class ArtifactCreateView(CreateView):
-    model = Artifact
-    form_class = ArtifactForm
-    template_name = 'artifacts/addArtifact.html'
-    error_message = 'ass'
-    success_url = 'artifacts/'
+def artifact_create_view(request, resource_id):
+    if request.method == "POST":
+        form = ArtifactCreateForm(request.POST)
+        if form.is_valid():
+            new_artifact = form.save()
+            Resource.assign_new_artifact(new_artifact, resource_id)
+            return redirect('')
+        else:
+            return render(request, 'artifacts/addArtifact.html', {'form': form})
+    else:
+        form = ArtifactCreateForm()
+    return render(request, 'artifacts/addArtifact.html', {'form': form})
+
+
 
