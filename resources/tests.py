@@ -111,16 +111,21 @@ class ArtifactTestCase(LiveServerTestCase):
         cls.selenium = WebDriver(driver)
         cls.selenium.implicitly_wait(10)
 
-        project = Project.objects.create(name='Galeria', description='Deacsalc caksj cla cad')
-        project.save()
-
     @classmethod
     def tearDownClass(cls):
         cls.selenium.quit()
         super().tearDownClass()
 
     def test_create_resource(self):
-        url = '%s%s' % (self.live_server_url, reverse_lazy('create_resource'))
+        project = Project.objects.create(name='Galeria', description='Deacsalc caksj cla cad')
+        project.save()
+        resource = Resource.objects.create(name="Resource1", type="Banner", priority=3, estimated_duration="1",
+                                           description="", created_at="", updated_at="", current_phase=1,
+                                           project=project)
+        resource.save()
+        ana = User.objects.create(username="Ana", password="eagle")
+        ana.save()
+        url = '%s%s' % (self.live_server_url, reverse_lazy('create_artifacts', kwargs={'resource_id': 1}))
         print('URL selected for test: %s' % url)
         self.selenium.get(url)
 
@@ -133,14 +138,11 @@ class ArtifactTestCase(LiveServerTestCase):
         description_input = self.selenium.find_element_by_id('id_description')
         description_input.send_keys('Descripcion cualquier para probar')
 
-        self.selenium.find_element_by_xpath('//select[@id="id_type"]/option[2]').click()
-        self.selenium.find_element_by_xpath('//select[@id="id_priority"]/option[2]').click()
+        upload = self.selenium.find_element_by_id('id_file')
+        upload.sendKeys("./prueba.jpg");
 
-        estimated_duration_input = self.selenium.find_element_by_id('id_estimated_duration')
-        estimated_duration_input.send_keys('11')
-
-        project_input = self.selenium.find_element_by_xpath('//select[@id="id_project"]/option[2]')
-        project_input.click()
+        id_created_by = self.selenium.find_element_by_id('id_created_by')
+        id_created_by.send_keys('Ana')
 
         tags_input = self.selenium.find_element_by_id('id_tags')
         tags_input.send_keys('carro,moto,bicicleta')
@@ -149,6 +151,6 @@ class ArtifactTestCase(LiveServerTestCase):
 
         self.selenium.implicitly_wait(10)
 
-        name_label = self.selenium.find_element_by_id('id_name')
+        name_label = self.selenium.find_element_by_xpath('/html/body/div/div/div[1]/div[1]/span/strong')
 
-        self.assertIn('Prueba', name_label.text)
+        self.assertIn('Artefactos del recurso', name_label.text)
