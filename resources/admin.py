@@ -18,6 +18,13 @@ class WorkplanActivityInline(admin.StackedInline):
     extra = 1
 
 
+class WorkplanActivityAdmin(admin.ModelAdmin):
+    '''
+        Admin View for WorkplanActivity
+    '''
+    pass
+
+
 class ResourceAdmin(admin.ModelAdmin):
     '''
         Admin View for  Resource
@@ -43,3 +50,4 @@ admin.site.register(Tag, TagAdmin)
 admin.site.register(Artifact, ArtifactAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Resource, ResourceAdmin)
+admin.site.register(WorkplanActivity, WorkplanActivityAdmin)
