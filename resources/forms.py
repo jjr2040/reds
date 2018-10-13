@@ -81,11 +81,18 @@ class ResourceForm(forms.ModelForm):
 
 
 class WorkplanActivityCreateForm(forms.ModelForm):
+
+
+    start_date = forms.DateTimeField(
+        label=u'Fecha de inicio (yyyy-mm-dd hh-mm-ss)',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    end_date = forms.DateTimeField(
+        label=u'Fecha de fin (yyyy-mm-dd hh-mm-ss)',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
     class Meta:
         model = WorkplanActivity
         fields = ('name', 'start_date', 'end_date', 'duration', 'periodicity', 'resource')
-        widgets = {
-            # Use localization and bootstrap 3
-            'start_date': DateTimeWidget(attrs={'id': "start_date"}, usel10n=True, bootstrap_version=3),
-            'end_date': DateTimeWidget(attrs={'id': "end_date"}, usel10n=True, bootstrap_version=3)
-    }
+
+
