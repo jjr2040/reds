@@ -78,8 +78,8 @@ def artifactList(request, resource_id):
     resource = Resource.objects.get(id = resource_id)
     artifact_list = resource.artifacts.all()
     #artifact_list = Artifact.objects.all()
-    context = {'artifact_list': artifact_list}
-    return render(request, "artifact/artifactList.html", context)
+    context = {'artifact_list': artifact_list, 'resource_id': resource_id}
+    return render(request, "artifacts/artifactList.html", context)
 
 
 def workflow_users(request, workplan_activity_id):
@@ -110,16 +110,18 @@ def workflow_users(request, workplan_activity_id):
         # return render(request, "workflow/workflow_users.html", context)
     return render(request, "workflow/workflow_users.html", context)
 
+
 class WorkplanActivityList(ListView):
     model = WorkplanActivity
+
 
 def artifact_create_view(request, resource_id):
     if request.method == "POST":
         form = ArtifactCreateForm(request.POST)
         if form.is_valid():
             new_artifact = form.save()
-            Resource.assign_new_artifact(new_artifact,resource_id)
-            return redirect(request, '')
+            Resource.assign_new_artifact(new_artifact, resource_id)
+            return redirect('')
         else:
             return render(request, 'artifacts/addArtifact.html', {'form': form})
     else:
