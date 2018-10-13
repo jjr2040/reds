@@ -121,9 +121,9 @@ def artifact_create_view(request, resource_id):
         if form.is_valid():
             new_artifact = form.save()
             Resource.assign_new_artifact(new_artifact, resource_id)
-            return redirect('')
+            return render(request, 'artifacts/artifactList.html')
         else:
-            return render(request, 'artifacts/addArtifact.html', {'form': form})
+            return HttpResponseRedirect(reverse('artifact_list', kwargs={'resource_id': resource_id}))
     else:
         form = ArtifactCreateForm()
     return render(request, 'artifacts/addArtifact.html', {'form': form})
