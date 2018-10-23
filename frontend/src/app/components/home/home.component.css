@@ -1,0 +1,47 @@
+#correo {
+    font-size: 18px;
+    padding: 15px 15px;
+    border-radius: 25px 25px 25px 0;
+}
+
+#password {
+    font-size: 18px;
+    padding: 15px 15px;
+    border-radius: 25px 25px 25px 0;
+}
+
+#message {
+    border-radius: 25px 25px 25px 0;
+}
+
+.btn.submit-btn {
+    background: #fb397d;
+    height: 48px;
+    min-width: 185px;
+    color: #ffffff;
+    font-weight: 500;
+    border-radius: 22px 25px 22px 0;
+}
+
+.btn.submit-btn:hover {
+    background: #c6592f;
+    color: #fff;
+    -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+}
+
+.wellcome-heading h2 {
+    margin-top: 25%;
+    font-size: 80px;
+}
+
+h3 {
+    margin-top: 50%;
+}
+
+.tituloLogin {
+    margin-top: 10px;
+    color:#FFF; 
+    text-align: center;
+}
