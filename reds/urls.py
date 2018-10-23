@@ -17,11 +17,20 @@ from django.contrib import admin
 from django.conf.urls import url
 from django.urls import *
 from resources import views
+from rest_framework.routers import DefaultRouter
+
+
+router = DefaultRouter()
+router.register(r'resources', views.ResourceViewSet)
+router.register(r'projects', views.ProjectViewSet)
+router.register(r'artifacts', views.ArtifactViewSet)
+router.register(r'workplan_activities', views.WorkplanActivityViewSet)
 
 
 urlpatterns = [
     path('', views.index, name="index"),
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
     path('resource/<int:pk>', views.ResourceDetailView.as_view(), name='resource_detail'),
     path('resource/create', views.ResourceCreateView.as_view(), name='create_resource'),
     path('resource/<int:resource_id>/workplanactivity/list', views.list_workplanactivity, name='list_workplanactivity'),

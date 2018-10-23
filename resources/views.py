@@ -9,6 +9,8 @@ from users.models import User
 from django.http import HttpResponseRedirect
 from django.views.generic import FormView
 from .forms import S3DirectUploadForm
+from rest_framework import viewsets
+from .serializers import *
 
 
 class ResourceCreateView(CreateView):
@@ -120,5 +122,30 @@ def artifact_create_view(request, resource_id):
         form = ArtifactCreateForm()
     return render(request, 'artifacts/addArtifact.html', {'form': form})
 
+
+# REST Views
+
+class ResourceViewSet(viewsets.ModelViewSet):
+
+    queryset = Resource.objects.all()
+    serializer_class = ResourceSerializer
+    #filter_fields = ('media_type', )
+
+
+class ProjectViewSet(viewsets.ModelViewSet):
+
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    #filter_fields = ('media_type', )
+
+
+class ArtifactViewSet(viewsets.ModelViewSet):
+    queryset = Artifact.objects.all()
+    serializer_class = ArtifactSerializer
+
+
+class WorkplanActivityViewSet(viewsets.ModelViewSet):
+    queryset = WorkplanActivity.objects.all()
+    serializer_class = WorkplanActivity
 
 
