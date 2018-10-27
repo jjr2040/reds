@@ -1,0 +1,2 @@
+# reds
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/30b78dfe29134ba2b8ae548588055a06)](https://app.codacy.com/app/sy-velasquez10/reds?utm_source=github.com&utm_medium=referral&utm_content=jjr2040/reds&utm_campaign=Badge_Grade_Dashboard)
