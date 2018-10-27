@@ -146,6 +146,6 @@ class ArtifactViewSet(viewsets.ModelViewSet):
 
 class WorkplanActivityViewSet(viewsets.ModelViewSet):
     queryset = WorkplanActivity.objects.all()
-    serializer_class = WorkplanActivity
+    serializer_class = WorkplanActivitySerializer
 
 
