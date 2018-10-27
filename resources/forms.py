@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from resources.models import Resource, Project, WorkplanActivity, User
-from datetimewidget.widgets import DateTimeWidget
 from django.forms import ModelForm
 from resources.models import Artifact
 from s3direct.widgets import S3DirectWidget

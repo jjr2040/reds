@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from django.db import models
 from users.models import User
 from taggit.managers import TaggableManager
 from s3direct.fields import S3DirectField

@@ -1,13 +1,11 @@
 from django.test import LiveServerTestCase, TestCase
 from selenium.webdriver.chrome.webdriver import WebDriver
-from selenium.webdriver.common.keys import Keys
 from django.urls import reverse_lazy
 import os
 from django.conf import settings
 import platform
 from resources.models import *
 from users.models import User
-from datetime import datetime
 from selenium.webdriver.support.wait import WebDriverWait
 
 
@@ -75,8 +73,6 @@ class WorkplanActivityCase(TestCase):
         pablo = User.objects.create(username="Pablo", password="lion")
         User.objects.create(username="Juan", password="lion2")
         project = Project.objects.create(name="ProjectX", description="In progress...")
-        tag = Tag.objects.create(name="Banner")
-        tag2 = Tag.objects.create(name="Intro")
         arti = Artifact.objects.create(name="Intro", description="In progress...", file="banner.png", created_by=ana)
         arti2 = Artifact.objects.create(name="Intro2", description="In progress...", file="banner2.png", created_by=ana)
         

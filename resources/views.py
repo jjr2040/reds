@@ -1,14 +1,12 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import CreateView
 from django.views.generic import DetailView, ListView
-from resources.models import Resource, WorkplanActivity, Artifact
+from resources.models import Resource, WorkplanActivity
 from resources.forms import ResourceForm, WorkplanActivityCreateForm, ArtifactCreateForm
 from django.urls import reverse_lazy, reverse
 from django.core.exceptions import ObjectDoesNotExist
 from users.models import User
 from django.http import HttpResponseRedirect
-from django.views.generic import FormView
-from .forms import S3DirectUploadForm
 from rest_framework import viewsets
 from .serializers import *
 
