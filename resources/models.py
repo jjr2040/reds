@@ -2,6 +2,7 @@
 from users.models import User
 from taggit.managers import TaggableManager
 from s3direct.fields import S3DirectField
+from django.db import models
 
 class Tag(models.Model):
 
