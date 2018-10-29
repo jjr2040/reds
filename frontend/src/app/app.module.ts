@@ -13,12 +13,16 @@ import { ErrorHandlingService } from './services/error-handling.service';
 import { HttpExampleService } from './services/http-example.service';
 import { MatListModule } from '@angular/material';
 import { HomeComponent } from './components/home/home.component';
+import { ResourceDetailComponent } from './components/resource-detail/resource-detail.component';
+import { ResourceListComponent } from './components/resource-list/resource-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    ResourceDetailComponent,
+    ResourceListComponent
   ],
   imports: [
     BrowserModule,
