@@ -1,3 +1,5 @@
+import { Project } from './project';
+
 export class Resource {
     name: String;
     type: String;
@@ -7,4 +9,5 @@ export class Resource {
     creared_at: Date;
     updated_at: Date;
     current_phase: Number;
+    project: Project;
 }

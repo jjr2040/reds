@@ -21,4 +21,11 @@ export class ResourceService {
       catchError(this.errorHandlingService.handleError<Resource[]>('Error fetching resources'))
     );
   }
+
+  getResource(id: Number): Observable<Resource> {
+    const url = this.apiUrl + `${id}/`;
+    return this.http.get<Resource>(url).pipe(
+      catchError(this.errorHandlingService.handleError<Resource>('Error fetching a resource'))
+    );
+  }
 }
