@@ -1,6 +1,7 @@
 import { Project } from './project';
 
 export class Resource {
+    id: String;
     name: String;
     type: String;
     priority: Number;

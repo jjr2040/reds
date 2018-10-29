@@ -1,3 +1,4 @@
+import { Resource } from 'src/app/models/resource';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -25,6 +26,19 @@ export class ResourceService {
   getResource(id: Number): Observable<Resource> {
     const url = this.apiUrl + `${id}/`;
     return this.http.get<Resource>(url).pipe(
+      catchError(this.errorHandlingService.handleError<Resource>('Error fetching a resource'))
+    );
+  }
+
+  createResource(resource: Resource): Observable<Resource> {
+    return this.http.post<Resource>(this.apiUrl, resource).pipe(
+      catchError(this.errorHandlingService.handleError<Resource>('Error fetching a resource'))
+    );
+  }
+
+  updateResource(resource: Resource): Observable<Resource> {
+    const url = this.apiUrl + `${resource.id}/`;
+    return this.http.put<Resource>(url, resource).pipe(
       catchError(this.errorHandlingService.handleError<Resource>('Error fetching a resource'))
     );
   }
