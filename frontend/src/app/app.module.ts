@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import { MatListModule } from '@angular/material';
 import { HomeComponent } from './components/home/home.component';
 import { ResourceDetailComponent } from './components/resource-detail/resource-detail.component';
 import { ResourceListComponent } from './components/resource-list/resource-list.component';
+import { ResourceUsersComponent } from './components/resource-users/resource-users.component';
 
 
 @NgModule({
@@ -22,14 +23,16 @@ import { ResourceListComponent } from './components/resource-list/resource-list.
     AppComponent,
     HomeComponent,
     ResourceDetailComponent,
-    ResourceListComponent
+    ResourceListComponent,
+    ResourceUsersComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    MatListModule
+    MatListModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthenticationService,
