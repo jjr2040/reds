@@ -11,4 +11,5 @@ export class Resource {
     updated_at: Date;
     current_phase: Number;
     project: Project;
+    users: string[];
 }
