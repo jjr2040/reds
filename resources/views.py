@@ -144,4 +144,14 @@ class WorkplanActivityViewSet(viewsets.ModelViewSet):
     queryset = WorkplanActivity.objects.all()
     serializer_class = WorkplanActivitySerializer
 
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+    
+   
+
+        
+
 

@@ -7,6 +7,11 @@ class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resource
         fields = '__all__'
+    users = serializers.SlugRelatedField(
+        many=True,
+        queryset=User.objects.all(),
+        slug_field='username'
+     )
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -30,4 +35,4 @@ class WorkplanActivitySerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['id','username']
