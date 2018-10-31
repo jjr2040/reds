@@ -10,11 +10,11 @@ import { LoadingService } from './services/loading.service';
 import { MessageService } from './services/message.service';
 import { AppRoutingModule } from './app-routing.module';
 import { ErrorHandlingService } from './services/error-handling.service';
-import { HttpExampleService } from './services/http-example.service';
 import { MatListModule } from '@angular/material';
 import { HomeComponent } from './components/home/home.component';
 import { ResourceDetailComponent } from './components/resource-detail/resource-detail.component';
 import { ResourceListComponent } from './components/resource-list/resource-list.component';
+import { ArtifactListComponent } from './components/artifact-list/artifact-list.component';
 import { ResourceUsersComponent } from './components/resource-users/resource-users.component';
 
 
@@ -25,6 +25,7 @@ import { ResourceUsersComponent } from './components/resource-users/resource-use
     ResourceDetailComponent,
     ResourceListComponent,
     ResourceUsersComponent
+    ArtifactListComponent
   ],
   imports: [
     BrowserModule,
@@ -38,8 +39,7 @@ import { ResourceUsersComponent } from './components/resource-users/resource-use
     AuthenticationService,
     LoadingService,
     MessageService,
-    ErrorHandlingService,
-    HttpExampleService
+    ErrorHandlingService
   ],
   bootstrap: [AppComponent]
 })
