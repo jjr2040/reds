@@ -16,6 +16,7 @@ import { ResourceDetailComponent } from './components/resource-detail/resource-d
 import { ResourceListComponent } from './components/resource-list/resource-list.component';
 import { ArtifactListComponent } from './components/artifact-list/artifact-list.component';
 import { ResourceUsersComponent } from './components/resource-users/resource-users.component';
+import { ActivityUsersComponent } from './components/activity-users/activity-users.component';
 
 
 @NgModule({
@@ -24,8 +25,9 @@ import { ResourceUsersComponent } from './components/resource-users/resource-use
     HomeComponent,
     ResourceDetailComponent,
     ResourceListComponent,
-    ResourceUsersComponent
-    ArtifactListComponent
+    ResourceUsersComponent,
+    ArtifactListComponent,
+    ActivityUsersComponent
   ],
   imports: [
     BrowserModule,
