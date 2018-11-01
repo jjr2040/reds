@@ -10,7 +10,6 @@ export class ArtifactListComponent implements OnInit {
   @Input() resource: number;
   constructor(private artifactService: ArtifactService) {
     this.artifactService.getArtifact(this.resource).subscribe( response => {
-      
     });
   }
 
