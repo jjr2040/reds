@@ -31,14 +31,14 @@ export class ResourceService {
 
   createResource(resource: Resource): Observable<Resource> {
     return this.http.post<Resource>(this.apiUrl, resource).pipe(
-      catchError(this.errorHandlingService.handleError<Resource>('Error fetching a resource'))
+      catchError(this.errorHandlingService.handleError<Resource>('Error creating a resource'))
     );
   }
 
   updateResource(resource: Resource): Observable<Resource> {
     const url = this.apiUrl + `${resource.id}/`;
     return this.http.put<Resource>(url, resource).pipe(
-      catchError(this.errorHandlingService.handleError<Resource>('Error fetching a resource'))
+      catchError(this.errorHandlingService.handleError<Resource>('Error updating a resource'))
     );
   }
 }

@@ -1,3 +1,79 @@
-<p>
-  resource-detail works!
-</p>
+<div class="page-wrapper">
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h3 *ngIf="resource" class="text-themecolor">{{resource.name}}</h3>
+      </div>
+      <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/resources">Recursos</a></li>
+          <li class="breadcrumb-item">recurso</li>
+          <li *ngIf="resource" class="breadcrumb-item active">{{resource.name}}</li>
+        </ol>
+      </div>
+      <div>
+        <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+      <div class="col-12">
+        <div *ngIf="resource" class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-3 col-xs-6 b-r"> <strong>Tipo</strong>
+                <br>
+                <p class="text-muted">{{resource.type}}</p>
+              </div>
+              <div class="col-md-3 col-xs-6 b-r"> <strong>Prioridad</strong>
+                <br>
+                <p class="text-muted">{{resource.priority}}</p>
+              </div>
+              <div class="col-md-3 col-xs-6 b-r"> <strong>Tiempo estimado (días)</strong>
+                <br>
+                <p class="text-muted">{{resource.estimated_duration}}</p>
+              </div>
+              <div class="col-md-3 col-xs-6"> <strong>Fase actual</strong>
+                <br>
+                <p class="text-muted">{{resource.current_phase}}</p>
+              </div>
+            </div>
+            <hr>
+            <h4 class="font-medium m-t-30"><strong>Descripción:</strong></h4>
+            <p class="m-t-30">{{resource.description}}</p>
+            <h4 class="font-medium m-t-30"><strong>Proyecto:</strong> {{resource.project.name}}</h4>
+            <hr>
+            <div class="row">
+              <div class="col-md-6 col-xs-6 b-r"> <strong>Fecha de creación</strong>
+                <br>
+                <p class="text-muted">{{resource.created_at}}</p>
+              </div>
+              <div class="col-md-6 col-xs-6"> <strong>Fecha de modificación</strong>
+                <br>
+                <p class="text-muted">{{resource.updated_at}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Container fluid  -->
+  <!-- ============================================================== -->
+</div>

@@ -2,14 +2,14 @@ import { Project } from './project';
 
 export class Resource {
     id: Number;
-    name: String;
-    type: String;
+    name: string;
+    type: string;
     priority: Number;
     estimated_duration: Number;
-    description: String;
-    creared_at: Date;
+    description: string;
+    created_at: Date;
     updated_at: Date;
-    current_phase: Number;
+    current_phase: string;
     project: Project;
     users: string[];
 }

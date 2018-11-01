@@ -16,6 +16,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ResourceDetailComponent } from './components/resource-detail/resource-detail.component';
 import { ResourceListComponent } from './components/resource-list/resource-list.component';
 import { ResourceUsersComponent } from './components/resource-users/resource-users.component';
+import { ResourcesCreateComponent } from './components/resources-create/resources-create.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ResourceUsersComponent } from './components/resource-users/resource-use
     HomeComponent,
     ResourceDetailComponent,
     ResourceListComponent,
-    ResourceUsersComponent
+    ResourceUsersComponent,
+    ResourcesCreateComponent
   ],
   imports: [
     BrowserModule,
