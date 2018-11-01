@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ArtifactService } from 'src/app/services/artifact.service';
+import { ArtifactService } from './../../services/artifact.service';
 
 @Component({
   selector: 'app-artifact-list',
