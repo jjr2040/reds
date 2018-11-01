@@ -16,29 +16,29 @@ export class ArtifactService {
   constructor(private http: HttpClient,
     private errorHandlingService: ErrorHandlingService) { }
 
-  getArtifacts(): Observable<Artifact[]> {
+  getArtifacts(id): Observable<Artifact[]> {
     return this.http.get<Artifact[]>(this.apiUrl).pipe(
-      catchError(this.errorHandlingService.handleError<Artifact[]>('Error fetching resources'))
+      catchError(this.errorHandlingService.handleError<Artifact[]>('Error getting artifacts'))
     );
   }
 
   getArtifact(id: Number): Observable<Artifact> {
     const url = this.apiUrl + `${id}/`;
     return this.http.get<Artifact>(url).pipe(
-      catchError(this.errorHandlingService.handleError<Artifact>('Error fetching a resource'))
+      catchError(this.errorHandlingService.handleError<Artifact>('Error fetching an artifact'))
     );
   }
 
   createArtifact(artifact: Artifact): Observable<Artifact> {
     return this.http.post<Artifact>(this.apiUrl, artifact).pipe(
-      catchError(this.errorHandlingService.handleError<Artifact>('Error fetching a resource'))
+      catchError(this.errorHandlingService.handleError<Artifact>('Error adding an artifact'))
     );
   }
 
   updateArtifact(artifact: Artifact): Observable<Artifact> {
     const url = this.apiUrl + `${artifact.id}/`;
     return this.http.put<Artifact>(url, artifact).pipe(
-      catchError(this.errorHandlingService.handleError<Artifact>('Error fetching a resource'))
+      catchError(this.errorHandlingService.handleError<Artifact>('Error updating an artifact'))
     );
   }
 }

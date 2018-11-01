@@ -12,4 +12,5 @@ export class Resource {
     current_phase: Number;
     project: Project;
     users: string[];
+    artifacts: Number[];
 }

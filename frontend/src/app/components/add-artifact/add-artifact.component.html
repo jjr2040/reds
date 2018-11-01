@@ -18,22 +18,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
-          <div *ngFor='let resource of resources' class="card card-outline-inverse">
-              <div class="card-header">
-                  <h4 class="m-b-0 text-white">{{resource.name}}</h4></div>
-              <div class="card-body">
-                  <h3 class="card-title">Special title treatment</h3>
-                  <p class="card-text">{{resource.description}}</p>
 
-                  <a href="javascript:void(0);" (click)="goTo(resource.id)" class="btn btn-primary">Ver detalle</a>
-              </div>
-              <app-artifact-list [artifactsIds]="resource.artifacts"></app-artifact-list>
-          </div>
-      </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- End of Container fluid  -->
-    <!-- ============================================================== -->
   </div>
 </div>
