@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ArtifactService } from 'src/app/services/artifact.service';
+import { ArtifactService } from '../../services/artifact.service';
 
 @Component({
   selector: 'app-artifact-list',
@@ -10,7 +10,6 @@ export class ArtifactListComponent implements OnInit {
   @Input() resource: number;
   constructor(private artifactService: ArtifactService) {
     this.artifactService.getArtifact(this.resource).subscribe( response => {
-      
     });
   }
 

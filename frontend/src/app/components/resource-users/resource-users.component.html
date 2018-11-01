@@ -23,7 +23,7 @@
               <div class="card-header">
                   <h4 class="m-b-0 text-white">{{resource.name}}</h4></div>
               <div class="card-body">
-                  <!--<p *ngFor="let user of resource.users" class="card-text">{{user}}</p>-->
+                  <p *ngFor="let user of resource.users" class="card-text">{{user}}</p>
                   <form #newUserForm="ngForm" (ngSubmit)="newUserForm.form.valid && validUser(newUser.value) && addUser(resource,newUser.value)" novalidate>
                   	<div class="row">
                   		<div class="col-8">

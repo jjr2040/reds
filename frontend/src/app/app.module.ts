@@ -24,7 +24,7 @@ import { ResourceUsersComponent } from './components/resource-users/resource-use
     HomeComponent,
     ResourceDetailComponent,
     ResourceListComponent,
-    ResourceUsersComponent
+    ResourceUsersComponent,
     ArtifactListComponent
   ],
   imports: [
