@@ -1,13 +1,13 @@
 import { User } from './user';
 
 export class Artifact {
-    id: Number;
+    id?: Number;
     name: String;
     description: String;
-    creared_at: Date;
-    updated_at: Date;
+    creared_at?: Date;
+    updated_at?: Date;
     file: String;
     created_by: User;
-    tags: String[];
+    tags?: String[];
     preview: Boolean;
 }

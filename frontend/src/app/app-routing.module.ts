@@ -6,6 +6,7 @@ import { ResourceDetailComponent } from './components/resource-detail/resource-d
 import { ResourceListComponent } from './components/resource-list/resource-list.component';
 import { ResourceUsersComponent } from './components/resource-users/resource-users.component';
 import { ActivityUsersComponent } from './components/activity-users/activity-users.component';
+import { AddArtifactComponent } from './components/add-artifact/add-artifact.component';
 import { ResourcesCreateComponent } from './components/resources-create/resources-create.component';
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'resources/users', component: ResourceUsersComponent},
  { path: 'activity/:id/users', component: ActivityUsersComponent},
  { path: 'users', component: ResourceUsersComponent},
+  { path: 'resource/:id/artifacts/create', component: AddArtifactComponent},
   { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
 

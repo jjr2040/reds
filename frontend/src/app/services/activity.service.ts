@@ -11,7 +11,7 @@ import { WorkplanActivity } from '../models/workplan-activity';
   providedIn: 'root'
 })
 export class ActivityService {
-  
+
   private apiUrl = `${environment.apiUrl}/workplan_activities/`;
 
   constructor(private http: HttpClient,

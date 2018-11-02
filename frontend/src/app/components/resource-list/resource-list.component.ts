@@ -24,4 +24,8 @@ export class ResourceListComponent implements OnInit {
   goTo(id) {
     this.router.navigate([`/resource/${id}`]);
   }
+
+  addArtifact(id) {
+    this.router.navigate([`/resource/${id}/artifacts/create`]);
+  }
 }

@@ -26,6 +26,7 @@
               <h3 class="card-title">{{resource.name}}</h3>
               <p class="card-text">{{resource.description}}</p>
               <a routerLink="/resources/{{resource.id}}" class="btn btn-primary">Ver recurso</a>
+                  <a href="javascript:void(0);" (click)="addArtifact(resource.id)" class="btn btn-primary">Agregar Artefacto</a>
           </div>
           <app-artifact-list [artifactsIds]="resource.artifacts"></app-artifact-list>
         </div>

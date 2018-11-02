@@ -4,21 +4,45 @@
   <!-- Container fluid  -->
   <!-- ============================================================== -->
   <div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <div class="row page-titles">
-      <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Artefactos</h3>
+    <div class="form-group row">
+      <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+          <label for="name">Nombre del artefacto</label>
+          <input type="text" class="form-control" id="name" placeholder="Nombres del artefacto" [(ngModel)]="name">
       </div>
-      <div class="col-md-7 align-self-center">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="recursos">Artefactos</a></li>
-        </ol>
+      <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+          <label for="description">Descripción</label>
+          <input type="text" class="form-control" id="description" placeholder="Descripcion" [(ngModel)]="description">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+        <label for="created_by">Creado por</label>
+        <select class="form-control" id="created_by" [(ngModel)]="created_by">
+          <option value="1">1</option>
+          <option>b</option>
+        </select>
+      </div>
+      <div class="form-group col-xs-10 col-sm-10 col-md-4 col-lg-4">
+        <label for="inputArchivo">Cargar archivo</label>
+        <input type="file" (change)="fileEvent($event)" name="imageUpload" id="imageUpload">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+          <label for="tags">Tags</label>
+          <input type="text" class="form-control" id="tags" placeholder="Tags" [(ngModel)]="tags">
+      </div>
+      <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4" style="line-height: 6.4;">
+          <input type="checkbox" class="filled-in" id="preview" [(ngModel)]="preview" checked>
+          <label for="preview">Tiene preview</label>
       </div>
     </div>
     <div class="row">
-
+      <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
+          <br>
+          <button type="submit" class="btn btn-info" (click)="crearArtifact()">Crear Artefacto</button>
+      </div>
     </div>
+    <div class="clearfix"></div>
   </div>
 </div>
