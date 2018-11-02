@@ -1,0 +1,135 @@
+<div class="page-wrapper">
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Editar actividad</h3>
+      </div>
+      <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/activities">Actividades</a></li>
+          <li class="breadcrumb-item">Editar</li>
+        </ol>
+      </div>
+      <div>
+        <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Crea un nuevo recurso</h4>
+            <form [formGroup]="resourceForm" (ngSubmit)="saveResource()" class="form-material m-t-40">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" formControlName="name" class="form-control form-control-line" required> 
+              </div>
+              <div class="form-group">
+                <label>Descripción</label>
+                <textarea formControlName="description" class="form-control form-control-line" rows="3" required></textarea>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label>Projecto</label>
+                  <select *ngIf="projects" formControlName="project_id" class="form-control" required>
+                    <option>---</option>
+                    <option *ngFor="let project of projects" [ngValue]="project.id" >{{project.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Duración estimada (días)</label>
+                  <input type="number" formControlName="estimated_duration" class="form-control form-control-line"  > 
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-4">
+                  <label>Tipo</label>
+                  <select formControlName="type" class="form-control" required >
+                    <option>---</option>
+                    <option value="Web page">Página Web</option>
+                    <option value="Banner">Banner</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-4">
+                  <label>Prioridad</label>
+                  <select formControlName="priority" class="form-control">
+                    <option>---</option>
+                    <option [ngValue]="1">Baja</option>
+                    <option [ngValue]="2">Media</option>
+                    <option [ngValue]="3">Alta</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-4">
+                  <label>Fase actual</label>
+                  <select formControlName="current_phase" class="form-control">
+                    <option [ngValue]="1">Preproducción</option>
+                    <option [ngValue]="2">Producción</option>
+                    <option [ngValue]="3">Postproducción</option>
+                    <option [ngValue]="4">Control de calidad</option>
+                  </select>
+                </div>
+              </div>
+              
+              
+              <div class="tags-default form-group">
+                <label>Etiquetas</label>
+                <input type="text" class="form-control" formControlName="tags">
+                <span class="help">Escribe las etiquetas separadas por coma ","</span>
+              </div>
+              <button type="submit" class="btn waves-effect waves-light btn-outline-primary">Crear</button>
+
+              <!-- <div class="form-group">[disabled]="!resourceForm.valid"
+                <label for="example-email">Email <span class="help"> e.g. "example@gmail.com"</span></label>
+                <input type="email" id="example-email2" name="example-email" class="form-control" placeholder="Email"> </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" value="password"> </div>
+              <div class="form-group">
+                <label>Placeholder</label>
+                <input type="text" class="form-control" placeholder="placeholder"> </div>
+              <div class="form-group">
+                <label>Text area</label>
+                <textarea class="form-control" rows="5"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Input Select</label>
+                <select class="form-control">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Helping text</label>
+                <input type="text" class="form-control form-control-line"> <span class="help-block text-muted"><small>A block of help text that breaks onto a new line and may extend beyond one line.</small></span> 
+              </div> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Container fluid  -->
+  <!-- ============================================================== -->
+</div>
+  
+  

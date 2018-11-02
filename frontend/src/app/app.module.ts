@@ -16,9 +16,11 @@ import { ResourceDetailComponent } from './components/resource-detail/resource-d
 import { ResourceListComponent } from './components/resource-list/resource-list.component';
 import { ArtifactListComponent } from './components/artifact-list/artifact-list.component';
 import { ResourceUsersComponent } from './components/resource-users/resource-users.component';
+import { ActivityListComponent } from './components/activity-list/activity-list.component';
 import { AddArtifactComponent } from './components/add-artifact/add-artifact.component';
 import { ActivityUsersComponent } from './components/activity-users/activity-users.component';
 import { ResourcesCreateComponent } from './components/resources-create/resources-create.component';
+import { ActivityEditComponent } from './components/activity-edit/activity-edit.component';
 import { ResourcesEditComponent } from './components/resources-edit/resources-edit.component';
 
 
@@ -31,9 +33,11 @@ import { ResourcesEditComponent } from './components/resources-edit/resources-ed
     ResourceUsersComponent,
     ArtifactListComponent,
     ActivityUsersComponent,
+    ActivityListComponent,
     AddArtifactComponent,
     ResourcesCreateComponent,
-    ResourcesEditComponent
+    ResourcesEditComponent,
+    ActivityEditComponent
   ],
   imports: [
     BrowserModule,
