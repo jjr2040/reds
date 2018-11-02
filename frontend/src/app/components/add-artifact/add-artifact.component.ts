@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as S3 from 'aws-sdk/clients/s3';
 import { ArtifactService } from '../../services/artifact.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
 
@@ -18,17 +18,23 @@ export class AddArtifactComponent implements OnInit {
   name;
   preview;
   users;
-  constructor(private router: Router, private artifactService: ArtifactService, private userService: UserService) {
+  resource_id;
+  constructor(private router: Router, private artifactService: ArtifactService, private userService: UserService,
+    private route: ActivatedRoute) {
     this.userService.getUsers().subscribe( users => {
       this.users = users;
     });
    }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.resource_id = params['id'];
+    });
   }
 
   fileEvent(fileInput: any) {
     const fileAWS = fileInput.target.files[0];
+    this.file = fileAWS.name;
     const bucket = new S3(
       {
         accessKeyId: '',
@@ -54,12 +60,15 @@ export class AddArtifactComponent implements OnInit {
   }
 
   crearArtifact() {
+    console.log(this.created_by);
     this.artifactService.createArtifact({
       name: this.name,
       description: this.description,
       created_by: this.created_by,
       file: this.file,
-      preview: this.preview
+      preview: this.preview,
+      resource_id: this.resource_id,
+      tags: this.tags
     }).subscribe( response => {
       if (response) {
         this.router.navigate(['/resources']);

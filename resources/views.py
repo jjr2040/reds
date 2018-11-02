@@ -151,9 +151,16 @@ class ArtifactViewSet(viewsets.ModelViewSet):
     queryset = Artifact.objects.all()
     serializer_class = ArtifactSerializer
 
-    #def perform_create(self, serializer):
-     #   resource_id = self.request.data.get('id_resource')
-      #  Resource.assign_new_artifact(serializer, resource_id)
+    def perform_create(self, serializer):
+        resource_id = self.request.data.get('resource_id')
+        tags = self.request.data.get('tags')
+
+        instance = serializer.save()
+        Resource.assign_new_artifact(instance, resource_id)
+
+        if tags is not None:
+            for tag in tags:
+                instance.tags.add(tag)
 
 
 class WorkplanActivityViewSet(viewsets.ModelViewSet):
