@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WorkplanActivity } from '../../models/WorkplanActivity';
+import { WorkplanActivity } from './../../models/workplan-activity';
 
 @Component({
   selector: 'app-activity-list',

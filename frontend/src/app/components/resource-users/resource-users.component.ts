@@ -13,13 +13,13 @@ export class ResourceUsersComponent implements OnInit {
 
   resources: Resource[];
   u: User[];
-  users : string[];
+  users: string[];
 
   constructor(private resourceService: ResourceService,private userService: UserService) { }
 
   ngOnInit() {
     this.getUsers();
-  	this.getResources();
+    this.getResources();
   }
 
   getResources(): void {
@@ -27,7 +27,7 @@ export class ResourceUsersComponent implements OnInit {
     .subscribe( resources => this.resources = resources);
   }
 
-  addUser(resource,newUser): void {  
+  addUser(resource, newUser): void { 
     resource.users.push(newUser.trim());
     this.resourceService.updateResource(resource)
       .subscribe();

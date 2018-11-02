@@ -23,20 +23,20 @@
               <div class="card-header">
                   <h4 class="m-b-0 text-white">{{resource.name}}</h4></div>
               <div class="card-body">
-                  <!--<p *ngFor="let user of resource.users" class="card-text">{{user}}</p>-->
+                  <p *ngFor="let user of resource.users" class="card-text">{{user}}</p>
                   <form #newUserForm="ngForm" (ngSubmit)="newUserForm.form.valid && validUser(newUser.value) && addUser(resource,newUser.value)" novalidate>
                   	<div class="row">
                   		<div class="col-8">
                   			<input type="text" class="form-control" #newUser [ngClass]="{'is-invalid':(newUserForm.submitted && !validUser(newUser.value))}" name="newUser" (keyup)="0" required>
 		                  		<div *ngIf="newUserForm.submitted && !validUser(newUser.value)" class="invalid-feedback">
-									<div *ngIf="newUserForm.submitted && !validUser(newUser.value)">No existe un usuario con ese nombre</div>
-								</div>
+									           <div *ngIf="newUserForm.submitted && !validUser(newUser.value)">No existe un usuario con ese nombre</div>
+								          </div>
                   		</div>
                   		<div class="col-4">
                   			<button type="submit" id="add-btn" class="btn btn-primary">Agregar</button>
                   		</div>
-					</div>	                  	
-				  </form>
+					          </div>	                  	
+				          </form>
               </div>
           </div>
       </div>

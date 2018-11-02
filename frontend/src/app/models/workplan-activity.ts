@@ -1,4 +1,5 @@
 export class WorkplanActivity {
+	id: number;
     name: String;
     start_date: Date;
     end_date: Date;
@@ -7,4 +8,5 @@ export class WorkplanActivity {
     status: Number;
     progress: Number;
     resource: Number;
+    users: string[];
 }
