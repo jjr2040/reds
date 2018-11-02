@@ -16,32 +16,37 @@ class ResourceSerializer(serializers.ModelSerializer):
         required=False
      )
 
-    project = ProjectSerializer()
-    current_phase = serializers.CharField(source='get_current_phase_display')
+    project = ProjectSerializer(required=False)
+    current_phase_display = serializers.SerializerMethodField(read_only=True)
+    priority_display = serializers.SerializerMethodField(read_only=True)
+
+    tags = serializers.StringRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Resource
-        # fields = (
-        #     'id',
-        #     'name',
-        #     'type',
-        #     'priority',
-        #     'estimated_duration',
-        #     'description',
-        #     'created_at',
-        #     'updated_at',
-        #     'current_phase',
-        #     'project',
-        #     'users'
-        # )
-        fields = '__all__'
+        fields = (
+            'id',
+            'name',
+            'type',
+            'priority',
+            'estimated_duration',
+            'description',
+            'created_at',
+            'updated_at',
+            'current_phase',
+            'project',
+            'users',
+            'current_phase_display',
+            'priority_display',
+            'tags'
+        )
 
-    def create(self, validated_data):
-        project_id = validated_data.pop('project').get('id')
-        instance = Resource.objects.create(**validated_data)
-        instance.project = project_id
-        return instance
-    
+    def get_current_phase_display(self, obj):
+        return obj.get_current_phase_display()
+
+    def get_priority_display(self, obj):
+        return obj.get_priority_display()
+
 
 class ArtifactSerializer(serializers.ModelSerializer):
     class Meta:

@@ -4,6 +4,7 @@ import { Project } from './../../models/project';
 import { ProjectService } from './../../services/project.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resources-create',
@@ -19,7 +20,8 @@ export class ResourcesCreateComponent implements OnInit {
     priority: ['', Validators.required],
     estimated_duration: ['', Validators.required],
     current_phase: [1, Validators.required],
-    project_id: ['', Validators.required]
+    project_id: ['', Validators.required],
+    tags: ['']
   });
 
   projects: Project[];
@@ -27,7 +29,8 @@ export class ResourcesCreateComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private fb: FormBuilder,
-    private resourceService: ResourceService
+    private resourceService: ResourceService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -40,15 +43,11 @@ export class ResourcesCreateComponent implements OnInit {
 
   saveResource(): void {
     console.warn(this.resourceForm.value);
-
-    const projectId = this.resourceForm.get('project_id').value;
-
     const resource: Resource = this.resourceForm.value;
-
-    resource.project = this.projects.find( project => project.id === projectId );
-
+    resource.tags = (this.resourceForm.get('tags').value as string).split(',');
     this.resourceService.createResource(resource).subscribe( createdResource => {
       console.log('Created a resource');
+      this.router.navigate(['/resources', createdResource.id]);
     });
   }
 

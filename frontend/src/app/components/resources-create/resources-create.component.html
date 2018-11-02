@@ -51,7 +51,7 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label>Duración estimada (días)</label>
-                  <input type="number" formControlName="estimated_duration" class="form-control form-control-line" required> 
+                  <input type="number" formControlName="estimated_duration" class="form-control form-control-line"  > 
                 </div>
               </div>
               <div class="row">
@@ -86,7 +86,8 @@
               
               <div class="tags-default form-group">
                 <label>Etiquetas</label>
-                <div class="bootstrap-tagsinput"> <input class="form-control" type="text" placeholder="add tags" size="8"></div><input type="text" value="" data-role="tagsinput" placeholder="agrega etiquetas" style="display: none;"> 
+                <input type="text" class="form-control" formControlName="tags">
+                <span class="help">Escribe las etiquetas separadas por coma ","</span>
               </div>
               <button type="submit" class="btn waves-effect waves-light btn-outline-primary">Crear</button>
 

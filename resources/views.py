@@ -127,6 +127,18 @@ class ResourceViewSet(viewsets.ModelViewSet):
     serializer_class = ResourceSerializer
     #filter_fields = ('media_type', )
 
+    def perform_create(self, serializer):
+        project_id = self.request.data['project_id']
+        tags = self.request.data.get('tags')
+
+        instance = serializer.save(project_id=project_id)
+
+        if tags is not None:
+            for tag in tags:
+                instance.tags.add(tag)
+
+        
+
 
 class ProjectViewSet(viewsets.ModelViewSet):
 

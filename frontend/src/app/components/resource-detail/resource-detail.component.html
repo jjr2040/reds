@@ -39,7 +39,7 @@
               </div>
               <div class="col-md-3 col-xs-6 b-r"> <strong>Prioridad</strong>
                 <br>
-                <p class="text-muted">{{resource.priority}}</p>
+                <p class="text-muted">{{resource.priority_display}}</p>
               </div>
               <div class="col-md-3 col-xs-6 b-r"> <strong>Tiempo estimado (días)</strong>
                 <br>
@@ -47,13 +47,18 @@
               </div>
               <div class="col-md-3 col-xs-6"> <strong>Fase actual</strong>
                 <br>
-                <p class="text-muted">{{resource.current_phase}}</p>
+                <p class="text-muted">{{resource.current_phase_display}}</p>
               </div>
             </div>
             <hr>
             <h4 class="font-medium m-t-30"><strong>Descripción:</strong></h4>
             <p class="m-t-30">{{resource.description}}</p>
-            <h4 class="font-medium m-t-30"><strong>Proyecto:</strong> {{resource.project.name}}</h4>
+            <hr>
+            <h4 class="font-medium m-t-30"><strong>Proyecto:</strong> </h4>
+            <p class="m-t-30">{{resource.project.name}}</p>
+            <hr>
+            <h4 class="font-medium m-t-30"><strong>Tags:</strong> </h4>
+            <p class="m-t-30">{{resource.tags}}</p>
             <hr>
             <div class="row">
               <div class="col-md-6 col-xs-6 b-r"> <strong>Fecha de creación</strong>
