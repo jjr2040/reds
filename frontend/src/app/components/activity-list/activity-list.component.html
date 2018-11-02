@@ -1,0 +1,52 @@
+<div class="page-wrapper" style="min-height: 539px;">
+  
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Actividades de plan de trabajo</h3>
+      </div>
+      <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="actividades">Actividades</a></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <table id="tabla" class="col-md-6" cellspacing="0" width="100%">
+                        <thead>
+                                <tr>
+                                     <th class="card-header">Nombre</th>
+                                     <th class="card-header">Estado</th>
+                                     <th class="card-header">Avance</th>
+                                     <th class="card-header">Fecha inicio</th>
+                                     <th class="card-header">Fecha fin</th>
+                                     <th class="card-header">Operaciones</th>
+                               </tr>
+                        </thead>
+                <tbody>
+                     <tr *ngFor="let activity of activities" [class.selected]="activity === selectedActivity">
+                            <td>{{ activity.name }}</td>
+                            <td>{{ activity.status }}</td>
+                            <td>{{ activity.progress }} %</td>
+                            <td>{{ activity.start_date }}</td>
+                            <td>{{ activity.end_date }}</td>
+                            <td class="text-center">
+                                   <p class="card-text">Editar Eliminar</p>
+                            </td>
+                        </tr>
+                  </tbody>
+      </table>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End of Container fluid  -->
+    <!-- ============================================================== -->
+  </div>
+</div>
