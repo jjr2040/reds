@@ -19,6 +19,7 @@ import { ResourceUsersComponent } from './components/resource-users/resource-use
 import { AddArtifactComponent } from './components/add-artifact/add-artifact.component';
 import { ActivityUsersComponent } from './components/activity-users/activity-users.component';
 import { ResourcesCreateComponent } from './components/resources-create/resources-create.component';
+import { ArtifactDetailComponent } from './components/artifact-detail/artifact-detail.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ResourcesCreateComponent } from './components/resources-create/resource
     ArtifactListComponent,
     ActivityUsersComponent,
     AddArtifactComponent,
-    ResourcesCreateComponent
+    ResourcesCreateComponent,
+    ArtifactDetailComponent
   ],
   imports: [
     BrowserModule,

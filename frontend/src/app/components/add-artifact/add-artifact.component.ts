@@ -60,7 +60,6 @@ export class AddArtifactComponent implements OnInit {
   }
 
   crearArtifact() {
-    console.log(this.created_by);
     this.artifactService.createArtifact({
       name: this.name,
       description: this.description,
