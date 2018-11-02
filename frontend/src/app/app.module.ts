@@ -28,7 +28,7 @@ import { ActivityUsersComponent } from './components/activity-users/activity-use
     ResourceListComponent,
     ResourceUsersComponent,
     ArtifactListComponent,
-    ActivityUsersComponent
+    ActivityUsersComponent,
     AddArtifactComponent
   ],
   imports: [

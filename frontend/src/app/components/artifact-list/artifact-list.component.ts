@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { ArtifactService } from './../../services/artifact.service';
 import { Artifact } from '../../models/artifact';
 
