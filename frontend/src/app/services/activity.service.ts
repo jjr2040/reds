@@ -14,6 +14,8 @@ export class ActivityService {
 
   private apiUrl = `${environment.apiUrl}/workplan_activities/`;
 
+  private apiUrl = `${environment.apiUrl}/workplan-activities/`;
+
   constructor(private http: HttpClient,
     private errorHandlingService: ErrorHandlingService) { }
 
@@ -23,23 +25,30 @@ export class ActivityService {
     );
   }
 
-  getResource(id: Number): Observable<WorkplanActivity> {
+  getActivity(id: Number): Observable<WorkplanActivity> {
     const url = this.apiUrl + `${id}/`;
     return this.http.get<WorkplanActivity>(url).pipe(
       catchError(this.errorHandlingService.handleError<WorkplanActivity>('Error fetching an activity'))
     );
   }
 
-  createResource(activity: WorkplanActivity): Observable<WorkplanActivity> {
+  createActivity(activity: WorkplanActivity): Observable<WorkplanActivity> {
     return this.http.post<WorkplanActivity>(this.apiUrl, activity).pipe(
-      catchError(this.errorHandlingService.handleError<WorkplanActivity>('Error fetching an activity'))
+      catchError(this.errorHandlingService.handleError<WorkplanActivity>('Error creating an activity'))
     );
   }
 
-  updateResource(activity: WorkplanActivity): Observable<WorkplanActivity> {
+  updateActivity(activity: WorkplanActivity): Observable<WorkplanActivity> {
     const url = this.apiUrl + `${activity.id}/`;
     return this.http.put<WorkplanActivity>(url, activity).pipe(
-      catchError(this.errorHandlingService.handleError<WorkplanActivity>('Error fetching an activity'))
+      catchError(this.errorHandlingService.handleError<WorkplanActivity>('Error updating an activity'))
+    );
+  }
+
+  deleteActivity(activity: WorkplanActivity): Observable<WorkplanActivity> {
+    const url = this.apiUrl + `${activity.id}/`;
+    return this.http.delete<WorkplanActivity>(url).pipe(
+      catchError(this.errorHandlingService.handleError<WorkplanActivity>('Error deleting an activity'))
     );
   }
 }

@@ -55,15 +55,25 @@ class ArtifactSerializer(serializers.ModelSerializer):
 
 
 class WorkplanActivitySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = WorkplanActivity
-        fields = '__all__'
     users = serializers.SlugRelatedField(
         many=True,
         queryset=User.objects.all(),
-        slug_field='username'
-     )
+        slug_field='username',
+        required=False
+    )
 
+    periodicity_display = serializers.SerializerMethodField(read_only=True)
+    status_display = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = WorkplanActivity
+        fields = '__all__'
+
+    def get_periodicity_display(self, obj):
+        return obj.get_periodicity_display()
+
+    def get_status_display(self, obj):
+        return obj.get_status_display()
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

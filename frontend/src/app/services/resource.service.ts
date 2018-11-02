@@ -12,9 +12,18 @@ import { Resource } from '../models/resource';
 export class ResourceService {
 
   private apiUrl = `${environment.apiUrl}/resources/`;
+  private currentResource: Resource;
 
   constructor(private http: HttpClient,
     private errorHandlingService: ErrorHandlingService) { }
+
+  setCurrentResource(resource: Resource) {
+    this.currentResource = resource;
+  }
+
+  getCurrentResource(): Resource {
+    return this.currentResource;
+  }
 
   getResources(): Observable<Resource[]> {
     return this.http.get<Resource[]>(this.apiUrl).pipe(

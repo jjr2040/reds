@@ -1,0 +1,56 @@
+<div class="page-wrapper" style="min-height: 539px;">
+  
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Actividades de plan de trabajo</h3>
+      </div>
+      <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Actividades</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <button type="button" routerLink="/activity/new" class="btn waves-effect waves-light btn-outline-primary mb-3">Agregar actividad</button>
+        <table class="table color-table primary-table">
+          <thead>
+            <tr>
+              <th class="card-header">Nombre</th>
+              <th class="card-header">Estado</th>
+              <th class="card-header">Avance</th>
+              <th class="card-header">Fecha inicio</th>
+              <th class="card-header">Fecha fin</th>
+              <th class="card-header">Operaciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let activity of activities" [class.selected]="activity === selectedActivity">
+              <td>{{ activity.name }}</td>
+              <td>{{ activity.status_display }}</td>
+              <td>{{ activity.progress }} %</td>
+              <td>{{ activity.start_date }}</td>
+              <td>{{ activity.end_date }}</td>
+              <td class="text-nowrap">
+                  <a routerLink="/activity/{{activity.id}}/edit" data-toggle="tooltip" data-original-title="Editar"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                  <a (click)="deleteActivity(activity)" data-toggle="tooltip" data-original-title="Borrar"> <i class="fa fa-close text-danger"></i> </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- ============================================================== -->
+    <!-- End of Container fluid  -->
+    <!-- ============================================================== -->
+  </div>
+</div>

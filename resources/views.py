@@ -137,7 +137,15 @@ class ResourceViewSet(viewsets.ModelViewSet):
             for tag in tags:
                 instance.tags.add(tag)
 
-        
+    def perform_update(self, serializer):
+        project_id = self.request.data['project_id']
+        tags = self.request.data.get('tags')
+
+        instance = serializer.save(project_id=project_id)
+        instance.tags.clear()
+        if tags is not None:
+            for tag in tags:
+                instance.tags.add(tag)
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
