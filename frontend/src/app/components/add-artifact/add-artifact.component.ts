@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as S3 from 'aws-sdk/clients/s3';
 import { ArtifactService } from '../../services/artifact.service';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -16,8 +17,12 @@ export class AddArtifactComponent implements OnInit {
   description;
   name;
   preview;
-
-  constructor(private router: Router, private artifactService: ArtifactService) { }
+  users;
+  constructor(private router: Router, private artifactService: ArtifactService, private userService: UserService) {
+    this.userService.getUsers().subscribe( users => {
+      this.users = users;
+    });
+   }
 
   ngOnInit() {
   }

@@ -151,6 +151,10 @@ class ArtifactViewSet(viewsets.ModelViewSet):
     queryset = Artifact.objects.all()
     serializer_class = ArtifactSerializer
 
+    #def perform_create(self, serializer):
+     #   resource_id = self.request.data.get('id_resource')
+      #  Resource.assign_new_artifact(serializer, resource_id)
+
 
 class WorkplanActivityViewSet(viewsets.ModelViewSet):
     queryset = WorkplanActivity.objects.all()

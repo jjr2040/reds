@@ -18,6 +18,7 @@ export class ArtifactListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    console.log(this.artifactsIds);
     if (this.artifactsIds) {
       this.artifactsIds.forEach( (artifactId, index) => {
         this.artifactService.getArtifact(artifactId).subscribe( element => {

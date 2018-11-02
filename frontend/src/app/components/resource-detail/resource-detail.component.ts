@@ -1,6 +1,6 @@
 import { Resource } from './../../models/resource';
 import { ResourceService } from './../../services/resource.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,7 +14,8 @@ export class ResourceDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private resourceService: ResourceService
+    private resourceService: ResourceService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -26,4 +27,7 @@ export class ResourceDetailComponent implements OnInit {
     this.resourceService.getResource(id).subscribe( resource => this.resource = resource);
   }
 
+  addArtifact(id) {
+    this.router.navigate([`/resource/${id}/artifacts/create`]);
+  }
 }

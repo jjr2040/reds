@@ -18,8 +18,7 @@
       <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
         <label for="created_by">Creado por</label>
         <select class="form-control" id="created_by" [(ngModel)]="created_by">
-          <option value="1">1</option>
-          <option>b</option>
+          <option *ngFor="let user of users" value="user.id">{{user.username}}</option>
         </select>
       </div>
       <div class="form-group col-xs-10 col-sm-10 col-md-4 col-lg-4">
