@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ResourceDetailComponent } from './components/resource-detail/resource-detail.component';
 import { ResourceListComponent } from './components/resource-list/resource-list.component';
 import { ResourceUsersComponent } from './components/resource-users/resource-users.component';
+import { ActivityUsersComponent } from './components/activity-users/activity-users.component';
 import { ResourcesCreateComponent } from './components/resources-create/resources-create.component';
 
 const routes: Routes = [
@@ -12,7 +13,9 @@ const routes: Routes = [
   { path: 'resources', component: ResourceListComponent},
   { path: 'resources/new', component: ResourcesCreateComponent},
   { path: 'resources/:id', component: ResourceDetailComponent},
-  { path: 'users', component: ResourceUsersComponent},
+  { path: 'resources/users', component: ResourceUsersComponent},
+ { path: 'activity/:id/users', component: ActivityUsersComponent},
+ { path: 'users', component: ResourceUsersComponent},
   { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
 

@@ -27,6 +27,7 @@
               <p class="card-text">{{resource.description}}</p>
               <a routerLink="/resources/{{resource.id}}" class="btn btn-primary">Ver recurso</a>
           </div>
+          <app-artifact-list [artifactsIds]="resource.artifacts"></app-artifact-list>
         </div>
       </div>
     </div>

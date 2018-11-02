@@ -1,0 +1,20 @@
+<div class="accordion" id="accordionExample">
+    <div class="card" *ngFor="let artifact of artifacts; let index = index">
+        <div class="card-header" [attr.id]="index">
+            <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" [attr.data-target]="'#collapse_'+index" aria-expanded="true" [attr.aria-controls]="'collapse_'+index">
+                {{artifact.name}}
+            </button>
+            </h5>
+        </div>
+
+        <div [attr.id]="'collapse_'+index" class="collapse" [attr.aria-labelledby]="index" [attr.data-parent]="'#'+index">
+            <div class="card-body">
+                {{artifact.description}}
+                <br>
+                <br>
+                <a href="{{artifact.file}}" class="btn btn-info" target="_blank">Descargar</a>
+            </div>
+        </div>
+    </div>
+</div>

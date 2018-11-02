@@ -16,6 +16,7 @@ export class Resource {
     current_phase_display: string;
     priority_display: string;
     tags: string[];
+  artifacts: Number[];
 
     // get priorityDisplay(): string {
     //     switch (this.priority) {

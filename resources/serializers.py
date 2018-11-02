@@ -58,6 +58,11 @@ class WorkplanActivitySerializer(serializers.ModelSerializer):
     class Meta:
         model = WorkplanActivity
         fields = '__all__'
+    users = serializers.SlugRelatedField(
+        many=True,
+        queryset=User.objects.all(),
+        slug_field='username'
+     )
 
 
 class UserSerializer(serializers.ModelSerializer):

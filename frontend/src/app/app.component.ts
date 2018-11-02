@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from './services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,11 @@ import { AuthenticationService } from './services/authentication.service';
 export class AppComponent {
   logueado: boolean;
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
     this.authenticationService.isSignedIn.subscribe((isSignedIn) => this.logueado = isSignedIn);
+  }
+
+  goTo(url) {
+    this.router.navigate([url]);
   }
 }

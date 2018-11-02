@@ -20,7 +20,6 @@ export class AuthenticationService implements CanActivate {
 
   constructor(private http: HttpClient, private router: Router,
               private loadingService: LoadingService, private messageService: MessageService) {
-    this.setCurrentTokenFromLocalStorage();
     this.isSignedIn = new BehaviorSubject(this.currentToken);
   }
 
