@@ -30,8 +30,7 @@ import { ResourcesCreateComponent } from './components/resources-create/resource
     ResourceUsersComponent,
     ArtifactListComponent,
     ActivityUsersComponent,
-    AddArtifactComponent
-    ResourceUsersComponent,
+    AddArtifactComponent,
     ResourcesCreateComponent
   ],
   imports: [
