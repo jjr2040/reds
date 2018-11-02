@@ -1,3 +1,4 @@
+import { ActivityEditComponent } from './components/activity-edit/activity-edit.component';
 import { ResourcesEditComponent } from './components/resources-edit/resources-edit.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -18,6 +19,8 @@ const routes: Routes = [
   { path: 'resources/users', component: ResourceUsersComponent},
   { path: 'resources/:id', component: ResourceDetailComponent},
   { path: 'activity/:id/users', component: ActivityUsersComponent},
+  { path: 'activity/new', component: ActivityEditComponent},
+  { path: 'activity/:id/edit', component: ActivityEditComponent},
   { path: 'activities', component: ActivityListComponent},
   { path: 'users', component: ResourceUsersComponent},
   { path: '**', redirectTo: '/', pathMatch: 'full' },
