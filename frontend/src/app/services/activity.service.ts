@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ErrorHandlingService } from './error-handling.service';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { WorkplanActivity } from '../models/WorkplanActivity';
+import { WorkplanActivity } from '../models/workplan-activity';
 
 
 @Injectable({

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from './../../services/user.service';
 import { ActivityService } from './../../services/activity.service';
 import { User } from './../../models/user';
-import { WorkplanActivity } from './../../models/WorkplanActivity';
+import { WorkplanActivity } from './../../models/workplan-activity';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
