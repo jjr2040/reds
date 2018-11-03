@@ -72,6 +72,12 @@
             </div>
             <hr>
             <a routerLink="/resources/edit/{{resource.id}}" class="btn btn-primary">Editar recurso</a>
+            <hr>
+            <h4 class="font-medium m-t-30"><strong>Artefactos:</strong> </h4>
+            <app-artifact-list [artifactsIds]="resource.artifacts"></app-artifact-list>
+            <a href="javascript:void(0);" (click)="addArtifact(resource.id)" data-toggle="modal" class="btn m-t-10 btn-info btn-block waves-effect waves-light">
+              <i class="ti-plus"></i> Agregar Artefacto
+            </a>
           </div>
         </div>
       </div>
@@ -79,6 +85,9 @@
     <!-- ============================================================== -->
     <!-- End PAge Content -->
     <!-- ============================================================== -->
+    <div class="row" *ngIf="resource">
+        
+    </div>
   </div>
   <!-- ============================================================== -->
   <!-- End Container fluid  -->

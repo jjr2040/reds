@@ -15,11 +15,11 @@ export class ActivityUsersComponent implements OnInit {
   activity: WorkplanActivity;
   users: string[];
 
-  constructor(private userService: UserService, private activityService: ActivityService,private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private activityService: ActivityService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-  	this.getUsers();
-  	this.getActivity();
+    this.getUsers();
+    this.getActivity();
   }
 
   getActivity(): void {
@@ -30,7 +30,7 @@ export class ActivityUsersComponent implements OnInit {
       });
   }
 
-  addUser(newUser): void {  
+  addUser(newUser): void {
     this.activity.users.push(newUser.trim());
     this.activityService.updateActivity(this.activity)
       .subscribe();
@@ -44,11 +44,11 @@ export class ActivityUsersComponent implements OnInit {
     this.userService.getUsers()
     .subscribe( users => {
       let unames = [];
-      for(let user of users){
+      for (let user of users) {
         unames.push(user.username);
       }
       this.users = unames;
-    }); 
+    });
   }
 
 }

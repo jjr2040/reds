@@ -1,4 +1,6 @@
 import { Project } from './project';
+import { Artifact } from './artifact';
+
 
 export class Resource {
 
@@ -16,5 +18,6 @@ export class Resource {
     current_phase_display: string;
     priority_display: string;
     tags: string[];
-    artifacts: Number[];
+    artifacts: Artifact[];
+    aws_credential: String;
 }

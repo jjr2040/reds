@@ -1,10 +1,17 @@
 from rest_framework import serializers
 from .models import *
 from users.models import User
+import os
+
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
+        fields = '__all__'
+
+class ArtifactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Artifact
         fields = '__all__'
 
 class ResourceSerializer(serializers.ModelSerializer):
@@ -19,8 +26,11 @@ class ResourceSerializer(serializers.ModelSerializer):
     project = ProjectSerializer(required=False)
     current_phase_display = serializers.SerializerMethodField(read_only=True)
     priority_display = serializers.SerializerMethodField(read_only=True)
+    aws_credential = serializers.SerializerMethodField(read_only=True)
+
 
     tags = serializers.StringRelatedField(many=True, read_only=True)
+    artifacts = ArtifactSerializer(required=False, many=True)
 
     class Meta:
         model = Resource
@@ -38,7 +48,9 @@ class ResourceSerializer(serializers.ModelSerializer):
             'users',
             'current_phase_display',
             'priority_display',
-            'tags'
+            'tags',
+            'artifacts',
+            'aws_credential'
         )
 
     def get_current_phase_display(self, obj):
@@ -47,11 +59,8 @@ class ResourceSerializer(serializers.ModelSerializer):
     def get_priority_display(self, obj):
         return obj.get_priority_display()
 
-
-class ArtifactSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Artifact
-        fields = '__all__'
+    def get_aws_credential(self, obj):
+        return os.environ.get('AWS_ACCESS_KEY_ID') + '%' + os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 
 class WorkplanActivitySerializer(serializers.ModelSerializer):

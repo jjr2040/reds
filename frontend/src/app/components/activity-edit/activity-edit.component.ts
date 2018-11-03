@@ -70,7 +70,7 @@ export class ActivityEditComponent implements OnInit {
       const activity: WorkplanActivity = this.activityForm.value;
 
       this.activityService.createActivity(activity).subscribe( updatedActivity => {
-        console.log('updated activity');
+        console.log('activity created');
         this.router.navigate(['/activities']);
       });
     } else {
