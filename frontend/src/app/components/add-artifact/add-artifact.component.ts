@@ -19,6 +19,7 @@ export class AddArtifactComponent implements OnInit {
   preview;
   users;
   resource_id;
+  resourceName;
   constructor(private router: Router, private artifactService: ArtifactService, private userService: UserService,
     private route: ActivatedRoute) {
     this.userService.getUsers().subscribe( users => {
@@ -29,6 +30,7 @@ export class AddArtifactComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.resource_id = params['id'];
+      this.resourceName = params['name'];
     });
   }
 
@@ -70,7 +72,7 @@ export class AddArtifactComponent implements OnInit {
       tags: this.tags
     }).subscribe( response => {
       if (response) {
-        this.router.navigate(['/resources']);
+        this.router.navigate(['/resources/' + this.resource_id]);
       }
     });
   }
