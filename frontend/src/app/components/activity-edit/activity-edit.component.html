@@ -8,12 +8,12 @@
     <!-- ============================================================== -->
     <div class="row page-titles">
       <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Editar actividad</h3>
+        <h3 class="text-themecolor">{{actionName}} actividad</h3>
       </div>
       <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a routerLink="/activities">Actividades</a></li>
-          <li class="breadcrumb-item">Editar</li>
+          <li class="breadcrumb-item">{{actionName}}</li>
         </ol>
       </div>
       <div>
@@ -86,11 +86,11 @@
                   </select>
               </div>
               <div class="row">
-                <div class="col-9">
+                <div *ngIf="!isNew && activity" class="col-9">
                   <button class="btn waves-effect waves-light btn-outline-primary" routerLink="/activity/{{activity.id}}/users">Responsables</button>
                 </div>
                 <div class="col-3">
-                  <button type="submit" class="btn waves-effect waves-light btn-outline-primary">{{actionName}}</button>
+                  <button type="submit" class="btn btn-block waves-effect waves-light btn-outline-primary">{{actionName}}</button>
                 </div>
               </div>
             </form>
@@ -106,6 +106,6 @@
   <!-- End Container fluid  -->
   <!-- ============================================================== -->
 </div>
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
   
   
