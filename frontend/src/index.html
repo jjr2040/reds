@@ -17,7 +17,6 @@
     <!-- This page CSS -->
     <!-- chartist CSS -->
     <link href="assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
-    <link href="assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
     <!--c3 CSS -->
     <link href="assets/plugins/c3-master/c3.min.css" rel="stylesheet">
     <!--Toaster Popup message CSS -->
@@ -25,7 +24,6 @@
     <!-- Custom CSS -->
     <link href="assets/css/style.css" rel="stylesheet">
     <!-- Dashboard 1 Page CSS -->
-    <link href="assets/css/pages/dashboard1.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="assets/css/colors/default-dark.css" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -76,18 +74,21 @@
     <script src="assets/plugins/sparkline/jquery.sparkline.min.js"></script>
     <!--morris JavaScript -->
     <script src="assets/plugins/chartist-js/dist/chartist.min.js"></script>
-    <script src="assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
     <!--c3 JavaScript -->
     <script src="assets/plugins/d3/d3.min.js"></script>
     <script src="assets/plugins/c3-master/c3.min.js"></script>
     <!-- Popup message jquery -->
     <script src="assets/plugins/toast-master/js/jquery.toast.js"></script>
     <!-- Chart JS -->
-    <script src="assets/js/dashboard1.js"></script>
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <script>
+        if (global === undefined) {
+            var global = window;
+        }
+    </script>
 </body>
 
 </html>

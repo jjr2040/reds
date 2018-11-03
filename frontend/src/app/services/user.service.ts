@@ -22,4 +22,10 @@ export class UserService {
     );
   }
 
+  getUser(id): Observable<User> {
+    return this.http.get<User>(this.apiUrl + id).pipe(
+      catchError(this.errorHandlingService.handleError<User>('Error fetching users'))
+    );
+  }
+
 }
