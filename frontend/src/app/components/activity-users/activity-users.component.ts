@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ActivityUsersComponent implements OnInit {
 
   activity: WorkplanActivity;
-  users : string[];
+  users: string[];
 
   constructor(private userService: UserService, private activityService: ActivityService,private route: ActivatedRoute) { }
 
@@ -24,7 +24,7 @@ export class ActivityUsersComponent implements OnInit {
 
   getActivity(): void {
   	const id = +this.route.snapshot.paramMap.get('id');
-    this.activityService.getResource(id)
+    this.activityService.getActivity(id)
       .subscribe(activity => {
         this.activity = activity;
       });
@@ -32,7 +32,7 @@ export class ActivityUsersComponent implements OnInit {
 
   addUser(newUser): void {  
     this.activity.users.push(newUser.trim());
-    this.activityService.updateResource(this.activity)
+    this.activityService.updateActivity(this.activity)
       .subscribe();
   }
 

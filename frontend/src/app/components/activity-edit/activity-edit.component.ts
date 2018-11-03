@@ -4,7 +4,7 @@ import { ResourceService } from './../../services/resource.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActivityService } from './../../services/activity.service';
 import { Component, OnInit } from '@angular/core';
-import { Resource } from 'src/app/models/resource';
+import { Resource } from '../../models/resource';
 
 @Component({
   selector: 'app-activity-edit',
