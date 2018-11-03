@@ -12,6 +12,7 @@ import { catchError, map } from 'rxjs/operators';
 export class ArtifactService {
 
   private apiUrl = `${environment.apiUrl}/artifacts/`;
+  private aws_credential;
 
   constructor(private http: HttpClient,
     private errorHandlingService: ErrorHandlingService) { }
@@ -40,5 +41,13 @@ export class ArtifactService {
     return this.http.put<Artifact>(url, artifact).pipe(
       catchError(this.errorHandlingService.handleError<Artifact>('Error updating an artifact'))
     );
+  }
+
+  setCredential(aws_credential) {
+    this.aws_credential = aws_credential;
+  }
+
+  getAWSCredential() {
+    return this.aws_credential;
   }
 }
