@@ -164,8 +164,8 @@ class ArtifactViewSet(viewsets.ModelViewSet):
         tags = self.request.data.get('tags')
 
         instance = serializer.save()
-        Resource.assign_new_artifact(instance, resource_id)
-
+        Resource.objects.get(id=resource_id).artifacts.add(instance)
+        print(Resource.objects.get(id=resource_id).artifacts)
         if tags is not None:
             for tag in tags:
                 instance.tags.add(tag)
