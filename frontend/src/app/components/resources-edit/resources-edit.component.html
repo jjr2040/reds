@@ -31,32 +31,31 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Crea un nuevo recurso</h4>
-            <form *ngIf="resource" [formGroup]="resourceForm" (ngSubmit)="saveResource()" class="form-material m-t-40">
+             <form *ngIf="resource" [formGroup]="resourceForm" (ngSubmit)="saveResource()" class="form-material m-t-40">
               <div class="form-group">
-                <label>Nombre</label>
+                <label class="font-medium m-t-30">Nombre</label>
                 <input type="text" formControlName="name" class="form-control form-control-line" required> 
               </div>
               <div class="form-group">
-                <label>Descripción</label>
+                <label class="font-medium m-t-30">Descripción</label>
                 <textarea formControlName="description" class="form-control form-control-line" rows="3" required></textarea>
               </div>
               <div class="row">
                 <div class="form-group col-md-6">
-                  <label>Projecto</label>
+                  <label class="font-medium m-t-30">Projecto</label>
                   <select *ngIf="projects" formControlName="project_id" class="form-control" required>
                     <option>---</option>
                     <option *ngFor="let project of projects" [ngValue]="project.id" >{{project.name}}</option>
                   </select>
                 </div>
                 <div class="form-group col-md-6">
-                  <label>Duración estimada (días)</label>
+                  <label class="font-medium m-t-30">Duración estimada (días)</label>
                   <input type="number" formControlName="estimated_duration" class="form-control form-control-line"  > 
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-md-4">
-                  <label>Tipo</label>
+                  <label class="font-medium m-t-30">Tipo</label>
                   <select formControlName="type" class="form-control" required >
                     <option>---</option>
                     <option value="Web page">Página Web</option>
@@ -64,7 +63,7 @@
                   </select>
                 </div>
                 <div class="form-group col-md-4">
-                  <label>Prioridad</label>
+                  <label class="font-medium m-t-30">Prioridad</label>
                   <select formControlName="priority" class="form-control">
                     <option>---</option>
                     <option [ngValue]="3">Baja</option>
@@ -73,7 +72,7 @@
                   </select>
                 </div>
                 <div class="form-group col-md-4">
-                  <label>Fase actual</label>
+                  <label class="font-medium m-t-30">Fase actual</label>
                   <select formControlName="current_phase" class="form-control">
                     <option [ngValue]="1">Preproducción</option>
                     <option [ngValue]="2">Producción</option>

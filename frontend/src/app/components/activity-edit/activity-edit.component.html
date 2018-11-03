@@ -16,9 +16,6 @@
           <li class="breadcrumb-item">{{actionName}}</li>
         </ol>
       </div>
-      <div>
-        <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
-      </div>
     </div>
     <!-- ============================================================== -->
     <!-- End Bread crumb and right sidebar toggle -->
@@ -31,35 +28,34 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Crea un nuevo recurso</h4>
             <form [formGroup]="activityForm" (ngSubmit)="saveActivity()" class="form-material m-t-40">
               <div class="form-group">
-                <label>Nombre</label>
+                <label class="font-medium m-t-30">Nombre</label>
                 <input type="text" formControlName="name" class="form-control form-control-line" required> 
               </div>
               <div class="row">
                 <div class="form-group col-md-4">
-                  <label>Fecha de inicio</label>
+                  <label class="font-medium m-t-30">Fecha de inicio</label>
                   <input type="text" formControlName="start_date" class="form-control form-control-line" placeholder="yyyy-mm-dd hh:mm:ss" required>
                   <span class="help">Formato: yyyy-mm-dd hh:mm:ss</span> 
                 </div>
                 <div class="form-group col-md-4">
-                  <label>Fecha de fin</label>
+                  <label class="font-medium m-t-30">Fecha de fin</label>
                   <input type="text" formControlName="end_date" class="form-control form-control-line" placeholder="yyyy-mm-dd hh:mm:ss" required>
                   <span class="help">Formato: yyyy-mm-dd hh:mm:ss</span>  
                 </div>
                 <div class="form-group col-md-4">
-                    <label>Avance (%)</label>
+                    <label class="font-medium m-t-30">Avance (%)</label>
                     <input type="number" formControlName="progress" class="form-control form-control-line" required> 
                   </div>
               </div>
               <div class="row">
                 <div class="form-group col-md-4">
-                  <label>Duración (Días)</label>
+                  <label class="font-medium m-t-30">Duración (Días)</label>
                   <input type="number" formControlName="duration" class="form-control form-control-line">
                 </div>
                 <div class="form-group col-md-4">
-                  <label>Periodicidad</label>
+                  <label class="font-medium m-t-30">Periodicidad</label>
                   <select formControlName="periodicity" class="form-control">
                     <option [ngValue]="1">Cada hora</option>
                     <option [ngValue]="2">Diario</option>
@@ -70,7 +66,7 @@
                   </select>
                 </div>
                 <div class="form-group col-md-4">
-                  <label>Estado</label>
+                  <label class="font-medium m-t-30">Estado</label>
                   <select formControlName="status" class="form-control">
                     <option [ngValue]="1">Iniciado</option>
                     <option [ngValue]="2">No iniciado</option>
@@ -79,11 +75,12 @@
                 </div>
                 <input *ngIf="!isNew" type="number" formControlName="resource" style="visibility: hidden">
               </div>
-              <div *ngIf="isNew" class="form-group">
-                  <label>Recurso</label>
-                  <select formControlName="resource" class="form-control">
+              <div class="form-group">
+                  <label class="font-medium m-t-30">Recurso</label>
+                  <select *ngIf="isNew" formControlName="resource" class="form-control">
                       <option *ngFor="let resource of resources" [ngValue]="resource.id" >{{resource.name}}</option>
                   </select>
+                  <div *ngIf="!isNew && activity" >{{activity.resource}}</div>
               </div>
               <div class="row">
                 <div *ngIf="!isNew && activity" class="col-9">
@@ -106,6 +103,5 @@
   <!-- End Container fluid  -->
   <!-- ============================================================== -->
 </div>
-<!-- <router-outlet></router-outlet> -->
   
   

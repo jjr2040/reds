@@ -1,0 +1,62 @@
+<div class="page-wrapper">
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">{{actionName}}</h3>
+      </div>
+      <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/activities">Acta</a></li>
+          <li class="breadcrumb-item">{{actionName}}</li>
+        </ol>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="recordForm" (ngSubmit)="saveRecord()" class="form-material m-t-40">
+              <div class="form-group">
+                <label class="font-medium m-t-30">Titulo</label>
+                <input type="text" formControlName="title" class="form-control form-control-line" required> 
+              </div>
+              <div class="row">
+                <div class="form-group col-md-4">
+                  <label class="font-medium m-t-30">Contenido</label>
+                  <textarea type="text" formControlName="body" class="form-control form-control-line" rows="4" required></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label class="font-medium m-t-30">Recurso</label>
+                  <select *ngIf="isNew" formControlName="resource" class="form-control">
+                      <option *ngFor="let resource of resources" [ngValue]="resource.id" >{{resource.name}}</option>
+                  </select>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <button type="submit" class="btn btn-block waves-effect waves-light btn-outline-primary">{{actionName}}</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+  </div>
+</div>

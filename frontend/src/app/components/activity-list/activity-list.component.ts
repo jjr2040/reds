@@ -1,6 +1,7 @@
 import { ActivityService } from './../../services/activity.service';
 import { Component, OnInit } from '@angular/core';
 import { WorkplanActivity } from './../../models/workplan-activity';
+import { ResourceService } from '../../services/resource.service';
 
 @Component({
   selector: 'app-activity-list',
@@ -12,7 +13,7 @@ export class ActivityListComponent implements OnInit {
   activities: WorkplanActivity[];
   selectedActivity: WorkplanActivity;
 
-  constructor(private activityService: ActivityService) {}
+  constructor(private activityService: ActivityService, private resourceService: ResourceService) {}
 
   ngOnInit() {
     this.activityService.getActivities().subscribe( activities => {
@@ -24,6 +25,12 @@ export class ActivityListComponent implements OnInit {
     this.activityService.deleteActivity(activity).subscribe( () => {
       const index = this.activities.indexOf(activity);
       this.activities.splice(index, 1);
+    });
+  }
+
+  resource(id) {
+    this.resourceService.getResource(id).subscribe( response => {
+      return response.name;
     });
   }
 }
