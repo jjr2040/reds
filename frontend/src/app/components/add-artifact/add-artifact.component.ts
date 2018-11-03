@@ -37,8 +37,8 @@ export class AddArtifactComponent implements OnInit {
     this.file = fileAWS.name;
     const bucket = new S3(
       {
-        accessKeyId: '',
-        secretAccessKey: '',
+        accessKeyId: this.artifactService.getAWSCredential().split('%')[0],
+        secretAccessKey: this.artifactService.getAWSCredential().split('%')[1],
         region: 'us-east-2'
       }
     );

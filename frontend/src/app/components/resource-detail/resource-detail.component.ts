@@ -27,7 +27,7 @@ export class ResourceDetailComponent implements OnInit {
     this.resourceService.getResource(id).subscribe( resource => this.resource = resource);
   }
 
-  addArtifact(id) {
+  addArtifact(id, credential) {
     this.router.navigate([`/resource/${id}/artifacts/create`]);
   }
 }
