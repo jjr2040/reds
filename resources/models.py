@@ -158,3 +158,22 @@ class Resource(models.Model):
     def assign_new_artifact(cs, new_artifact, resource_id):
         r = cs.objects.get(id=resource_id)
         r.artifacts.add(new_artifact)
+
+
+
+class MeetingRecord(models.Model):
+
+    title = models.CharField(u'Título', max_length=50)
+    body = models.TextField()
+
+    created_at = models.DateTimeField(verbose_name=u'Fecha creación', auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name=u'Fecha de modificación', auto_now=True)
+
+    resource = models.ForeignKey('Resource', related_name='meetings', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "MeetingRecord"
+        verbose_name_plural = "MeetingRecords"
+
+    def __str__(self):
+        return self.title
