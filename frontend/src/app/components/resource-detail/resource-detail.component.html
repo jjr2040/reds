@@ -54,7 +54,7 @@
             <h4 class="font-medium m-t-30"><strong>Proyecto:</strong> </h4>
             <p class="m-t-30">{{resource.project.name}}</p>
             <hr>
-            <h4 class="font-medium m-t-30"><strong>Tags:</strong> </h4>
+            <h4 class="font-medium m-t-30"><strong>Etiquetas:</strong> </h4>
             <p class="m-t-30">{{resource.tags}}</p>
             <hr>
             <div class="row">
@@ -69,6 +69,7 @@
             </div>
             <hr>
             <a routerLink="/resources/edit/{{resource.id}}" class="btn btn-primary">Editar recurso</a>
+            <a routerLink="/resource/{{resource.id}}/meetingRecord" class="btn btn-primary" style="margin-left:20px;">Ver actas de reuniones</a>
             <hr>
             <h4 class="font-medium m-t-30"><strong>Artefactos:</strong> </h4>
             <app-artifact-list [artifactsIds]="resource.artifacts"></app-artifact-list>

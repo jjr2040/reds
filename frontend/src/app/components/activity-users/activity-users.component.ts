@@ -23,7 +23,7 @@ export class ActivityUsersComponent implements OnInit {
   }
 
   getActivity(): void {
-  	const id = +this.route.snapshot.paramMap.get('id');
+    const id = +this.route.snapshot.paramMap.get('id');
     this.activityService.getActivity(id)
       .subscribe(activity => {
         this.activity = activity;

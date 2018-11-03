@@ -63,9 +63,6 @@ export class ActivityEditComponent implements OnInit {
   }
 
   saveActivity() {
-
-    console.warn(this.activityForm.value);
-
     if (this.isNew) {
       const activity: WorkplanActivity = this.activityForm.value;
 

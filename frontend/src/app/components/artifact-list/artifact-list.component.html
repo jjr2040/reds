@@ -9,13 +9,16 @@
         </div>
         <div [attr.id]="'collapse_'+index" class="collapse" [attr.aria-labelledby]="index" [attr.data-parent]="'#'+index">
             <div class="card-body">
-                <h4> Creado por: {{artifact.created_by_name}} </h4>
+                <h4 class="font-medium m-t-30"> Creado por: {{artifact.created_by_name}} </h4>
                 {{artifact.description}}
                 <br>
+                <h4 class="font-medium m-t-30"> Descripción: </h4>
+                {{artifact.description}}
                 <br>
-                <h4 class="font-medium m-t-30"><strong>Tags:</strong> </h4>
+                <h4 class="font-medium m-t-30">Etiquetas: </h4>
+                <br>
                 <p class="m-t-30">{{artifact.tags}}</p>
-                <a href="{{artifact.file}}" class="btn btn-info" target="_blank">Descargar</a>
+                <a href="{{artifact.file}}" class="btn btn-primary" target="_blank">Descargar</a>
             </div>
         </div>
     </div>

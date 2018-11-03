@@ -11,6 +11,8 @@ import { ActivityUsersComponent } from './components/activity-users/activity-use
 import { AddArtifactComponent } from './components/add-artifact/add-artifact.component';
 import { ResourcesCreateComponent } from './components/resources-create/resources-create.component';
 import { ActivityListComponent } from './components/activity-list/activity-list.component';
+import { MeetingRecordComponent } from './components/meeting-record/meeting-record.component';
+import { MeetingRecordEditComponent } from './components/meeting-record-edit/meeting-record-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,6 +27,9 @@ const routes: Routes = [
   { path: 'activities', component: ActivityListComponent},
   { path: 'users', component: ResourceUsersComponent},
   { path: 'resource/:id/artifacts/create/:name', component: AddArtifactComponent},
+  { path: 'meetingRecords', component: MeetingRecordComponent},
+  { path: 'meetingRecords/new', component: MeetingRecordEditComponent},
+  { path: 'resource/:id/meetingRecord', component: MeetingRecordComponent},
   { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
 
