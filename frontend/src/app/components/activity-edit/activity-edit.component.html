@@ -85,7 +85,14 @@
                       <option *ngFor="let resource of resources" [ngValue]="resource.id" >{{resource.name}}</option>
                   </select>
               </div>
-              <button type="submit" class="btn waves-effect waves-light btn-outline-primary">{{actionName}}</button>
+              <div class="row">
+                <div class="col-9">
+                  <button class="btn waves-effect waves-light btn-outline-primary" routerLink="/activity/{{activity.id}}/users">Responsables</button>
+                </div>
+                <div class="col-3">
+                  <button type="submit" class="btn waves-effect waves-light btn-outline-primary">{{actionName}}</button>
+                </div>
+              </div>
             </form>
           </div>
         </div>
@@ -99,5 +106,6 @@
   <!-- End Container fluid  -->
   <!-- ============================================================== -->
 </div>
+<router-outlet></router-outlet>
   
   
