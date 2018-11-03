@@ -26,6 +26,7 @@ router.register(r'projects', views.ProjectViewSet)
 router.register(r'artifacts', views.ArtifactViewSet)
 router.register(r'workplan-activities', views.WorkplanActivityViewSet)
 router.register(r'users', views.UserViewSet)
+router.register(r'meeting-records', views.MeetingRecordViewSet)
 
 
 urlpatterns = [

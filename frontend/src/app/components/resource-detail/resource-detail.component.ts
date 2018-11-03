@@ -2,6 +2,7 @@ import { Resource } from './../../models/resource';
 import { ResourceService } from './../../services/resource.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ArtifactService } from '../../services/artifact.service';
 
 @Component({
   selector: 'app-resource-detail',
@@ -15,6 +16,7 @@ export class ResourceDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private resourceService: ResourceService,
+    private artifactService: ArtifactService,
     private router: Router
   ) { }
 
@@ -24,10 +26,13 @@ export class ResourceDetailComponent implements OnInit {
 
   getResource(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.resourceService.getResource(id).subscribe( resource => this.resource = resource);
+    this.resourceService.getResource(id).subscribe( resource => {
+      this.resource = resource;
+      this.artifactService.setCredential(this.resource.aws_credential);
+    });
   }
 
-  addArtifact(id, credential) {
-    this.router.navigate([`/resource/${id}/artifacts/create`]);
+  addArtifact(id, name) {
+    this.router.navigate([`/resource/${id}/artifacts/create/${name}`]);
   }
 }

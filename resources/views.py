@@ -179,6 +179,10 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+class MeetingRecordViewSet(viewsets.ModelViewSet):
+    queryset = MeetingRecord.objects.all()
+    serializer_class = MeetingRecordSerializer
+
 
     
    

@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'activity/:id/edit', component: ActivityEditComponent},
   { path: 'activities', component: ActivityListComponent},
   { path: 'users', component: ResourceUsersComponent},
-  { path: 'resource/:id/artifacts/create', component: AddArtifactComponent},
+  { path: 'resource/:id/artifacts/create/:name', component: AddArtifactComponent},
   { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
 
