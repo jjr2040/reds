@@ -177,3 +177,19 @@ class MeetingRecord(models.Model):
 
     def __str__(self):
         return self.title
+
+class ResourceVersion(models.Model):
+
+    created_at = models.DateTimeField(verbose_name=u'Fecha creación', auto_now_add=True)
+    version_number = models.IntegerField(verbose_name=u'Versión Número')
+    file = models.TextField(verbose_name=u'Archivo')
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE, related_name='resource')
+
+    class Meta:
+        verbose_name = "ResourceVersion"
+        verbose_name_plural = "ResourceVersions"
+
+    def __str__(self):
+        return self.version_number
+
+

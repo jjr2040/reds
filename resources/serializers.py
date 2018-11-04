@@ -62,6 +62,10 @@ class ResourceSerializer(serializers.ModelSerializer):
     def get_aws_credential(self, obj):
         return os.environ.get('AWS_ACCESS_KEY_ID') + '%' + os.environ.get('AWS_SECRET_ACCESS_KEY')
 
+class ResourceVersionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ResourceVersion
+        fields = '__all__'
 
 class WorkplanActivitySerializer(serializers.ModelSerializer):
     users = serializers.SlugRelatedField(

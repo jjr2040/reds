@@ -3,6 +3,9 @@ import { ResourceService } from './../../services/resource.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ArtifactService } from '../../services/artifact.service';
+import { ResourceVersionService } from '../../services/resourceVersion.service';
+import { ResourceVersion } from '../../models/ResourceVersion';
+import * as S3 from 'aws-sdk/clients/s3';
 
 @Component({
   selector: 'app-resource-detail',
@@ -12,16 +15,21 @@ import { ArtifactService } from '../../services/artifact.service';
 export class ResourceDetailComponent implements OnInit {
 
   resource: Resource;
+  resourceVersions: ResourceVersion[];
+  file;
+  number;
 
   constructor(
     private route: ActivatedRoute,
     private resourceService: ResourceService,
+    private resourceVersionService: ResourceVersionService,
     private artifactService: ArtifactService,
     private router: Router
   ) { }
 
   ngOnInit() {
     this.getResource();
+    this.getResourceVersions();
   }
 
   getResource(): void {
@@ -34,5 +42,56 @@ export class ResourceDetailComponent implements OnInit {
 
   addArtifact(id, name) {
     this.router.navigate([`/resource/${id}/artifacts/create/${name}`]);
+  }
+
+  getResourceVersions(): void {
+    this.resourceVersions = [];
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.resourceVersionService.getResourceVersions().subscribe( versions => {
+      versions.forEach( version => {
+        if (version.resource === id) {
+          this.resourceVersions.push(version);
+          this.number = version.version_number;
+        }
+      });
+    });
+  }
+
+  fileEvent(fileInput: any) {
+    const fileAWS = fileInput.target.files[0];
+    this.file = fileAWS.name;
+    /*const bucket = new S3(
+      {
+        accessKeyId: this.artifactService.getAWSCredential().split('%')[0],
+        secretAccessKey: this.artifactService.getAWSCredential().split('%')[1],
+        region: 'us-east-2'
+      }
+    );
+
+    const params = {
+      Bucket: 'agilesreds',
+      Key:  fileAWS.name,
+      Body: fileAWS
+    };
+    bucket.upload(params, function (err, data) {
+      if (err) {
+        console.log('There was an error uploading your file: ', err);
+        return false;
+      }
+      this.file = data.Location;
+      console.log('Successfully uploaded file.', data);
+      return true;
+    });*/
+  }
+
+  nuevaVersion() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.resourceVersionService.createResourceVersion({
+      version_number: this.number + 1,
+      file: this.file,
+      resource: id
+    }).subscribe( response => {
+      this.resourceVersions.push(response);
+    });
   }
 }
