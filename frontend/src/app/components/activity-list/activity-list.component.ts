@@ -27,10 +27,4 @@ export class ActivityListComponent implements OnInit {
       this.activities.splice(index, 1);
     });
   }
-
-  resource(id) {
-    this.resourceService.getResource(id).subscribe( response => {
-      return response.name;
-    });
-  }
 }

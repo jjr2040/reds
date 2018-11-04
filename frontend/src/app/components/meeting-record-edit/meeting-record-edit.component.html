@@ -44,6 +44,7 @@
                   <select *ngIf="isNew" formControlName="resource" class="form-control">
                       <option *ngFor="let resource of resources" [ngValue]="resource.id" >{{resource.name}}</option>
                   </select>
+                  <div *ngIf="!isNew && activity" >{{record.resource}}</div>
               </div>
               <div class="row">
                 <div class="col-3">
