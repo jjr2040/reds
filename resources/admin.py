@@ -46,8 +46,16 @@ class ArtifactAdmin(admin.ModelAdmin):
     pass
 
 
+class ResourceCommentAdmin(admin.ModelAdmin):
+    '''
+        Admin View for Artifact
+    '''
+    pass
+
+
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Artifact, ArtifactAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Resource, ResourceAdmin)
 admin.site.register(WorkplanActivity, WorkplanActivityAdmin)
+admin.site.register(ResourceComment, ResourceCommentAdmin)

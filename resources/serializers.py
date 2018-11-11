@@ -60,7 +60,7 @@ class ResourceSerializer(serializers.ModelSerializer):
         return obj.get_priority_display()
 
     def get_aws_credential(self, obj):
-        return os.environ.get('AWS_ACCESS_KEY_ID') + '%' + os.environ.get('AWS_SECRET_ACCESS_KEY')
+        return ""
 
 class ResourceVersionSerializer(serializers.ModelSerializer):
     class Meta:

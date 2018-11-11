@@ -199,7 +199,7 @@ class ResourceComment(models.Model):
     title = models.CharField(u'Título', max_length=50)
     content = models.TextField()
     resolved = models.BooleanField(default=False)
-    created_at = models.DateTimeField(verbose_name=u'Fecha creación', auto_now_add=True)
+    created_at = models.DateField(verbose_name=u'Fecha creación', auto_now_add=True)
     resource = models.ForeignKey(Resource, on_delete=models.CASCADE, related_name='comments')
 
     class Meta:

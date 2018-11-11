@@ -25,6 +25,8 @@ import { ResourcesEditComponent } from './components/resources-edit/resources-ed
 import { ArtifactDetailComponent } from './components/artifact-detail/artifact-detail.component';
 import { MeetingRecordComponent } from './components/meeting-record/meeting-record.component';
 import { MeetingRecordEditComponent } from './components/meeting-record-edit/meeting-record-edit.component';
+import { ResourceCommentsListComponent } from './resource-comments-list/resource-comments-list.component';
+import { ResourceCommentsCreateComponent } from './resource-comments-create/resource-comments-create.component';
 
 
 @NgModule({
@@ -43,7 +45,9 @@ import { MeetingRecordEditComponent } from './components/meeting-record-edit/mee
     ActivityEditComponent,
     ArtifactDetailComponent,
     MeetingRecordComponent,
-    MeetingRecordEditComponent
+    MeetingRecordEditComponent,
+    ResourceCommentsListComponent,
+    ResourceCommentsCreateComponent
   ],
   imports: [
     BrowserModule,

@@ -125,7 +125,6 @@ class ResourceViewSet(viewsets.ModelViewSet):
 
     queryset = Resource.objects.all()
     serializer_class = ResourceSerializer
-    #filter_fields = ('media_type', )
 
     def perform_create(self, serializer):
         project_id = self.request.data['project_id']
@@ -152,7 +151,6 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-    #filter_fields = ('media_type', )
 
 
 class ArtifactViewSet(viewsets.ModelViewSet):
@@ -174,14 +172,18 @@ class ArtifactViewSet(viewsets.ModelViewSet):
 class WorkplanActivityViewSet(viewsets.ModelViewSet):
     queryset = WorkplanActivity.objects.all()
     serializer_class = WorkplanActivitySerializer
+    filter_fields = ('resource',)
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+
 class MeetingRecordViewSet(viewsets.ModelViewSet):
     queryset = MeetingRecord.objects.all()
     serializer_class = MeetingRecordSerializer
+
 
 class ResourceVersionViewSet(viewsets.ModelViewSet):
     queryset = ResourceVersion.objects.all()
@@ -191,6 +193,7 @@ class ResourceVersionViewSet(viewsets.ModelViewSet):
 class ResourceCommentViewSet(viewsets.ModelViewSet):
     queryset = ResourceComment.objects.all()
     serializer_class = ResourceCommentSerializer
+    filter_fields = ('resource',)
    
 
         

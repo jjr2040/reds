@@ -1,3 +1,4 @@
+import { ResourceCommentsCreateComponent } from './resource-comments-create/resource-comments-create.component';
 import { ActivityEditComponent } from './components/activity-edit/activity-edit.component';
 import { ResourcesEditComponent } from './components/resources-edit/resources-edit.component';
 import { NgModule } from '@angular/core';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'resources', component: ResourceListComponent},
   { path: 'resources/new', component: ResourcesCreateComponent},
+  { path: 'resources/:resourceId/comments/create', component: ResourceCommentsCreateComponent},
   { path: 'resources/edit/:id', component: ResourcesEditComponent},
   { path: 'resources/users', component: ResourceUsersComponent},
   { path: 'resources/:id', component: ResourceDetailComponent},

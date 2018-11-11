@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ArtifactService } from '../../services/artifact.service';
 import { ResourceVersionService } from '../../services/resourceVersion.service';
-import { ResourceVersion } from '../../models/ResourceVersion';
+import { ResourceVersion } from '../../models/resourceVersion';
 import * as S3 from 'aws-sdk/clients/s3';
 
 @Component({

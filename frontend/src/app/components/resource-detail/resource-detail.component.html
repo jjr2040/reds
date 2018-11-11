@@ -77,6 +77,12 @@
               <i class="ti-plus"></i> Agregar Artefacto
             </a>
             <hr>
+            <h4 class="font-medium m-t-30"><strong>Comentarios:</strong> </h4>
+            <app-resource-comments-list [resourceId]="resource.id"></app-resource-comments-list>
+            <a href="javascript:void(0);" routerLink="/resources/{{resource.id}}/comments/create" data-toggle="modal" class="btn m-t-10 btn-info btn-block waves-effect waves-light">
+              <i class="ti-plus"></i> Agregar Commentario
+            </a>
+            <hr>
             <h4 class="font-medium m-t-30"><strong>Versiones del Recurso:</strong> </h4>
             <table class="table color-table primary-table">
               <thead>
@@ -87,7 +93,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let version of resourceVersions" [class.selected]="activity === selectedActivity">
+                <tr *ngFor="let version of resourceVersions">
                   <td>{{ version.version_number }}</td>
                   <td>{{ version.created_at | date:'short' }}</td>
                   <td>{{ version.file }}</td>
