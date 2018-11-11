@@ -98,3 +98,9 @@ class MeetingRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = MeetingRecord
         fields = '__all__'
+
+
+class ResourceCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ResourceComment
+        fields = '__all__'

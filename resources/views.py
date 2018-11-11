@@ -186,7 +186,11 @@ class MeetingRecordViewSet(viewsets.ModelViewSet):
 class ResourceVersionViewSet(viewsets.ModelViewSet):
     queryset = ResourceVersion.objects.all()
     serializer_class = ResourceVersionSerializer
-    
+
+
+class ResourceCommentViewSet(viewsets.ModelViewSet):
+    queryset = ResourceComment.objects.all()
+    serializer_class = ResourceCommentSerializer
    
 
         

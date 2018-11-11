@@ -28,6 +28,7 @@ router.register(r'workplan-activities', views.WorkplanActivityViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'meeting-records', views.MeetingRecordViewSet)
 router.register(r'resource-versions', views.ResourceVersionViewSet)
+router.register(r'resource-comments', views.ResourceCommentViewSet)
 
 
 urlpatterns = [

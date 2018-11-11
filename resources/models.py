@@ -178,6 +178,7 @@ class MeetingRecord(models.Model):
     def __str__(self):
         return self.title
 
+
 class ResourceVersion(models.Model):
 
     created_at = models.DateTimeField(verbose_name=u'Fecha creación', auto_now_add=True)
@@ -193,3 +194,17 @@ class ResourceVersion(models.Model):
         return self.version_number
 
 
+class ResourceComment(models.Model):
+
+    title = models.CharField(u'Título', max_length=50)
+    content = models.TextField()
+    resolved = models.BooleanField(default=False)
+    created_at = models.DateTimeField(verbose_name=u'Fecha creación', auto_now_add=True)
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE, related_name='comments')
+
+    class Meta:
+        verbose_name = "Resource Comment"
+        verbose_name_plural = "Resource Comments"
+
+    def __str__(self):
+        return self.title
