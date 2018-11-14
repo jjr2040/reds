@@ -7,7 +7,14 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from rest_framework import viewsets
 from .serializers import *
-
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.status import (
+    HTTP_400_BAD_REQUEST,
+    HTTP_404_NOT_FOUND,
+    HTTP_200_OK,
+    HTTP_401_UNAUTHORIZED
+)
 
 class ResourceCreateView(CreateView):
     model = Resource
@@ -194,8 +201,11 @@ class ResourceCommentViewSet(viewsets.ModelViewSet):
     queryset = ResourceComment.objects.all()
     serializer_class = ResourceCommentSerializer
     filter_fields = ('resource',)
-   
 
-        
+@api_view(["POST"])
+def asignar_artefacto(request):
+    data = request.data
+    Resource.objects.get(id=data['resource_id']).artifacts.add(Artifact.objects.get(id=data['artifact_id']))
+    return Response({'ok': 'Artefacto Asignado'}, status=HTTP_200_OK)
 
 

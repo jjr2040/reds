@@ -17,7 +17,7 @@ export class ArtifactService {
   constructor(private http: HttpClient,
     private errorHandlingService: ErrorHandlingService) { }
 
-  getArtifacts(id): Observable<Artifact[]> {
+  getArtifacts(): Observable<Artifact[]> {
     return this.http.get<Artifact[]>(this.apiUrl).pipe(
       catchError(this.errorHandlingService.handleError<Artifact[]>('Error getting artifacts'))
     );
@@ -32,6 +32,15 @@ export class ArtifactService {
 
   createArtifact(artifact: Artifact): Observable<Artifact> {
     return this.http.post<Artifact>(this.apiUrl, artifact).pipe(
+      catchError(this.errorHandlingService.handleError<Artifact>('Error adding an artifact'))
+    );
+  }
+
+  asignArtifact(artifact_id, resource_id): Observable<Artifact> {
+    return this.http.post<Artifact>(`http://localhost:8000/asignarArtefacto/`, {
+      artifact_id: artifact_id,
+      resource_id: resource_id
+    }).pipe(
       catchError(this.errorHandlingService.handleError<Artifact>('Error adding an artifact'))
     );
   }

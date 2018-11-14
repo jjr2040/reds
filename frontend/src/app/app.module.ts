@@ -27,6 +27,8 @@ import { MeetingRecordComponent } from './components/meeting-record/meeting-reco
 import { MeetingRecordEditComponent } from './components/meeting-record-edit/meeting-record-edit.component';
 import { ResourceCommentsListComponent } from './resource-comments-list/resource-comments-list.component';
 import { ResourceCommentsCreateComponent } from './resource-comments-create/resource-comments-create.component';
+import { FindArtifactsComponent } from './components/find-artifacts/find-artifacts.component';
+import { MyFilterPipe } from './components/find-artifacts/pipe';
 
 
 @NgModule({
@@ -47,7 +49,9 @@ import { ResourceCommentsCreateComponent } from './resource-comments-create/reso
     MeetingRecordComponent,
     MeetingRecordEditComponent,
     ResourceCommentsListComponent,
-    ResourceCommentsCreateComponent
+    ResourceCommentsCreateComponent,
+    FindArtifactsComponent,
+    MyFilterPipe
   ],
   imports: [
     BrowserModule,
