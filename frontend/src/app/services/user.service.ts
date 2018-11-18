@@ -28,4 +28,9 @@ export class UserService {
     );
   }
 
+   loguear(user: User): Observable<User> {
+    return this.http.post<User>(this.apiUrl + 'loguear', user).pipe(
+      catchError(this.errorHandlingService.handleError<User>('Error login user'))
+    );
+  }
 }
