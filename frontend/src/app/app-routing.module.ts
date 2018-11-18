@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'resources/new', component: ResourcesCreateComponent},
   { path: 'resources/:resourceId/comments/create', component: ResourceCommentsCreateComponent},
   { path: 'resources/edit/:id', component: ResourcesEditComponent},
-  { path: 'resources/users', component: ResourceUsersComponent},
+  { path: 'resources/:id/users', component: ResourceUsersComponent},
   { path: 'resources/:id', component: ResourceDetailComponent},
   { path: 'activity/:id/users', component: ActivityUsersComponent},
   { path: 'activity/new', component: ActivityEditComponent},

@@ -5,8 +5,11 @@ from resources.forms import ResourceForm, WorkplanActivityCreateForm, ArtifactCr
 from django.urls import reverse_lazy, reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
-from rest_framework import viewsets
+from rest_framework import viewsets,generics
 from .serializers import *
+from rest_framework.views import APIView
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 
 class ResourceCreateView(CreateView):
@@ -146,6 +149,12 @@ class ResourceViewSet(viewsets.ModelViewSet):
             for tag in tags:
                 instance.tags.add(tag)
 
+    @action(methods=['get'], detail=True)
+    def phases(self, request, pk=None):
+        phases = Phase.objects.filter(resource = pk)
+        serializer = PhaseSerializer(phases,many=True)
+        return Response(serializer.data)
+
 
 class ProjectViewSet(viewsets.ModelViewSet):
 
@@ -194,8 +203,12 @@ class ResourceCommentViewSet(viewsets.ModelViewSet):
     queryset = ResourceComment.objects.all()
     serializer_class = ResourceCommentSerializer
     filter_fields = ('resource',)
-   
 
-        
+
+class PhaseViewSet(viewsets.ModelViewSet):
+    queryset = Phase.objects.all()
+    serializer_class = PhaseSerializer
+
+         
 
 

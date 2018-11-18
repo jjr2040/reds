@@ -5,6 +5,7 @@ import { ErrorHandlingService } from './error-handling.service';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Resource } from '../models/resource';
+import { Phase } from '../models/phase';
 
 @Injectable({
   providedIn: 'root'
@@ -50,4 +51,12 @@ export class ResourceService {
       catchError(this.errorHandlingService.handleError<Resource>('Error updating a resource'))
     );
   }
+
+  getResourcePhases(id: Number): Observable<Phase[]> {
+    const url = this.apiUrl + `${id}/phases`;
+    return this.http.get<Phase[]>(url).pipe(
+      catchError(this.errorHandlingService.handleError<Phase[]>('Error fetching a resource'))
+    );
+  }
+
 }
