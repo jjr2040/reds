@@ -25,17 +25,19 @@ export class ResourceDetailComponent implements OnInit {
     private resourceVersionService: ResourceVersionService,
     private artifactService: ArtifactService,
     private router: Router
-  ) { }
-
-  ngOnInit() {
+  ) {
     this.getResource();
     this.getResourceVersions();
+  }
+
+  ngOnInit() {
   }
 
   getResource(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.resourceService.getResource(id).subscribe( resource => {
       this.resource = resource;
+      this.resourceService.setCurrentResource(this.resource);
       this.artifactService.setCredential(this.resource.aws_credential);
     });
   }

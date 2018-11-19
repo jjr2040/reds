@@ -7,19 +7,20 @@
         <!-- Logo -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" [routerLink]="['/resources']">
+            <a class="navbar-brand" href="javascript:void(o)" (click)="goToResources()">
                 <!-- Logo icon --><b>
-                    <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                    <!-- Dark Logo icon -->
-                    <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                    <!-- Light Logo icon -->
-                    <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                <!-- Dark Logo icon -->
+                <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                <!-- Light Logo icon -->
+                <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text --><span>
-                    <!-- dark Logo text -->
-                    <!-- Light Logo text -->    
-                    <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
+                <!-- dark Logo text -->
+                <!-- Light Logo text -->    
+                <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> 
+            </a>
         </div>
         <!-- ============================================================== -->
         <!-- End Logo -->
@@ -31,7 +32,7 @@
                 <ul class="navbar-nav mr-auto">
                     <!-- This is  -->
                     <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                    <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                    <li class="nav-item" [hidden]="!resource"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                     
                 </ul>
             </div>
@@ -43,21 +44,36 @@
 <!-- ============================================================== -->
 <!-- Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->
-<aside class="left-sidebar">
+<aside class="left-sidebar" [hidden]="!resource">
     <!-- Sidebar scroll-->
-    <div class="scroll-sidebar">
+    <div class="scroll-sidebar" *ngIf="resource">
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
-            <ul id="sidebarnav">
-                <li style="color:white" class="nav-small-cap">Administrador</li>
-                <li> <a style="color:white" class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Recursos</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a routerLink="/resources">Mis Recursos</a></li>
-                        <li><a routerLink="/activities">Planes de Trabajo</a></li>
-                        <li><a routerLink="resources/users">Responsables</a></li>
-                        <li><a routerLink="/meetingRecords">Actas Reuniones</a></li>
-                        <li><a routerLink="/artifacts">Artefactos</a></li>
-                    </ul>
+            <ul id="sidebarnav" >
+                <li>
+                    <a style="color:white" class="waves-effect waves-dark" routerLink="/resources/{{resource.id}}">
+                        <i class="mdi mdi-bullseye"></i><span class="hide-menu">Recurso</span>
+                    </a>
+                </li>
+                <li>
+                    <a style="color:white" class="waves-effect waves-dark" routerLink="/activities">
+                        <i class="mdi mdi-work"></i><span class="hide-menu">Planes de trabajo</span>
+                    </a>
+                </li>
+                <li>
+                    <a style="color:white" class="waves-effect waves-dark" routerLink="resources/users">
+                        <i class="mdi mdi-work"></i><span class="hide-menu">Responsables</span>
+                    </a>
+                </li>
+                <li>
+                    <a style="color:white" class="waves-effect waves-dark" routerLink="/meetingRecords">
+                        <i class="mdi mdi-work"></i><span class="hide-menu">Actas Reuniones</span>
+                    </a>
+                </li>
+                <li>
+                    <a style="color:white" class="waves-effect waves-dark" routerLink="/artifacts">
+                        <i class="mdi mdi-work"></i><span class="hide-menu">Artefactos Nuevos</span>
+                    </a>
                 </li>
             </ul>
         </nav>
@@ -65,7 +81,8 @@
     </div>
     <!-- End Sidebar scroll-->
 </aside>
+<app-resource-list *ngIf="!resource"></app-resource-list>
 <!-- ============================================================== -->
 <!-- End Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->
-<router-outlet></router-outlet>
+<router-outlet *ngIf="resource"></router-outlet>

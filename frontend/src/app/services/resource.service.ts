@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ErrorHandlingService } from './error-handling.service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Resource } from '../models/resource';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,30 @@ import { Resource } from '../models/resource';
 export class ResourceService {
 
   private apiUrl = `${environment.apiUrl}/resources/`;
-  private currentResource: Resource;
+  private currentResource;
+  isCurrentResource: BehaviorSubject<Resource>;
 
   constructor(private http: HttpClient,
-    private errorHandlingService: ErrorHandlingService) { }
+    private errorHandlingService: ErrorHandlingService, private authenticationService: AuthenticationService) {
+      this.isCurrentResource = new BehaviorSubject(this.currentResource);
+      //this.setCurrentResourceFromLocalStorage();
+  }
+
+  setCurrentResourceFromLocalStorage() {
+    if (this.authenticationService.localStorageAvailable() && localStorage.getItem('currentResource')) {
+      this.currentResource = JSON.parse(localStorage.getItem('currentResource'));
+      this.isCurrentResource.next(this.currentResource);
+    }
+  }
 
   setCurrentResource(resource: Resource) {
     this.currentResource = resource;
+    if (resource) {
+      localStorage.setItem('currentResource', JSON.stringify(resource));
+    } else {
+      localStorage.removeItem('currentResource');
+    }
+    this.isCurrentResource.next(resource);
   }
 
   getCurrentResource(): Resource {

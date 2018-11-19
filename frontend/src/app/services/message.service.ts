@@ -6,6 +6,14 @@ export class MessageService {
 
   constructor() { }
 
+  showSuccess(title: string, text: string) {
+    return swal({
+      type: 'success',
+      title: title,
+      text: text
+    });
+  }
+
   showError(title: string, text: string) {
     swal({
       type: 'error',

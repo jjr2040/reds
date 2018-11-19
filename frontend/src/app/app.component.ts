@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
+import { Resource } from './models/resource';
+import { ResourceService } from './services/resource.service';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +11,15 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   logueado: boolean;
+  resource;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
+  constructor(private authenticationService: AuthenticationService, private router: Router, private resourceService: ResourceService) {
     this.authenticationService.isSignedIn.subscribe((isSignedIn) => this.logueado = isSignedIn);
+    this.resourceService.isCurrentResource.subscribe((currentResource) => this.resource = currentResource);
   }
 
-  goTo(url) {
-    this.router.navigate([url]);
+  goToResources() {
+    //this.resourceService.setCurrentResource(null);
+    this.router.navigate(['/resources']);
   }
 }

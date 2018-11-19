@@ -47,7 +47,7 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr *ngFor="let artifact of artifacts | myfilter:buscar">
+                  <tr *ngFor="let artifact of artifacts | artifactFilter:buscar">
                       <td>{{artifact.name}}</td>
                       <td>{{artifact.description}}</td>
                       <td>{{artifact.tags}}</td>
