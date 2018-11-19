@@ -22,11 +22,10 @@ export class LoginUserComponent implements OnInit {
   }
 
   loguear() {
-     this.user.password = this.password;
-     this.username = this.username;
-     this.userService.loguear(this.user).subscribe( response => {
+     this.userService.loguear({id: 0, username: this.username, password: this.password, is_staff: 'false'}).subscribe( loginUser => {
         console.log('loguear usuario');
-        if (response) {
+        if (loginUser.username !==  '') {
+          this.authService.currentUser = loginUser;
           this.router.navigate(['/resources/']);
         }
         });

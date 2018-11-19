@@ -11,31 +11,24 @@
     <!-- ============================================================== -->
     <!-- Start Page Content -->
     <!-- ============================================================== -->
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <form (ngSubmit)="loguear()" class="form-material m-t-40">
-              <div class="form-group">
-                <label class="font-medium m-t-30">Nombre de usuario</label>
-                <input type="text" [(ngModel)]="username" class="form-control form-control-line" required> 
-              </div>
-              <div class="row">
-                <div class="form-group col-md-4">
-                  <label class="font-medium m-t-30">Contrase�a</label>
-                  <input type="password" [(ngModel)]="password" class="form-control form-control-line" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-3">
-                  <button type="submit" class="btn btn-block waves-effect waves-light btn-outline-primary">Iniciar sessión</button>
-                </div>
-               </div>
-            </form>
-          </div>
-        </div>
+  <div class="form-group row">
+      <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+          <label for="name">Nombre de usuario</label>
+          <input type="text" class="form-control" id="username" placeholder="Nombre de usuario" [(ngModel)]="username">
+      </div>
+      <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+          <label for="description">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Descripcion" [(ngModel)]="password">
       </div>
     </div>
+    <div class="row">
+      <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
+          <br>
+          <button type="submit" class="btn btn-info" (click)="loguear()">Ingresar</button>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  
     <!-- ============================================================== -->
     <!-- End PAge Content -->
     <!-- ============================================================== -->

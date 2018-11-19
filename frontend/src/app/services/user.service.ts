@@ -12,6 +12,7 @@ import { User } from '../models/user';
 export class UserService {
 
   private apiUrl = `${environment.apiUrl}/users/`;
+  private apiUrlLogin = `${environment.apiUrlLogin}users/loguear/`;
 
   constructor(private http: HttpClient,
     private errorHandlingService: ErrorHandlingService) { }
@@ -29,7 +30,7 @@ export class UserService {
   }
 
    loguear(user: User): Observable<User> {
-    return this.http.post<User>(this.apiUrl + 'loguear', user).pipe(
+    return this.http.post<User>(this.apiUrlLogin, user).pipe(
       catchError(this.errorHandlingService.handleError<User>('Error login user'))
     );
   }
