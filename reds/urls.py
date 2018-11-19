@@ -46,6 +46,7 @@ urlpatterns = [
     #url(r'^workplanactivity/new/$', views.create_workplanactivity, name='workplanactivity_new'),
     url(r'^workplanactivity/edit/(?P<pk>[0-9]+)/$', views.create_workplanactivity, name='workplanactivity_edit'),
     path('s3direct/', include('s3direct.urls')),
-    path('asignarArtefacto/', asignar_artefacto)
+    path('asignarArtefacto/', asignar_artefacto),
+    path('users/loguear/', views.loguear)
 
 ]
