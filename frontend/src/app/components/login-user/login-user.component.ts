@@ -27,6 +27,9 @@ export class LoginUserComponent implements OnInit {
         if (loginUser.username !==  '') {
           this.authService.currentUser = loginUser;
           this.router.navigate(['/resources/']);
+        } else {
+          this.username = '';
+          this.password = '';
         }
         });
   }
