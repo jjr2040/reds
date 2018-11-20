@@ -26,6 +26,7 @@ export class ResourceUsersComponent implements OnInit {
   showDropDown = false;
   validUser = true;
   validPhase = true;
+  resultsCursor = 0;
 
   constructor(private resourceService: ResourceService,private userService: UserService,private route: ActivatedRoute,
   private phaseService: PhaseService) {}
@@ -69,7 +70,6 @@ export class ResourceUsersComponent implements OnInit {
     const phase = this.phases[this.selectedPhase];
     if(!phase.users.includes(this.newUser.value)){
       phase.users.push(this.newUser.value);
-      console.log("Phase " + this.phases[this.selectedPhase].id + this.phases[this.selectedPhase].name_display);
       this.phaseService.updatePhase(phase)
       .subscribe(updatedPhase => {
         console.log("OK");
@@ -83,7 +83,6 @@ export class ResourceUsersComponent implements OnInit {
       this.validPhase = true;
       this.addUserToPhase();
     } else {
-      console.log("No phase selected :(");
       this.validPhase = false;
     }
   }
@@ -93,7 +92,6 @@ export class ResourceUsersComponent implements OnInit {
       this.validUser = true;
       this.checkPhase();
     } else {
-      console.log("No user selected :(");
       this.validUser = false;
     }
   }
@@ -116,6 +114,17 @@ export class ResourceUsersComponent implements OnInit {
     if(this.newUser.value.length > 0){
       this.results = this.getResults();
     }
+  }
+
+  onKey(event: KeyboardEvent) { // with type info
+    console.log(event.code);
+    if(event.code == 'arrowDown'){
+      console.log("ARROW DOWN");
+    }
+    if(event.code == 'arrowUp'){
+      console.log("ARROW UP");
+    }
+    //this.values += (<HTMLInputElement>event.target).value + ' | ';
   }
 
 }

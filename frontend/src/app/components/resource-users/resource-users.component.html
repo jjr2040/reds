@@ -20,7 +20,7 @@
             <h4 class="card-title"><strong>Agregar responsable</strong></h4>
             <div class="row">
                 <div class="col-sm-6">
-                    <input name="newUser" class="form-control form-control-line" placeholder="Buscar" [formControl]="newUser" (click)="toggleDropDown()" (ngModelChange)="setResults()" required>
+                    <input name="newUser" class="form-control form-control-line" placeholder="Buscar" [formControl]="newUser" (click)="toggleDropDown()" (ngModelChange)="setResults()" (keyup)="onKey($event)" required>
                     <div class="search-container" *ngIf="showDropDown">
                         <div class="users-names-container" *ngFor="let user of results" (click)="setUser(user.username)">
                             <span>{{user.username}}</span>
