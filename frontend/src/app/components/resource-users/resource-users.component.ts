@@ -107,6 +107,7 @@ export class ResourceUsersComponent implements OnInit {
         matches.push(this.users[i]);
       }
     }
+    this.resultsCursor = 0;
     return matches;
   }
 
@@ -116,15 +117,21 @@ export class ResourceUsersComponent implements OnInit {
     }
   }
 
-  onKey(event: KeyboardEvent) { // with type info
-    console.log(event.code);
-    if(event.code == 'arrowDown'){
-      console.log("ARROW DOWN");
-    }
-    if(event.code == 'arrowUp'){
-      console.log("ARROW UP");
-    }
-    //this.values += (<HTMLInputElement>event.target).value + ' | ';
+  onKey(event: KeyboardEvent) { 
+   if (event.keyCode === 40 && this.resultsCursor < this.results.length-1) {
+    // Arrow Down
+    this.resultsCursor++;
+    } else if (event.keyCode === 38 && this.resultsCursor > 0) {
+        // Arrow Up
+        this.resultsCursor--;
+    } else if (event.keyCode === 13){
+      this.setUser(this.results[this.resultsCursor].username);
+      event.preventDefault();
+    } 
+  }
+
+  over(i){
+    this.resultsCursor = i;
   }
 
 }

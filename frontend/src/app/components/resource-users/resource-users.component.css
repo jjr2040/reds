@@ -16,13 +16,17 @@
 	position: absolute;
 	z-index: 1;
 	width: 100%;
-	max-height: 100px;
-	max-width: 490px;
+	max-height: 200px;
+	max-width: 475px;
 	background-color: #F5F5F5;
 	overflow-y: auto; 
 }
 
 .users-names-container:hover {
+	background-color: #E0E0E0;
+}
+
+.active {
 	background-color: #E0E0E0;
 }
 
