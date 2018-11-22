@@ -6,6 +6,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Resource } from '../models/resource';
 import { AuthenticationService } from './authentication.service';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class ResourceService {
   isCurrentResource: BehaviorSubject<Resource>;
 
   constructor(private http: HttpClient,
-    private errorHandlingService: ErrorHandlingService, private authenticationService: AuthenticationService) {
+    private errorHandlingService: ErrorHandlingService, private authenticationService: AuthenticationService, private router: Router) {
       this.isCurrentResource = new BehaviorSubject(this.currentResource);
       //this.setCurrentResourceFromLocalStorage();
   }
@@ -67,5 +68,21 @@ export class ResourceService {
     return this.http.put<Resource>(url, resource).pipe(
       catchError(this.errorHandlingService.handleError<Resource>('Error updating a resource'))
     );
+  }
+
+  backToResources() {
+    this.currentResource = null;
+    if (this.authenticationService.localStorageAvailable()) {
+      localStorage.removeItem('currentUser');
+    }
+    this.isCurrentResource.next(null);
+  }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (this.currentResource) {
+      return true;
+    }
+    this.router.navigate(['/resources']);
+    return false;
   }
 }

@@ -19,7 +19,7 @@ export class AppComponent {
   }
 
   goToResources() {
-    //this.resourceService.setCurrentResource(null);
+    this.resourceService.backToResources();
     this.router.navigate(['/resources']);
   }
 }

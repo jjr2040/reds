@@ -44,9 +44,9 @@
 <!-- ============================================================== -->
 <!-- Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->
-<aside class="left-sidebar" [hidden]="!resource">
+<aside class="left-sidebar" *ngIf="resource">
     <!-- Sidebar scroll-->
-    <div class="scroll-sidebar" *ngIf="resource">
+    <div class="scroll-sidebar">
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav" >
@@ -81,7 +81,6 @@
     </div>
     <!-- End Sidebar scroll-->
 </aside>
-<app-resource-list *ngIf="!resource"></app-resource-list>
 <!-- ============================================================== -->
 <!-- End Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->

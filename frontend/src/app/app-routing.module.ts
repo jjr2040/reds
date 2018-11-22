@@ -16,9 +16,10 @@ import { MeetingRecordComponent } from './components/meeting-record/meeting-reco
 import { MeetingRecordEditComponent } from './components/meeting-record-edit/meeting-record-edit.component';
 import { ArtifactListComponent } from './components/artifact-list/artifact-list.component';
 import { FindArtifactsComponent } from './components/find-artifacts/find-artifacts.component';
+import { ResourceService } from './services/resource.service';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: 'resources/', pathMatch: 'full' },
   { path: 'resources', component: ResourceListComponent},
   { path: 'resources/new', component: ResourcesCreateComponent},
   { path: 'resources/:resourceId/comments/create', component: ResourceCommentsCreateComponent},
@@ -34,7 +35,7 @@ const routes: Routes = [
   { path: 'meetingRecords', component: MeetingRecordComponent},
   { path: 'meetingRecords/new', component: MeetingRecordEditComponent},
   { path: 'resource/:id/meetingRecord', component: MeetingRecordComponent},
-  { path: 'artifacts', component: FindArtifactsComponent},
+  { path: 'artifacts', component: FindArtifactsComponent, canActivate: [ResourceService]},
   { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
 

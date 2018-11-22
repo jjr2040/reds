@@ -23,6 +23,12 @@ export class ArtifactService {
     );
   }
 
+  getArtifactsResource(id): Observable<Artifact[]> {
+    return this.http.get<Artifact[]>(this.apiUrl + id).pipe(
+      catchError(this.errorHandlingService.handleError<Artifact[]>('Error getting artifacts'))
+    );
+  }
+
   getArtifact(id: Number): Observable<Artifact> {
     const url = this.apiUrl + `${id}/`;
     return this.http.get<Artifact>(url).pipe(
