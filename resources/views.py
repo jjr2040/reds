@@ -204,8 +204,9 @@ class ResourceCommentViewSet(viewsets.ModelViewSet):
 @api_view(["POST"])
 def asignar_artefacto(request):
     data = request.data
-    Resource.objects.get(id=data['resource_id']).artifacts.add(Artifact.objects.get(id=data['artifact_id']))
-    return Response({'ok': 'Artefacto Asignado'}, status=HTTP_200_OK)
+    artefacto = Artifact.objects.get(id=data['artifact_id'])
+    Resource.objects.get(id=data['resource_id']).artifacts.add(artefacto)
+    return Response({'ok': 'Artefacto Asignado', 'artefacto_id': artefacto.id}, status=HTTP_200_OK)
 
 
 @api_view(["POST"])

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ArtifactService } from '../../services/artifact.service';
 import { ResourceService } from '../../services/resource.service';
 import { MessageService } from '../../services/message.service';
-
+import { differenceBy } from 'lodash';
 @Component({
   selector: 'app-find-artifacts',
   templateUrl: './find-artifacts.component.html',
@@ -17,11 +17,7 @@ export class FindArtifactsComponent implements OnInit {
     this.resource = this.resourceService.getCurrentResource();
     this.artifactsService.getArtifacts().subscribe( response => {
       if (response) {
-        response.forEach(artifact => {
-          if (artifact.resource_id !== this.resource.id) {
-            this.artifacts.push(artifact);
-          }
-        });
+        this.artifacts = differenceBy(response, this.resource.artifacts, 'id');
       }
     });
   }
@@ -31,6 +27,8 @@ export class FindArtifactsComponent implements OnInit {
 
   asign(artifact_id) {
     this.artifactsService.asignArtifact(artifact_id, this.resource.id).subscribe( response => {
+      console.log(response);
+      this.artifacts = differenceBy(this.artifacts, [{id: response['artefacto_id']}], 'id');
       this.messageService.showSuccess('Ok', 'El artefacto ha sido asignado al recurso actual');
     });
   }
