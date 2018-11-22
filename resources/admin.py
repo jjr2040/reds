@@ -52,6 +52,12 @@ class ResourceCommentAdmin(admin.ModelAdmin):
     '''
     pass
 
+class PhaseAdmin(admin.ModelAdmin):
+    '''
+        Admin View for Phase
+    '''
+    pass
+
 
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Artifact, ArtifactAdmin)
@@ -59,3 +65,4 @@ admin.site.register(Project, ProjectAdmin)
 admin.site.register(Resource, ResourceAdmin)
 admin.site.register(WorkplanActivity, WorkplanActivityAdmin)
 admin.site.register(ResourceComment, ResourceCommentAdmin)
+admin.site.register(Phase, PhaseAdmin)

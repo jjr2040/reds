@@ -5,7 +5,7 @@ from resources.forms import ResourceForm, WorkplanActivityCreateForm, ArtifactCr
 from django.urls import reverse_lazy, reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
-from rest_framework import viewsets
+from rest_framework import viewsets,generics
 from .serializers import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -15,6 +15,9 @@ from rest_framework.status import (
     HTTP_200_OK,
     HTTP_401_UNAUTHORIZED
 )
+from rest_framework.views import APIView
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 class ResourceCreateView(CreateView):
     model = Resource
@@ -153,6 +156,12 @@ class ResourceViewSet(viewsets.ModelViewSet):
             for tag in tags:
                 instance.tags.add(tag)
 
+    @action(methods=['get'], detail=True)
+    def phases(self, request, pk=None):
+        phases = Phase.objects.filter(resource = pk)
+        serializer = PhaseSerializer(phases,many=True)
+        return Response(serializer.data)
+
 
 class ProjectViewSet(viewsets.ModelViewSet):
 
@@ -207,7 +216,11 @@ def asignar_artefacto(request):
     artefacto = Artifact.objects.get(id=data['artifact_id'])
     Resource.objects.get(id=data['resource_id']).artifacts.add(artefacto)
     return Response({'ok': 'Artefacto Asignado', 'artefacto_id': artefacto.id}, status=HTTP_200_OK)
+class PhaseViewSet(viewsets.ModelViewSet):
+    queryset = Phase.objects.all()
+    serializer_class = PhaseSerializer
 
+         
 
 @api_view(["POST"])
 def loguear(request):
@@ -224,3 +237,5 @@ def loguear(request):
 
     except ObjectDoesNotExist:
         return Response({'username': '', 'id': 0, 'is_staff': 'false'}, status=HTTP_200_OK)
+
+

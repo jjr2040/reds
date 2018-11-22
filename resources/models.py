@@ -143,7 +143,7 @@ class Resource(models.Model):
     current_phase = models.IntegerField(verbose_name='Fase actual', choices=PHASE_CHOICES, default=PREPRODUCTION)
 
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_resources')
-    users = models.ManyToManyField(User, related_name='user_resources')
+    #users = models.ManyToManyField(User, related_name='user_resources')
     tags = TaggableManager()
     artifacts = models.ManyToManyField(Artifact, related_name='artifact_resources')
 
@@ -208,3 +208,42 @@ class ResourceComment(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Phase(models.Model):
+    
+    PREPRODUCTION = 1
+    PRODUCTION = 2
+    POSTPRODUCTION = 3
+    QA = 4
+
+    PHASE_CHOICES = (
+        (PREPRODUCTION, 'Preproducción'),
+        (PRODUCTION, 'Producción'),
+        (POSTPRODUCTION, 'Postproducción'),
+        (QA, 'Control de calidad')
+    )
+
+    name = models.IntegerField(verbose_name='Fase del recurso', choices=PHASE_CHOICES, default=PREPRODUCTION)
+    users = models.ManyToManyField(User, related_name='phase_resources_users', blank=True)
+
+    resource = models.ForeignKey('Resource', related_name='phases', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Phase"
+        verbose_name_plural = "Phases"
+
+    def phase_name(self):
+        if self.name is 1:
+            return 'Preproducción'
+        elif self.name is 2:
+            return 'Producción'
+        elif self.name is 3:
+            return 'Postproducción'        
+        else:
+            return 'Control de calidad'    
+
+    def __str__(self):
+        return str(self.phase_name()) + ' ' + str(self.resource)
+
+             
