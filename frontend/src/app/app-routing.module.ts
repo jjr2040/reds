@@ -17,10 +17,14 @@ import { MeetingRecordEditComponent } from './components/meeting-record-edit/mee
 import { ArtifactListComponent } from './components/artifact-list/artifact-list.component';
 import { FindArtifactsComponent } from './components/find-artifacts/find-artifacts.component';
 import { ResourceService } from './services/resource.service';
+import { ResourceActiveListComponent } from './components/resource-active-list/resource-active-list.component';
+import { LoginUserComponent } from './components/login-user/login-user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'resources/', pathMatch: 'full' },
   { path: 'resources', component: ResourceListComponent},
+  { path: 'activeResources', component: ResourceActiveListComponent},
+  { path: 'loginUser', component: LoginUserComponent},
   { path: 'resources/new', component: ResourcesCreateComponent},
   { path: 'resources/:resourceId/comments/create', component: ResourceCommentsCreateComponent},
   { path: 'resources/edit/:id', component: ResourcesEditComponent},

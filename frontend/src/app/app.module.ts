@@ -29,6 +29,8 @@ import { ResourceCommentsListComponent } from './resource-comments-list/resource
 import { ResourceCommentsCreateComponent } from './resource-comments-create/resource-comments-create.component';
 import { FindArtifactsComponent } from './components/find-artifacts/find-artifacts.component';
 import { MyFilterPipe } from './components/find-artifacts/pipe';
+import { ResourceActiveListComponent } from './components/resource-active-list/resource-active-list.component';
+import { LoginUserComponent } from './components/login-user/login-user.component';
 
 
 @NgModule({
@@ -51,7 +53,9 @@ import { MyFilterPipe } from './components/find-artifacts/pipe';
     ResourceCommentsListComponent,
     ResourceCommentsCreateComponent,
     FindArtifactsComponent,
-    MyFilterPipe
+    MyFilterPipe,
+    ResourceActiveListComponent,
+    LoginUserComponent
   ],
   imports: [
     BrowserModule,
