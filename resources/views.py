@@ -212,12 +212,14 @@ def asignar_artefacto(request):
 def loguear(request):
     data = request.data
     print('username ' + data['username'])
-    user = User.objects.get(username=data['username'])
-    if user.check_password(data['password']):
-        print('ok')
-        return Response({'username': user.username, 'id': user.id, 'is_staff': user.is_staff}, status=HTTP_200_OK)
-    else:
-        print('fail')
+    try:
+        user = User.objects.get(username=data['username'])
+        if user.check_password(data['password']):
+            print('ok')
+            return Response({'username': user.username, 'id': user.id, 'is_staff': user.is_staff}, status=HTTP_200_OK)
+        else:
+            print('fail')
+            return Response({'username': '', 'id': 0, 'is_staff': 'false'}, status=HTTP_200_OK)
+
+    except ObjectDoesNotExist:
         return Response({'username': '', 'id': 0, 'is_staff': 'false'}, status=HTTP_200_OK)
-
-
