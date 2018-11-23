@@ -19,8 +19,8 @@ export class UserService {
 
   constructor(private http: HttpClient,
     private errorHandlingService: ErrorHandlingService, private router: Router) {
-      this.isSignedIn = new BehaviorSubject(this.currentUser);
       this.setCurrentUserFromLocalStorage();
+      this.isSignedIn = new BehaviorSubject(this.currentUser);
   }
 
   getUsers(): Observable<User[]> {
@@ -46,7 +46,10 @@ export class UserService {
   }
 
   setCurrentUserFromLocalStorage() {
+    console.log('service');
     if (this.localStorageAvailable() && localStorage.getItem('currentUser')) {
+      console.log(localStorage.getItem('currentUser'));
+
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
     return this.currentUser;

@@ -40,6 +40,7 @@ export class LoginUserComponent implements OnInit {
       if (loginUser.username !==  '') {
         this.userService.currentUser = loginUser;
         localStorage.setItem('currentUser', JSON.stringify(loginUser));
+        console.log(localStorage.getItem('currentUser'));
         this.userService.isSignedIn.next(true);
         this.router.navigate(['/resources/']);
       } else {
