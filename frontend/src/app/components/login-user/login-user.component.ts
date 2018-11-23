@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-login-user',
@@ -10,28 +11,41 @@ import { User } from '../../models/user';
   styleUrls: ['./login-user.component.css']
 })
 export class LoginUserComponent implements OnInit {
+  loginForm: FormGroup;
+  submitted;
 
-  username: string;
-  password: string;
-  user: User;
-  constructor(private authService: AuthenticationService,
-    private router: Router,
-    private userService: UserService) { }
+  constructor(private router: Router,
+    private userService: UserService, private formBuilder: FormBuilder, private messageService: MessageService) {
+      this.loginForm = this.formBuilder.group({
+        username: ['', [Validators.required]],
+        password: ['', [Validators.required]]
+      });
+  }
 
   ngOnInit() {
   }
 
+  get f() {
+    return this.loginForm.controls;
+  }
+
   loguear() {
-     this.userService.loguear({id: 0, username: this.username, password: this.password, is_staff: 'false'}).subscribe( loginUser => {
-        console.log('loguear usuario');
-        if (loginUser.username !==  '') {
-          this.authService.currentUser = loginUser;
-          this.router.navigate(['/resources/']);
-        } else {
-          this.username = '';
-          this.password = '';
-        }
-        });
+    this.submitted = true;
+
+    if (this.loginForm.invalid) {
+        return;
+    }
+    this.userService.loguear({id: 0, username: this.loginForm.value.username, password: this.loginForm.value.password, is_staff: 'false'})
+    .subscribe( loginUser => {
+      if (loginUser.username !==  '') {
+        this.userService.currentUser = loginUser;
+        localStorage.setItem('currentUser', JSON.stringify(loginUser));
+        this.userService.isSignedIn.next(true);
+        this.router.navigate(['/resources/']);
+      } else {
+        this.messageService.showError('Error', 'La contraseña o el usuario no coincide');
+      }
+    });
   }
 
 }

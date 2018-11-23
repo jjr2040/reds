@@ -19,12 +19,12 @@ import { FindArtifactsComponent } from './components/find-artifacts/find-artifac
 import { ResourceService } from './services/resource.service';
 import { ResourceActiveListComponent } from './components/resource-active-list/resource-active-list.component';
 import { LoginUserComponent } from './components/login-user/login-user.component';
+import { UserService } from './services/user.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'resources/', pathMatch: 'full' },
+  { path: '', component: LoginUserComponent },
   { path: 'resources', component: ResourceListComponent},
   { path: 'activeResources', component: ResourceActiveListComponent},
-  { path: 'loginUser', component: LoginUserComponent},
   { path: 'resources/new', component: ResourcesCreateComponent},
   { path: 'resources/:resourceId/comments/create', component: ResourceCommentsCreateComponent},
   { path: 'resources/edit/:id', component: ResourcesEditComponent},
