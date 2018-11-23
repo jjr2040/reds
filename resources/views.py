@@ -206,7 +206,7 @@ class ResourceVersionViewSet(viewsets.ModelViewSet):
 
 class ResourceCommentViewSet(viewsets.ModelViewSet):
     queryset = ResourceComment.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = ResourceCommentSerializer
     filter_fields = ('resource',)
 
 
