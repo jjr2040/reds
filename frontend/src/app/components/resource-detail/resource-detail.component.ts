@@ -53,7 +53,11 @@ export class ResourceDetailComponent implements OnInit {
       versions.forEach( version => {
         if (version.resource === id) {
           this.resourceVersions.push(version);
-          this.number = version.version_number;
+          if (version.version_number) {
+            this.number = version.version_number;
+          } else {
+            this.number = 0;
+          }
         }
       });
     });
@@ -93,7 +97,13 @@ export class ResourceDetailComponent implements OnInit {
       file: this.file,
       resource: id
     }).subscribe( response => {
+      console.log(response);
       this.resourceVersions.push(response);
     });
+  }
+
+  goToResources() {
+    this.resourceService.backToResources();
+    this.router.navigate(['/resources']);
   }
 }
