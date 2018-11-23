@@ -40,21 +40,22 @@
             <table class="display nowrap table table-hover table-striped table-bordered">
               <thead>
                   <tr>
-                      <th>Nombre</th>
-                      <th>Descripción</th>
-                      <th>Tags</th>
+                      <th>Nombre<br><input type="search" [(ngModel)]="buscarNombre" class="busqueda"></th>
+                      <th>Descripción<br><input type="search" [(ngModel)]="buscarDescripcion" class="busqueda"></th>
+                      <th>Tags<br><input type="search" [(ngModel)]="buscarTags" class="busqueda"></th>
                       <th>Asignar</th>
                   </tr>
               </thead>
               <tbody>
-                  <tr *ngFor="let artifact of artifacts | artifactFilter:buscar">
-                      <td>{{artifact.name}}</td>
-                      <td>{{artifact.description}}</td>
-                      <td>{{artifact.tags}}</td>
-                      <td> <button class="btn btn-primary" (click)="asign(artifact.id)">Asignar</button></td>
-                  </tr>
+                <tr *ngFor="let artifact of artifacts | artifactFilter:buscar:'all' |artifactFilter:buscarNombre:'name' |artifactFilter:buscarDescripcion:'description' |artifactFilter:buscarTags:'tags'">
+                    <td>{{artifact.name}}</td>
+                    <td>{{artifact.description}}</td>
+                    <td>{{artifact.tags}}</td>
+                    <td> <button class="btn btn-primary" (click)="asign(artifact.id)">Asignar</button></td>
+                </tr>
               </tbody>
             </table>
+            <label *ngIf="artifacts.length === 0">No hay artefactos o todos los que existen ya estan asignados al recurso actual</label>
           </div>
         </div>
       </div>
