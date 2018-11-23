@@ -6,6 +6,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Resource } from '../models/resource';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { Phase } from '../models/phase';
 
 @Injectable({
   providedIn: 'root'
@@ -88,4 +89,12 @@ export class ResourceService {
     this.router.navigate(['/resources']);
     return false;
   }
+
+  getResourcePhases(id: Number): Observable<Phase[]> {
+    const url = this.apiUrl + `${id}/phases`;
+    return this.http.get<Phase[]>(url).pipe(
+      catchError(this.errorHandlingService.handleError<Phase[]>('Error fetching a resource'))
+    );
+  }
+
 }

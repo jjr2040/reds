@@ -5,6 +5,8 @@ import { ProjectService } from './../../services/project.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PhaseService } from './../../services/phase.service';
+import { Phase } from './../../models/phase';
 
 @Component({
   selector: 'app-resources-create',
@@ -30,7 +32,8 @@ export class ResourcesCreateComponent implements OnInit {
     private projectService: ProjectService,
     private fb: FormBuilder,
     private resourceService: ResourceService,
-    private router: Router
+    private router: Router,
+    private phaseService: PhaseService
   ) { }
 
   ngOnInit() {
@@ -46,9 +49,24 @@ export class ResourcesCreateComponent implements OnInit {
     const resource: Resource = this.resourceForm.value;
     resource.tags = (this.resourceForm.get('tags').value as string).split(',');
     this.resourceService.createResource(resource).subscribe( createdResource => {
+      for(let i = 1; i <= 4; i++){
+        this.addPhase(i,createdResource);
+      }
       console.log('Created a resource');
       this.router.navigate(['/resources', createdResource.id]);
     });
+  }
+
+  addPhase(phaseName,createdResource): void {
+    let newPhase: Phase = {
+    name : phaseName,
+    resource : createdResource.id,
+    users: []
+  }
+  this.phaseService.createPhase(newPhase).subscribe( createdPhase=> {
+    console.log('New phase created' + createdPhase);
+  });
+  
   }
 
 }
