@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthenticationService } from './services/authentication.service';
 import { LoadingService } from './services/loading.service';
 import { MessageService } from './services/message.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +30,7 @@ import { FindArtifactsComponent } from './components/find-artifacts/find-artifac
 import { MyFilterPipe } from './components/find-artifacts/pipe';
 import { ResourceActiveListComponent } from './components/resource-active-list/resource-active-list.component';
 import { LoginUserComponent } from './components/login-user/login-user.component';
+import { UserService } from './services/user.service';
 
 
 @NgModule({
@@ -66,10 +66,10 @@ import { LoginUserComponent } from './components/login-user/login-user.component
     ReactiveFormsModule
   ],
   providers: [
-    AuthenticationService,
     LoadingService,
     MessageService,
-    ErrorHandlingService
+    ErrorHandlingService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

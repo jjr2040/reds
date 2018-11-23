@@ -5,7 +5,6 @@ import { ErrorHandlingService } from './error-handling.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Resource } from '../models/resource';
-import { AuthenticationService } from './authentication.service';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Phase } from '../models/phase';
 
@@ -19,16 +18,20 @@ export class ResourceService {
   isCurrentResource: BehaviorSubject<Resource>;
 
   constructor(private http: HttpClient,
-    private errorHandlingService: ErrorHandlingService, private authenticationService: AuthenticationService, private router: Router) {
+    private errorHandlingService: ErrorHandlingService, private router: Router) {
       this.isCurrentResource = new BehaviorSubject(this.currentResource);
       //this.setCurrentResourceFromLocalStorage();
   }
 
   setCurrentResourceFromLocalStorage() {
-    if (this.authenticationService.localStorageAvailable() && localStorage.getItem('currentResource')) {
+    if (this.localStorageAvailable() && localStorage.getItem('currentResource')) {
       this.currentResource = JSON.parse(localStorage.getItem('currentResource'));
       this.isCurrentResource.next(this.currentResource);
     }
+  }
+
+  localStorageAvailable() {
+    return typeof(Storage) !== 'undefined';
   }
 
   setCurrentResource(resource: Resource) {
@@ -73,7 +76,7 @@ export class ResourceService {
 
   backToResources() {
     this.currentResource = null;
-    if (this.authenticationService.localStorageAvailable()) {
+    if (this.localStorageAvailable()) {
       localStorage.removeItem('currentUser');
     }
     this.isCurrentResource.next(null);

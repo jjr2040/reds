@@ -3,6 +3,7 @@ import * as S3 from 'aws-sdk/clients/s3';
 import { ArtifactService } from '../../services/artifact.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -11,21 +12,30 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./add-artifact.component.css']
 })
 export class AddArtifactComponent implements OnInit {
-  file;
-  tags;
-  created_by;
-  description;
-  name;
-  preview;
+  artifactForm: FormGroup;
+  submitted;
   users;
   resource_id;
   resourceName;
+
   constructor(private router: Router, private artifactService: ArtifactService, private userService: UserService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute, private formBuilder: FormBuilder) {
     this.userService.getUsers().subscribe( users => {
       this.users = users;
     });
-   }
+    this.artifactForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      tags: ['', [Validators.required]],
+      preview: [false, [Validators.required]],
+      file: ['', [Validators.required]]
+    });
+    this.submitted = false;
+  }
+
+  get f() {
+    return this.artifactForm.controls;
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -36,7 +46,7 @@ export class AddArtifactComponent implements OnInit {
 
   fileEvent(fileInput: any) {
     const fileAWS = fileInput.target.files[0];
-    this.file = fileAWS.name;
+    this.artifactForm.value.file = fileAWS.name;
     const bucket = new S3(
       {
         accessKeyId: this.artifactService.getAWSCredential().split('%')[0],
@@ -50,26 +60,32 @@ export class AddArtifactComponent implements OnInit {
       Key:  fileAWS.name,
       Body: fileAWS
     };
-    bucket.upload(params, function (err, data) {
+    bucket.upload(params,  (err, data) => {
       if (err) {
         console.log('There was an error uploading your file: ', err);
         return false;
       }
-      this.file = data.Location;
+      this.artifactForm.value.file = data.Location;
       console.log('Successfully uploaded file.', data);
       return true;
     });
   }
 
   crearArtifact() {
+    this.submitted = true;
+
+    if (this.artifactForm.invalid) {
+      return;
+    }
+
     this.artifactService.createArtifact({
-      name: this.name,
-      description: this.description,
-      created_by: this.created_by,
-      file: this.file,
-      preview: this.preview,
-      resource_id: this.resource_id,
-      tags: this.tags
+      name: this.artifactForm.value.name,
+      description: this.artifactForm.value.description,
+      tags: this.artifactForm.value.tags,
+      created_by: this.userService.currentUser,
+      file: this.artifactForm.value.file,
+      preview: this.artifactForm.value.preview,
+      resource_id: this.resource_id
     }).subscribe( response => {
       if (response) {
         this.router.navigate(['/resources/' + this.resource_id]);
