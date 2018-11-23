@@ -10,13 +10,14 @@ import { UserService } from './services/user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  logueado: boolean;
+  isSignedIn: boolean;
   resource;
 
   constructor(private router: Router, private resourceService: ResourceService, private userService: UserService) {
     this.resourceService.isCurrentResource.subscribe((currentResource) => this.resource = currentResource);
     this.userService.isSignedIn.subscribe((isSignedIn) => {
-      this.logueado = isSignedIn;
+      this.isSignedIn = isSignedIn;
+      console.log(isSignedIn);
     });
   }
 
