@@ -1,43 +1,53 @@
-<div class="card">
-    <div class="card-body">
-        <div class="d-flex">
-            <div>
-                <h4 class="card-title"><strong>Responsables</strong></h4>
+<div class="page-wrapper" style="min-height: 539px;">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h3 class="text-themecolor">Responsables</h3>
+            </div>
+            <div class="col-md-7 align-self-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">Responsables</li>
+                </ol>
             </div>
         </div>
-        <div class="table-responsive m-t-20">
-            <ul class="list-group" *ngFor="let phase of phases">
-                <li *ngFor="let user of phase.users" class="list-group-item">
-                    <span class="user-name">{{user}}</span>
-                    <span *ngIf="phase.name_display=='Preproducción'" class="label label-success label-rounded phase-div">{{phase.name_display}}</span>
-                    <span *ngIf="phase.name_display=='Producción'" class="label label-info label-rounded phase-div">{{phase.name_display}}</span>
-                    <span *ngIf="phase.name_display=='Postproducción'" class="label label-danger label-rounded phase-div">{{phase.name_display}}</span>
-                    <span *ngIf="phase.name_display=='Control de calidad'" class="label label-primary label-rounded phase-div">{{phase.name_display}}</span>
-                </li>
-            </ul>
-        </div>
-        <form class="example-form form-material m-t-40" autocomplete="off">
-            <h4 class="card-title"><strong>Agregar responsable</strong></h4>
-            <div class="row">
-                <div class="col-sm-6">
-                    <input name="newUser" class="form-control form-control-line" placeholder="Buscar" [formControl]="newUser" (click)="toggleDropDown()" (ngModelChange)="setResults()" (keydown)="onKey($event)" required>
-                    <div class="search-container" *ngIf="showDropDown">
-                        <div class="users-names-container" *ngFor="let user of results; index as i" [class.active]="i == resultsCursor" (click)="setUser(user.username)" (mouseover)='over(i)'>
-                            <span>{{user.username}}</span>
+        <div class="card">
+            <div class="card-body">
+                <form class="example-form form-material m-t-40" autocomplete="off">
+                    <h4 class="card-title"><strong>Agregar responsable</strong></h4>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input name="newUser" class="form-control form-control-line" placeholder="Buscar" [formControl]="newUser" (click)="toggleDropDown()" (ngModelChange)="setResults()" (keydown)="onKey($event)" required>
+                            <div class="search-container" *ngIf="showDropDown">
+                                <div class="users-names-container" *ngFor="let user of results; index as i" [class.active]="i == resultsCursor" (click)="setUser(user.username)" (mouseover)='over(i)'>
+                                    <span>{{user.username}}</span>
+                                </div>
+                            </div>
+                            <p *ngIf="!validUser" class="text-danger">Usuario no valido</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <select class="form-control form-control-lg" name="phase" [(ngModel)]="selectedPhase" required>
+                                <option class="option-container" *ngFor="let phase of phases; index as i" [value]="i">
+                                    <span>{{phase.name_display}}</span></option>
+                            </select>
+                            <p *ngIf="!validPhase" class="text-danger">Seleccione una fase</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-primary" (click)="checkUser()">Agregar</button>
                         </div>
                     </div>
-                    <p *ngIf="!validUser" class="text-danger">Usuario no valido</p>
+                </form>
+                <div class="table-responsive m-t-20">
+                    <ul class="list-group" *ngFor="let phase of phases">
+                        <li *ngFor="let user of phase.users" class="list-group-item">
+                            <span class="user-name">{{user}}</span>
+                            <span *ngIf="phase.name_display=='Preproducción'" class="label label-success label-rounded phase-div">{{phase.name_display}}</span>
+                            <span *ngIf="phase.name_display=='Producción'" class="label label-info label-rounded phase-div">{{phase.name_display}}</span>
+                            <span *ngIf="phase.name_display=='Postproducción'" class="label label-danger label-rounded phase-div">{{phase.name_display}}</span>
+                            <span *ngIf="phase.name_display=='Control de calidad'" class="label label-primary label-rounded phase-div">{{phase.name_display}}</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-sm-4">
-                    <select class="form-control form-control-lg" name="phase" [(ngModel)]="selectedPhase" required>
-                        <option class="option-container" *ngFor="let phase of phases; index as i" [value]="i">
-                            <span>{{phase.name_display}}</span></option>
-                    </select>
-                    <p *ngIf="!validPhase" class="text-danger">Seleccione una fase</p>
-                </div>
-                <div class="col-sm-2">
-                    <button type="submit" class="btn btn-primary" (click)="checkUser()">Agregar</button>
-                </div>
+                
             </div>
-        </form>
+        </div>
     </div>

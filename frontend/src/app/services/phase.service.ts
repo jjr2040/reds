@@ -20,7 +20,13 @@ export class PhaseService {
   updatePhase(phase: any): Observable<Phase> {
     const url = this.apiUrl + `${phase.id}/`;
     return this.http.put<Phase>(url, phase).pipe(
-      catchError(this.errorHandlingService.handleError<Phase>('Error updating a resource'))
+      catchError(this.errorHandlingService.handleError<Phase>('Error updating a resource phase'))
+    );
+  }
+
+  createPhase(phase: Phase): Observable<Phase> {
+    return this.http.post<Phase>(this.apiUrl, phase).pipe(
+      catchError(this.errorHandlingService.handleError<Phase>('Error creating a resource phase'))
     );
   }
 
