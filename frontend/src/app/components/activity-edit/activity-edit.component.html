@@ -75,12 +75,13 @@
                 </div>
                 <input *ngIf="!isNew" type="number" formControlName="resource" style="visibility: hidden">
               </div>
-              <div class="form-group">
-                  <label class="font-medium m-t-30">Recurso</label>
+              <div class="form-group" style="visibility: hidden">
+                <input *ngIf="!isNew" type="number" formControlName="resource" style="visibility: hidden">
+                  <!-- <label class="font-medium m-t-30">Recurso</label>
                   <select *ngIf="isNew" formControlName="resource" class="form-control">
                       <option *ngFor="let resource of resources" [ngValue]="resource.id" >{{resource.name}}</option>
                   </select>
-                  <div *ngIf="!isNew && activity" >{{activity.resource}}</div>
+                  <div *ngIf="!isNew && activity" >{{activity.resource}}</div> -->
               </div>
               <div class="row">
                 <div *ngIf="!isNew && activity" class="col-9">

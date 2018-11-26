@@ -16,9 +16,12 @@ export class ActivityListComponent implements OnInit {
   constructor(private activityService: ActivityService, private resourceService: ResourceService) {}
 
   ngOnInit() {
-    this.activityService.getActivities().subscribe( activities => {
-      this.activities = activities;
-    });
+    const resource = this.resourceService.getCurrentResource();
+    if (resource) {
+      this.activityService.getActivities(resource.id).subscribe( activities => {
+        this.activities = activities;
+      });
+    }
   }
 
   deleteActivity(activity: WorkplanActivity) {
