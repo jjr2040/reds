@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
+import { Resource } from './models/resource';
+import { ResourceService } from './services/resource.service';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +10,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  logueado: boolean;
+  isSignedIn: boolean;
+  resource;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
-    this.authenticationService.isSignedIn.subscribe((isSignedIn) => this.logueado = isSignedIn);
+  constructor(private router: Router, private resourceService: ResourceService, private userService: UserService) {
+    this.resourceService.isCurrentResource.subscribe((currentResource) => this.resource = currentResource);
+    this.userService.isSignedIn.subscribe((isSignedIn) => {
+      this.isSignedIn = isSignedIn;
+      console.log(isSignedIn);
+    });
   }
 
-  goTo(url) {
-    this.router.navigate([url]);
+  goToResources() {
+    this.resourceService.backToResources();
+    this.router.navigate(['/resources']);
+  }
+
+  logOut() {
+    this.userService.signOut();
   }
 }

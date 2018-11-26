@@ -3,12 +3,12 @@ import { HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import swal from 'sweetalert2';
 
-import { AuthenticationService } from './authentication.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorHandlingService {
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private router: Router) { }
 
   handleError<T>(operation: string, result?: T) {
     return (error: any): Observable<T> => {
@@ -51,7 +51,9 @@ export class ErrorHandlingService {
 
   performAdditionalErrorActions(error: any) {
     if (error.status === 401 || error.status === 403) {
-      this.authenticationService.signOut();
+    }
+    if (error.status === 404) {
+      this.router.navigate(['/resources']);
     }
   }
 }

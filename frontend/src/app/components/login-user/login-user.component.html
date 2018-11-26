@@ -1,0 +1,34 @@
+<div class="wrapper fadeInDown" style="margin-top:150px;">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+  
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+                <img src="https://uniandes.edu.co/sites/default/files/logo-header_0_0.png" id="icon" alt="User Icon" style=" width: 100px;" />
+            </div>
+            <div class="col-md-6">
+              <img src="https://conectate.uniandes.edu.co/images/yootheme/logo_conectate.png" style=" width: 180px; margin-top: 25px;"/>
+            </div>
+          </div>
+        </div>
+        <h1 style="margin-top:30px;">REDs</h1>
+      </div>
+  
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="loguear()">
+        <input type="text" class="form-control fadeIn second" id="username" formControlName="username" name="username" placeholder="Nombre de usuario" [class.is-invalid]="submitted && f.username.errors" >
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Es necesario ingresar el nombre</div>
+        </div>
+        <input type="password" class="form-control fadeIn third" id="password" formControlName="password" name="password" placeholder="Contraseña" [class.is-invalid]="submitted && f.password.errors" >
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Es necesario ingresar la contraseña</div>
+        </div>
+        <input type="submit" class="fadeIn fourth" value="Log In">
+      </form>
+  
+    </div>
+  </div>

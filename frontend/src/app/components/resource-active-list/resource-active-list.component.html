@@ -1,0 +1,58 @@
+<div class="page-wrapper" style="min-height: 539px;">
+  
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Recursos activos asignados</h3>
+      </div>
+      <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Recursos</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <table class="table color-table primary-table">
+          <thead>
+            <tr>
+              <th class="card-header">Nombre</th>
+              <th class="card-header">Tipo</th>
+              <th class="card-header">Prioridad</th>
+              <th class="card-header">Duración</th>
+              <th class="card-header">Fecha creación</th>
+              <th class="card-header">Proyecto</th>
+              <th class="card-header">Descripción</th>
+              <th class="card-header">Operaciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let resource of resources" >
+              <td>{{ resource.name }}</td>
+              <td>{{ resource.type }}</td>
+              <td>{{ resource.priority }} </td>
+              <td>{{ resource.estimated_duration }} </td>
+              <td>{{ resource.created_at | date:'short'}}</td>
+              <td>{{ resource.project.name}}</td>
+              <td>{{ resource.description}}</td>
+              <td class="text-nowrap">
+                  <a routerLink="/resources/edit/{{resource.id}}" class="btn btn-primary">Editar recurso</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- ============================================================== -->
+    <!-- End of Container fluid  -->
+    <!-- ============================================================== -->
+  </div>
+</div>

@@ -17,8 +17,9 @@ export class ActivityService {
   constructor(private http: HttpClient,
     private errorHandlingService: ErrorHandlingService) { }
 
-  getActivities(): Observable<WorkplanActivity[]> {
-    return this.http.get<WorkplanActivity[]>(this.apiUrl).pipe(
+  getActivities(resourceId: Number): Observable<WorkplanActivity[]> {
+    const url = this.apiUrl + `?resource=${resourceId}`;
+    return this.http.get<WorkplanActivity[]>(url).pipe(
       catchError(this.errorHandlingService.handleError<WorkplanActivity[]>('Error fetching activities'))
     );
   }

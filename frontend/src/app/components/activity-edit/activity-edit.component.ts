@@ -15,6 +15,7 @@ export class ActivityEditComponent implements OnInit {
 
   activity: WorkplanActivity;
   resources: Resource[];
+  currentResource: Resource;
 
   activityForm: FormGroup = this.fb.group({
     name: [''],
@@ -35,9 +36,14 @@ export class ActivityEditComponent implements OnInit {
     private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.getResources();
-    if (!this.isNew) {
-      this.getActivity();
+
+    this.currentResource = this.resourceService.getCurrentResource();
+
+    if (this.currentResource) {
+      this.getResources();
+      if (!this.isNew) {
+        this.getActivity();
+      }
     }
   }
 
@@ -65,6 +71,7 @@ export class ActivityEditComponent implements OnInit {
   saveActivity() {
     if (this.isNew) {
       const activity: WorkplanActivity = this.activityForm.value;
+      activity.resource = this.currentResource.id;
 
       this.activityService.createActivity(activity).subscribe( updatedActivity => {
         console.log('activity created');

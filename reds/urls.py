@@ -18,6 +18,7 @@ from django.conf.urls import url
 from django.urls import *
 from resources import views
 from rest_framework.routers import DefaultRouter
+from resources.views import asignar_artefacto
 
 
 router = DefaultRouter()
@@ -27,6 +28,9 @@ router.register(r'artifacts', views.ArtifactViewSet)
 router.register(r'workplan-activities', views.WorkplanActivityViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'meeting-records', views.MeetingRecordViewSet)
+router.register(r'resource-versions', views.ResourceVersionViewSet)
+router.register(r'resource-comments', views.ResourceCommentViewSet)
+router.register(r'phases', views.PhaseViewSet)
 
 
 urlpatterns = [
@@ -42,5 +46,8 @@ urlpatterns = [
     path('resource/<int:resource_id>/activity/new', views.create_workplanactivity, name='workplanactivity_new'),
     #url(r'^workplanactivity/new/$', views.create_workplanactivity, name='workplanactivity_new'),
     url(r'^workplanactivity/edit/(?P<pk>[0-9]+)/$', views.create_workplanactivity, name='workplanactivity_edit'),
-    path('s3direct/', include('s3direct.urls'))
+    path('s3direct/', include('s3direct.urls')),
+    path('asignarArtefacto/', asignar_artefacto),
+    path('users/loguear/', views.loguear)
+
 ]

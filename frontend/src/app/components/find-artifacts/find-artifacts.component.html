@@ -1,0 +1,71 @@
+<div class="page-wrapper">
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Artefactos</h3>
+      </div>
+      <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/artifacts">Artefactos</a></li>
+          <li class="breadcrumb-item">Buscar</li>
+        </ol>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title"><strong>Buscar un Nuevo Artefacto</strong></h4>
+            <div id="buscar" class="dataTables_filter">
+              <label>Buscar:
+                  <input type="search" [(ngModel)]="buscar">
+              </label>
+            </div>
+            <br>
+            <br>
+            <hr>
+            <table class="display nowrap table table-hover table-striped table-bordered">
+              <thead>
+                  <tr>
+                      <th>Nombre<br><input type="search" [(ngModel)]="buscarNombre" class="busqueda"></th>
+                      <th>Descripción<br><input type="search" [(ngModel)]="buscarDescripcion" class="busqueda"></th>
+                      <th>Tags<br><input type="search" [(ngModel)]="buscarTags" class="busqueda"></th>
+                      <th>Asignar</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let artifact of artifacts | artifactFilter:buscar:'all' |artifactFilter:buscarNombre:'name' |artifactFilter:buscarDescripcion:'description' |artifactFilter:buscarTags:'tags'">
+                    <td>{{artifact.name}}</td>
+                    <td>{{artifact.description}}</td>
+                    <td>{{artifact.tags}}</td>
+                    <td> <button class="btn btn-primary" (click)="asign(artifact.id)">Asignar</button></td>
+                </tr>
+              </tbody>
+            </table>
+            <label *ngIf="artifacts.length === 0">No hay artefactos o todos los que existen ya estan asignados al recurso actual</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Container fluid  -->
+  <!-- ============================================================== -->
+</div>
+

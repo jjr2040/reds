@@ -1,60 +1,76 @@
 <div class="page-wrapper" style="min-height: 539px;">
-  
   <!-- ============================================================== -->
   <!-- Container fluid  -->
   <!-- ============================================================== -->
   <div class="container-fluid">
-      <div class="row page-titles">
-        <div class="col-md-5 align-self-center">
-          <h3 *ngIf="resourceName" class="text-themecolor">Agregar artefacto a {{resourceName}}</h3>
-        </div>
-        <div class="col-md-7 align-self-center">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/resources">Recursos</a></li>
-            <li class="breadcrumb-item">recurso</li>
-            <li *ngIf="resourceName" class="breadcrumb-item active"><a [routerLink]="['/resources/'+resource_id]">{{resourceName}}</a></li>
-            <li class="breadcrumb-item active">Add Artefacto</li>
-          </ol>
-        </div>
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h3 *ngIf="resourceName" class="text-themecolor">Agregar artefacto a {{resourceName}}</h3>
       </div>
-    <div class="form-group row">
-      <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+      <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/resources">Recursos</a></li>
+          <li class="breadcrumb-item">recurso</li>
+          <li *ngIf="resourceName" class="breadcrumb-item active"><a [routerLink]="['/resources/'+resource_id]">{{resourceName}}</a></li>
+          <li class="breadcrumb-item active">Add Artefacto</li>
+        </ol>
+      </div>
+    </div>
+    <form [formGroup]="artifactForm" (ngSubmit)="crearArtifact()">
+      <div class="form-group row">
+        <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
           <label for="name">Nombre del artefacto</label>
-          <input type="text" class="form-control" id="name" placeholder="Nombres del artefacto" [(ngModel)]="name">
-      </div>
-      <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+          <input type="text" class="form-control" id="name" formControlName="name" name="name" placeholder="Nombre del artefacto" [class.is-invalid]="submitted && f.name.errors" >
+          <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">Es necesario ingresar el nombre</div>
+          </div>
+        </div>
+        <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
           <label for="description">Descripción</label>
-          <input type="text" class="form-control" id="description" placeholder="Descripcion" [(ngModel)]="description">
+          <input type="text" class="form-control" id="description" formControlName="description" name="description" placeholder="Descripcion" [class.is-invalid]="submitted && f.description.errors" >
+          <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+              <div *ngIf="f.description.errors.required">Es necesario ingresar una descripción</div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
-        <label for="created_by">Creado por</label>
-        <select class="form-control" id="created_by" [(ngModel)]="created_by">
-          <option *ngFor="let user of users" [ngValue]="user.id">{{user.username}}</option>
-        </select>
+      <div class="form-group row">
+        <!--<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+          <label for="created_by">Creado por</label>
+          <select class="form-control" id="created_by" formControlName="created_by" name="created_by" [class.is-invalid]="submitted && f.created_by.errors">
+            <option *ngFor="let user of users" [ngValue]="user.id">{{user.username}}</option>
+          </select>
+          <div *ngIf="submitted && f.created_by.errors" class="invalid-feedback">
+              <div *ngIf="f.created_by.errors.required">Es necesario ingresar el creado por</div>
+          </div>
+        </div>-->
+        <div class="form-group col-xs-10 col-sm-10 col-md-4 col-lg-4">
+          <label for="inputArchivo">Cargar archivo</label>
+          <input type="file" (change)="fileEvent($event)" name="file" id="file" formControlName="file" [class.is-invalid]="submitted && f.file.errors">
+          <div *ngIf="submitted && f.file.errors" class="invalid-feedback">
+              <div *ngIf="f.file.errors.required">Es necesario subir un archivo</div>
+          </div>
+        </div>
       </div>
-      <div class="form-group col-xs-10 col-sm-10 col-md-4 col-lg-4">
-        <label for="inputArchivo">Cargar archivo</label>
-        <input type="file" (change)="fileEvent($event)" name="imageUpload" id="imageUpload">
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+      <div class="form-group row">
+        <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
           <label for="tags">Tags</label>
-          <input type="text" class="form-control" id="tags" placeholder="Tags" [(ngModel)]="tags">
+          <input type="text" class="form-control" id="tags" formControlName="tags" name="tags" placeholder="Tags" [class.is-invalid]="submitted && f.tags.errors" >
+          <div *ngIf="submitted && f.tags.errors" class="invalid-feedback">
+              <div *ngIf="f.tags.errors.required">Es necesario ingresar tags</div>
+          </div>
+        </div>
+        <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4" style="line-height: 6.4;">
+            <input type="checkbox" class="filled-in" id="preview" formControlName="preview" name="preview" checked>
+            <label for="preview">Tiene preview</label>
+        </div>
       </div>
-      <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4" style="line-height: 6.4;">
-          <input type="checkbox" class="filled-in" id="preview" [(ngModel)]="preview" checked>
-          <label for="preview">Tiene preview</label>
+      <div class="row">
+        <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
+            <br>
+            <button type="submit" class="btn btn-info">Crear Artefacto</button>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-          <br>
-          <button type="submit" class="btn btn-info" (click)="crearArtifact()">Crear Artefacto</button>
-      </div>
-    </div>
+    </form>
     <div class="clearfix"></div>
   </div>
 </div>

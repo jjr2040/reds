@@ -16,12 +16,12 @@ class ArtifactSerializer(serializers.ModelSerializer):
 
 class ResourceSerializer(serializers.ModelSerializer):
 
-    users = serializers.SlugRelatedField(
-        many=True,
-        queryset=User.objects.all(),
-        slug_field='username',
-        required=False
-     )
+    ##users = serializers.SlugRelatedField(
+    #    many=True,
+    #    queryset=User.objects.all(),
+    #    slug_field='username',
+    #    required=False
+    #)
 
     project = ProjectSerializer(required=False)
     current_phase_display = serializers.SerializerMethodField(read_only=True)
@@ -45,7 +45,7 @@ class ResourceSerializer(serializers.ModelSerializer):
             'updated_at',
             'current_phase',
             'project',
-            'users',
+            #'users',
             'current_phase_display',
             'priority_display',
             'tags',
@@ -60,8 +60,12 @@ class ResourceSerializer(serializers.ModelSerializer):
         return obj.get_priority_display()
 
     def get_aws_credential(self, obj):
-        return os.environ.get('AWS_ACCESS_KEY_ID') + '%' + os.environ.get('AWS_SECRET_ACCESS_KEY')
+        return str(os.environ.get('AWS_ACCESS_KEY_ID')) + '%' + str(os.environ.get('AWS_SECRET_ACCESS_KEY'))
 
+class ResourceVersionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ResourceVersion
+        fields = '__all__'
 
 class WorkplanActivitySerializer(serializers.ModelSerializer):
     users = serializers.SlugRelatedField(
@@ -94,3 +98,31 @@ class MeetingRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = MeetingRecord
         fields = '__all__'
+
+
+class ResourceCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ResourceComment
+        fields = '__all__'
+
+class PhaseSerializer(serializers.ModelSerializer):
+    users = serializers.SlugRelatedField(
+        many=True,
+        queryset=User.objects.all(),
+        slug_field='username',
+        required=False
+    )
+
+    name_display = serializers.SerializerMethodField(read_only=True)
+    
+    class Meta:
+        model = Phase
+        fields = (
+            'id',
+            'name',
+            'name_display',
+            'resource',
+            'users'
+        )
+    def get_name_display(self, obj):
+        return obj.get_name_display()

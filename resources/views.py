@@ -1,13 +1,23 @@
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.edit import CreateView
 from django.views.generic import DetailView, ListView
 from resources.forms import ResourceForm, WorkplanActivityCreateForm, ArtifactCreateForm
 from django.urls import reverse_lazy, reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
-from rest_framework import viewsets
+from rest_framework import viewsets,generics
 from .serializers import *
-
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.status import (
+    HTTP_400_BAD_REQUEST,
+    HTTP_404_NOT_FOUND,
+    HTTP_200_OK,
+    HTTP_401_UNAUTHORIZED
+)
+from rest_framework.views import APIView
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 class ResourceCreateView(CreateView):
     model = Resource
@@ -125,7 +135,6 @@ class ResourceViewSet(viewsets.ModelViewSet):
 
     queryset = Resource.objects.all()
     serializer_class = ResourceSerializer
-    #filter_fields = ('media_type', )
 
     def perform_create(self, serializer):
         project_id = self.request.data['project_id']
@@ -147,12 +156,17 @@ class ResourceViewSet(viewsets.ModelViewSet):
             for tag in tags:
                 instance.tags.add(tag)
 
+    @action(methods=['get'], detail=True)
+    def phases(self, request, pk=None):
+        phases = Phase.objects.filter(resource = pk)
+        serializer = PhaseSerializer(phases,many=True)
+        return Response(serializer.data)
+
 
 class ProjectViewSet(viewsets.ModelViewSet):
 
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-    #filter_fields = ('media_type', )
 
 
 class ArtifactViewSet(viewsets.ModelViewSet):
@@ -162,10 +176,8 @@ class ArtifactViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         resource_id = self.request.data.get('resource_id')
         tags = self.request.data.get('tags')
-
         instance = serializer.save()
         Resource.objects.get(id=resource_id).artifacts.add(instance)
-        print(Resource.objects.get(id=resource_id).artifacts.all())
         if tags is not None:
             for tag in tags:
                 instance.tags.add(tag)
@@ -174,19 +186,57 @@ class ArtifactViewSet(viewsets.ModelViewSet):
 class WorkplanActivityViewSet(viewsets.ModelViewSet):
     queryset = WorkplanActivity.objects.all()
     serializer_class = WorkplanActivitySerializer
+    filter_fields = ('resource',)
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+
 class MeetingRecordViewSet(viewsets.ModelViewSet):
     queryset = MeetingRecord.objects.all()
     serializer_class = MeetingRecordSerializer
+    filter_fields = ('resource',)
 
 
-    
-   
+class ResourceVersionViewSet(viewsets.ModelViewSet):
+    queryset = ResourceVersion.objects.all()
+    serializer_class = ResourceVersionSerializer
 
-        
+
+class ResourceCommentViewSet(viewsets.ModelViewSet):
+    queryset = ResourceComment.objects.all()
+    serializer_class = ResourceCommentSerializer
+    filter_fields = ('resource',)
+
+
+@api_view(["POST"])
+def asignar_artefacto(request):
+    data = request.data
+    artefacto = Artifact.objects.get(id=data['artifact_id'])
+    Resource.objects.get(id=data['resource_id']).artifacts.add(artefacto)
+    return Response({'ok': 'Artefacto Asignado', 'artefacto_id': artefacto.id}, status=HTTP_200_OK)
+class PhaseViewSet(viewsets.ModelViewSet):
+    queryset = Phase.objects.all()
+    serializer_class = PhaseSerializer
+
+         
+
+@api_view(["POST"])
+def loguear(request):
+    data = request.data
+    print('username ' + data['username'])
+    try:
+        user = User.objects.get(username=data['username'])
+        if user.check_password(data['password']):
+            print('ok')
+            return Response({'username': user.username, 'id': user.id, 'is_staff': user.is_staff}, status=HTTP_200_OK)
+        else:
+            print('fail')
+            return Response({'username': '', 'id': 0, 'is_staff': 'false'}, status=HTTP_200_OK)
+
+    except ObjectDoesNotExist:
+        return Response({'username': '', 'id': 0, 'is_staff': 'false'}, status=HTTP_200_OK)
 
 
