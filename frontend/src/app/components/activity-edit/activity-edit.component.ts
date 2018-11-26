@@ -24,8 +24,7 @@ export class ActivityEditComponent implements OnInit {
     duration: [0],
     periodicity: [3],
     status: [1],
-    progress: [0],
-    resource: ['']
+    progress: [0]
   });
 
   constructor(
@@ -70,8 +69,8 @@ export class ActivityEditComponent implements OnInit {
 
   saveActivity() {
     if (this.isNew) {
-      const activity: WorkplanActivity = this.activityForm.value;
-      activity.resource = this.currentResource.id;
+      const activity = this.activityForm.value;
+      activity.resource = this.resourceService.getCurrentResource().id;
 
       this.activityService.createActivity(activity).subscribe( updatedActivity => {
         console.log('activity created');

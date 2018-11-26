@@ -78,8 +78,8 @@ class WorkplanActivity(models.Model):
     )
 
     name = models.CharField('Nombre', max_length=100)
-    start_date = models.DateTimeField(verbose_name='Fecha de inicio')
-    end_date = models.DateTimeField(verbose_name='Fecha de fin')
+    start_date = models.DateField(verbose_name='Fecha de inicio')
+    end_date = models.DateField(verbose_name='Fecha de fin')
     duration = models.IntegerField(verbose_name=u'Duración')
     periodicity = models.IntegerField(verbose_name='Periodicidad', choices=PERIODICITY_CHOICES)
     status = models.IntegerField(verbose_name='Estado', choices=STATUS_CHOICES, default=NOT_STARTED)
