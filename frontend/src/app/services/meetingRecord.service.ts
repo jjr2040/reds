@@ -16,8 +16,9 @@ export class MeetingRecordService {
   constructor(private http: HttpClient,
     private errorHandlingService: ErrorHandlingService) { }
 
-  getMeetingRecords(): Observable<MeetingRecord[]> {
-    return this.http.get<MeetingRecord[]>(this.apiUrl).pipe(
+  getMeetingRecords(resourceId: Number): Observable<MeetingRecord[]> {
+    const url = this.apiUrl + `?resource=${resourceId}`;
+    return this.http.get<MeetingRecord[]>(url).pipe(
       catchError(this.errorHandlingService.handleError<MeetingRecord[]>('Error getting MeetingRecord'))
     );
   }
