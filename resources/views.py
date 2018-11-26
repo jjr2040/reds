@@ -197,6 +197,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class MeetingRecordViewSet(viewsets.ModelViewSet):
     queryset = MeetingRecord.objects.all()
     serializer_class = MeetingRecordSerializer
+    filter_fields = ('resource',)
 
 
 class ResourceVersionViewSet(viewsets.ModelViewSet):

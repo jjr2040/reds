@@ -20,7 +20,7 @@ export class ResourceCommentService {
 
   getCommentsForResource(resourceId: number): Observable<ResourceComment[]> {
     const url = this.apiUrl + `?resource=${resourceId}`;
-    return this.http.get<ResourceComment[]>(this.apiUrl).pipe(
+    return this.http.get<ResourceComment[]>(url).pipe(
       catchError(this.errorHandlingService.handleError<ResourceComment[]>('Error fetching Comments resource'))
     );
   }

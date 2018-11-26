@@ -78,7 +78,7 @@
             </a>
             <hr>
             <h4 class="font-medium m-t-30"><strong>Comentarios:</strong> </h4>
-            <app-resource-comments-list [resourceId]="resource.id"></app-resource-comments-list>
+            <app-resource-comments-list *ngIf="resource" [resourceId]="resource.id"></app-resource-comments-list>
             <a href="javascript:void(0);" routerLink="/resources/{{resource.id}}/comments/create" data-toggle="modal" class="btn m-t-10 btn-info btn-block waves-effect waves-light">
               <i class="ti-plus"></i> Agregar Commentario
             </a>
