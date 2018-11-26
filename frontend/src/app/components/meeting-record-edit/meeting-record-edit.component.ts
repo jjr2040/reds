@@ -13,18 +13,15 @@ import { ResourceService } from '../../services/resource.service';
 export class MeetingRecordEditComponent implements OnInit {
   recordForm: FormGroup = this.fb.group({
     title: [''],
-    body: [''],
-    resource: ['']
+    body: ['']
   });
 
   record: MeetingRecord;
-  resources;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private meetingRecordService: MeetingRecordService,
     private router: Router, private resourceService: ResourceService) { }
 
   ngOnInit() {
-    this.getResources();
     if (!this.isNew) {
     }
   }
@@ -38,22 +35,22 @@ export class MeetingRecordEditComponent implements OnInit {
   }
 
   saveRecord() {
-    const record: MeetingRecord = this.recordForm.value;
+    const record = {
+      title: this.recordForm.value.title,
+      body: this.recordForm.value.title,
+      resource: this.resourceService.getCurrentResource().id
+    };
     if (this.isNew) {
       this.meetingRecordService.createMeetingRecord(record).subscribe( updatedRecord => {
         console.log('activity record');
         this.router.navigate(['/meetingRecords']);
       });
     } else {
-      record.id = this.record.id;
+      record['id'] = this.record.id;
       this.meetingRecordService.updateMeetingRecord(record).subscribe( updatedActivity => {
         console.log('updated record');
         this.router.navigate(['/meetingRecords']);
       });
     }
-  }
-
-  getResources() {
-    this.resourceService.getResources().subscribe( resources => this.resources = resources);
   }
 }

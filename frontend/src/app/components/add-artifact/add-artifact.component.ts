@@ -82,7 +82,7 @@ export class AddArtifactComponent implements OnInit {
       name: this.artifactForm.value.name,
       description: this.artifactForm.value.description,
       tags: this.artifactForm.value.tags,
-      created_by: this.userService.currentUser,
+      created_by: this.userService.currentUser.id,
       file: this.artifactForm.value.file,
       preview: this.artifactForm.value.preview,
       resource_id: this.resource_id

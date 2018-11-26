@@ -60,6 +60,9 @@ export class ResourceDetailComponent implements OnInit {
           }
         }
       });
+      if (!this.number) {
+        this.number = 0;
+      }
     });
   }
 
