@@ -12,6 +12,9 @@ export class FindArtifactsComponent implements OnInit {
   artifacts = [];
   buscar;
   resource;
+  buscarNombre;
+  buscarDescripcion;
+  buscarTags;
 
   constructor(private artifactsService: ArtifactService, private resourceService: ResourceService, private messageService: MessageService) {
     this.resource = this.resourceService.getCurrentResource();
